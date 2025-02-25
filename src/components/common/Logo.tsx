@@ -1,8 +1,11 @@
 const Logo = () => {
   return (
     <div>
-      <img className="bg-blue-500" src="../../../public/logoIcon.png" alt="clicon logo" />
-      <h3>CLICON</h3>
+      <img
+        className="w-25"
+        src="/logoWhite.png"
+        alt="clicon logo"
+      />
     </div>
   );
 };
