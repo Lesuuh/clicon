@@ -1,23 +1,32 @@
 import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 
-
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  console.log(searchQuery);
+  const handleSearchSubmit = (e: React.MouseEvent<SVGElement>) => {
+    e.preventDefault();
+    console.log(searchQuery);
+  };
+
   return (
-    <div className="relative">
-      <input
-        type="text"
-        name="search"
-        id="search"
-        className="bg-white px-2 py-1 w-[648px] hidden md:flex"
-        placeholder="Search for anything..."
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-      <CiSearch className="absolute top-1/2 right-1 transform -translate-y-1/2"  size={20}/>
-    </div>
+    <form>
+      <div className="relative hidden md:flex">
+        <input
+          type="text"
+          name="search"
+          id="search"
+          className="bg-white px-[20px]  h-[48px] md:w-[500px] lg:w[648px] rounded-[2px] shadow-sm"
+          placeholder="Search for anything..."
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <CiSearch
+          onClick={handleSearchSubmit}
+          className="absolute top-1/2 right-[20px] transform -translate-y-1/2 text-black font-bold cursor-pointer"
+          size={20}
+        />
+      </div>
+    </form>
   );
 };
 
