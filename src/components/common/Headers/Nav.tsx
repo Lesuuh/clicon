@@ -29,7 +29,7 @@ const Nav = () => {
     { icon: <FaMobile />, name: "Wearable Technology" },
   ];
 
-  const [navState, setNavState] = useState(false);
+  const [navState, setNavState] = useState(true);
 
   const handleNavClose = () => {
     if (navState === true) setNavState(false);
@@ -40,45 +40,68 @@ const Nav = () => {
 
   return (
     <nav className="bg-[var(--secondary-700)] relative">
-      <div className="px-4 md:px-10 lg:px-40">
+      {/* onMobile */}
+      {navState && (
+        <div
+          className={`h-screen w-[90%] absolute top-0 left-0 bg-white text-gray-900 p-4 z-10`}
+        >
+          <div className="flex items-center">
+            <IoClose size={25} onClick={handleNavClose} />
+            <img src="/logoBlack.png" alt="clicon-logo" className="w-25 ml-2" />
+          </div>
+
+          <div className="mt-3">
+            <h3 className="text-xs font-semibold py-2 text-[var(--primary)]">
+              MY CLICON ACCOUNT
+            </h3>
+            <div className="flex flex-col">
+              <Link to="/orders" className="text-sm">
+                Orders
+              </Link>
+              <Link to="/wishlist" className="text-sm">
+                Wishlist
+              </Link>
+            </div>
+          </div>
+
+          <Separator className="mt-5 bg-gray-300 h-[1px]" />
+
+          {/* categories */}
+          <div className="my-2">
+            <h3 className="text-xs font-semibold py-2 text-[var(--primary)]">
+              OUR CATEGORIES
+            </h3>
+            <ul>
+              {categories.map((item) => (
+                <Link to={item.name} key={item.name}>
+                  <li className="text-sm py-1 flex items-center gap-2">
+                    {item.icon} {item.name}
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          </div>
+          <Separator className="my-4 bg-gray-200 h-[1px]" />
+          <div className="flex flex-col space-y-1">
+            <h3 className="text-xs font-semibold py-2 text-[var(--primary)]">
+              SERVICES
+            </h3>
+            <Link to="/customer-support" className="text-sm">
+              Customer Support
+            </Link>
+            <Link to="/contact" className="text-sm">
+              Contact us
+            </Link>
+          </div>
+        </div>
+      )}
+
+      <div className=" hidden md:block px-4 md:px-10 lg:px-40">
         <TopHeader />
       </div>
 
       <hr className="text-[var(--gray)]" />
       <div className="flex justify-between items-center py-[20px] px-4 md:px-10 lg:px-40">
-        {/* onMobile */}
-        {navState && (
-          <div
-            className={`h-screen w-[90%] absolute top-0 left-0 bg-white text-gray-900 p-4`}
-          >
-            <div className="flex items-center">
-              <IoClose size={25} onClick={handleNavClose} />
-              <img
-                src="/logoBlack.png"
-                alt="clicon-logo"
-                className="w-25 ml-2"
-              />
-            </div>
-
-            <Separator className="my-4 bg-[var(--gray)] h-[1px]" />
-
-            {/* categories */}
-            <div className="my-2">
-              <h3 className="text-xs font-semibold py-2 text-[var(--primary)]">
-                OUR CATEGORIES
-              </h3>
-              <ul>
-                {categories.map((item) => (
-                  <Link to={item.name} key={item.name}>
-                    <li className="text-sm py-1 flex items-center gap-2">
-                      {item.icon} {item.name}
-                    </li>
-                  </Link>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
         <div className="flex items-center">
           <IoMenu
             onClick={handleNavOpen}
