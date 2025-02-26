@@ -1,10 +1,10 @@
 import { Outlet } from "react-router";
-import Nav from "../components/common/Headers/Nav";
+import Header from "@/components/common/Headers/Header";
 
 const MainLayout = () => {
   return (
     <div>
-      <Nav />
+      <Header />
       <Outlet />
       <footer>Footer</footer>
     </div>

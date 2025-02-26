@@ -17,7 +17,7 @@ import {
 } from "@radix-ui/react-select";
 import { useState } from "react";
 
-const TopHeader = () => {
+const TopNav = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>("Eng");
   const [selectedCurrency, setSelectedCurrency] = useState<string>("NGN");
   return (
@@ -87,4 +87,4 @@ const TopHeader = () => {
   );
 };
 
-export default TopHeader;
+export default TopNav;
