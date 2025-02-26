@@ -21,7 +21,7 @@ const TopHeader = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>("Eng");
   const [selectedCurrency, setSelectedCurrency] = useState<string>("NGN");
   return (
-    <div className="flex justify-between items-center py-[12px] text-white">
+    <div className="flex flex-wrap justify-center md:justify-between items-center py-[12px] text-white">
       <p className="text-sm font-normal">
         Welcome to Clicon online ecommerce store
       </p>

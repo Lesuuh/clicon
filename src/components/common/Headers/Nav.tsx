@@ -1,20 +1,90 @@
-import { IoMenu } from "react-icons/io5";
 import Logo from "../Logo";
 import SearchBar from "../SearchBar";
 import { Link } from "react-router";
 import TopHeader from "./TopHeader";
+import { IoClose, IoMenu, IoWatch } from "react-icons/io5";
+import {
+  FaComputer,
+  FaHeadphones,
+  FaComputerMouse,
+  FaGamepad,
+  FaCamera,
+  FaTv,
+  FaMobile,
+} from "react-icons/fa6";
+import { Separator } from "@radix-ui/react-select";
+import { useState } from "react";
 
 const Nav = () => {
+  const categories = [
+    { icon: <FaComputer />, name: "Computer & Laptops" },
+    { icon: <FaComputerMouse />, name: "Computer Accessories" },
+    { icon: <FaMobile />, name: "SmartPhone" },
+    { icon: <FaHeadphones />, name: "Headphone" },
+    { icon: <FaMobile />, name: "Mobile Accessories" },
+    { icon: <FaGamepad />, name: "Gaming Consoles" },
+    { icon: <FaCamera />, name: "Camera & Photo" },
+    { icon: <FaTv />, name: "TV & Home Appliance" },
+    { icon: <IoWatch />, name: "Watches & Accessories" },
+    { icon: <FaMobile />, name: "Wearable Technology" },
+  ];
+
+  const [navState, setNavState] = useState(false);
+
+  const handleNavClose = () => {
+    if (navState === true) setNavState(false);
+  };
+  const handleNavOpen = () => {
+    if (navState === false) setNavState(true);
+  };
+
   return (
-    <div className="bg-[var(--secondary-700)] ">
+    <nav className="bg-[var(--secondary-700)] relative">
       <div className="px-4 md:px-10 lg:px-40">
         <TopHeader />
       </div>
 
       <hr className="text-[var(--gray)]" />
       <div className="flex justify-between items-center py-[20px] px-4 md:px-10 lg:px-40">
+        {/* onMobile */}
+        {navState && (
+          <div
+            className={`h-screen w-[90%] absolute top-0 left-0 bg-white text-gray-900 p-4`}
+          >
+            <div className="flex items-center">
+              <IoClose size={25} onClick={handleNavClose} />
+              <img
+                src="/logoBlack.png"
+                alt="clicon-logo"
+                className="w-25 ml-2"
+              />
+            </div>
+
+            <Separator className="my-4 bg-[var(--gray)] h-[1px]" />
+
+            {/* categories */}
+            <div className="my-2">
+              <h3 className="text-xs font-semibold py-2 text-[var(--primary)]">
+                OUR CATEGORIES
+              </h3>
+              <ul>
+                {categories.map((item) => (
+                  <Link to={item.name} key={item.name}>
+                    <li className="text-sm py-1 flex items-center gap-2">
+                      {item.icon} {item.name}
+                    </li>
+                  </Link>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
         <div className="flex items-center">
-          <IoMenu size={25} className="mr-2 text-white md:hidden" />
+          <IoMenu
+            onClick={handleNavOpen}
+            size={25}
+            className="mr-2 text-white md:hidden cursor-pointer"
+          />
           <Logo />
         </div>
         <SearchBar />
@@ -33,7 +103,7 @@ const Nav = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
