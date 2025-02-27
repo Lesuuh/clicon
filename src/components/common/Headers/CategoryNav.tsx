@@ -842,9 +842,6 @@ const CategoryNav = () => {
     "Computer & Laptops"
   );
   const [isSubCategory, setIsSubCategory] = useState<string | null>("Laptops");
-  console.log(activeCategory);
-  console.log(isSubCategory);
-
 
   return (
     <div className="relative">
