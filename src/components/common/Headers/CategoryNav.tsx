@@ -847,11 +847,13 @@ const CategoryNav = () => {
   return (
     <div className="relative">
       <button
-        className="bg-[var(--primary)] flex items-center px-[24px] py-[14px] rounded-[2px] text-white"
+        className={`${
+          isHovered ? "bg-[var(--primary)] text-white" : "  bg-[var(--gray-50)] text-gray-900"
+        }  flex items-center px-[24px] py-[14px] rounded-[2px] transition ease-in-out duration-100 text-sm`}
         onMouseEnter={() => {
           hoverTimeout = setTimeout(() => {
             setIsHovered(true);
-          }, 500);
+          }, 300);
         }}
         onMouseLeave={() => {
           if (hoverTimeout) clearTimeout(hoverTimeout);
