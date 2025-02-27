@@ -843,16 +843,19 @@ const CategoryNav = () => {
   );
   const [isSubCategory, setIsSubCategory] = useState<string | null>("Laptops");
 
+  let hoverTimeout: NodeJS.Timeout | null = null;
   return (
     <div className="relative">
       <button
         className="bg-[var(--primary)] flex items-center px-[24px] py-[14px] rounded-[2px] text-white"
         onMouseEnter={() => {
-          setTimeout(() => {
+          hoverTimeout = setTimeout(() => {
             setIsHovered(true);
           }, 500);
         }}
-        // onMouseLeave={() => setIsHovered(false)}
+        onMouseLeave={() => {
+          if (hoverTimeout) clearTimeout(hoverTimeout);
+        }}
       >
         All categories{" "}
         {isHovered ? (
