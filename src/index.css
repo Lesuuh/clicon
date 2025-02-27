@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+@custom-variant dark (&:is(.dark *));
 @import "tailwindcss";
 
 @theme {
@@ -12,4 +14,13 @@
 }
 body {
   font-family: "Public Sans", sans-serif;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
