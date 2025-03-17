@@ -1,0 +1,73 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Lesuuh",
+      "email": "lesuuh@example.com",
+      "password": "hashed_password",
+      "cart": [],
+      "wishlist": [],
+      "orders": []
+    }
+  ],
+
+  "products": [
+    {
+      "id": 1,
+      "name": "Apple iPhone 15 Pro",
+      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "price": 999.99,
+      "discount": 5,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviews": [
+        { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
+        { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
+      ],
+      "stock": 50,
+      "images": [
+        "https://example.com/iphone15-front.jpg",
+        "https://example.com/iphone15-back.jpg"
+      ],
+      "variants": [
+        {
+          "color": "Black",
+          "storage": "128GB",
+          "price": 999.99
+        },
+        {
+          "color": "Silver",
+          "storage": "256GB",
+          "price": 1099.99
+        }
+      ],
+      "shipping": {
+        "weight": "200g",
+        "dimensions": { "width": "7cm", "height": "14cm", "depth": "0.8cm" },
+        "availableRegions": ["US", "UK", "Canada"]
+      },
+      "seller": {
+        "id": 1,
+        "storeName": "Apple Official Store",
+        "location": "California, USA"
+      }
+    }
+  ],
+
+  "categories": [
+    { "id": 1, "name": "Smartphones", "slug": "smartphones" },
+    { "id": 2, "name": "Laptops", "slug": "laptops" },
+    { "id": 3, "name": "Accessories", "slug": "accessories" }
+  ],
+
+  "sellers": [
+    {
+      "id": 1,
+      "name": "ElectroMart",
+      "email": "electromart@example.com",
+      "storeName": "ElectroMart Official",
+      "products": [1, 2]
+    }
+  ]
+}

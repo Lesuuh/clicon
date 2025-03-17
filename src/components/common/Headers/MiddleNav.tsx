@@ -26,16 +26,16 @@ const MiddleNav = ({ navState, setNavState }: MiddleNavProps) => {
       <SearchBar />
       <div className="flex items-center space-x-4">
         <Link to={"/cart"} className="relative">
-          <img src="/cartIcon.png" alt="cart-icon" className="w-5" />
+          <img src="icons/cartIcon.png" alt="cart-icon" className="w-5" />
           <span className="font-normal text-xs bg-white px-1 rounded-full text-[var(--secondary)] absolute -top-5 -right-1 transform translate-y-1/2">
             2
           </span>
         </Link>
         <Link to={"/wishlist"}>
-          <img src="/Heart.png" alt="heart-icon/wishlist" className="w-5" />
+          <img src="icons/Heart.png" alt="heart-icon/wishlist" className="w-5" />
         </Link>
         <Link to={"/profile"}>
-          <img src="/UserIcon.png" alt="user-icon" className="w-5" />
+          <img src="icons/UserIcon.png" alt="user-icon" className="w-5" />
         </Link>
       </div>
     </div>

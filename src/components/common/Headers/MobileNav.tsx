@@ -41,7 +41,7 @@ const MobileNav = ({ navState, setNavState }: MobileNavProps) => {
         >
           <div className="flex items-center">
             <IoClose size={25} onClick={handleNavClose} />
-            <img src="/logoBlack.png" alt="clicon-logo" className="w-25 ml-2" />
+            <img src="icons/logoBlack.png" alt="clicon-logo" className="w-25 ml-2" />
           </div>
 
           <div className="mt-3">
