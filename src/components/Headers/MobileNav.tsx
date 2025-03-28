@@ -41,11 +41,15 @@ const MobileNav = ({ navState, setNavState }: MobileNavProps) => {
         >
           <div className="flex items-center">
             <IoClose size={25} onClick={handleNavClose} />
-            <img src="icons/logoBlack.png" alt="clicon-logo" className="w-25 ml-2" />
+            <img
+              src="icons/logoBlack.png"
+              alt="clicon-logo"
+              className="w-25 ml-2"
+            />
           </div>
 
           <div className="mt-3">
-            <h3 className="text-xs font-semibold py-2 text-[var(--primary)]">
+            <h3 className="text-xs font-semibold py-2 text-primary">
               MY CLICON ACCOUNT
             </h3>
             <div className="flex flex-col">
@@ -62,7 +66,7 @@ const MobileNav = ({ navState, setNavState }: MobileNavProps) => {
 
           {/* categories */}
           <div className="my-2">
-            <h3 className="text-xs font-semibold py-2 text-[var(--primary)]">
+            <h3 className="text-xs font-semibold py-2 text-primary">
               OUR CATEGORIES
             </h3>
             <ul>
@@ -77,7 +81,7 @@ const MobileNav = ({ navState, setNavState }: MobileNavProps) => {
           </div>
           <Separator className="my-4 bg-gray-200 h-[1px]" />
           <div className="flex flex-col space-y-1">
-            <h3 className="text-xs font-semibold py-2 text-[var(--primary)]">
+            <h3 className="text-xs font-semibold py-2 text-primary">
               SERVICES
             </h3>
             <Link to="/customer-support" className="text-sm">

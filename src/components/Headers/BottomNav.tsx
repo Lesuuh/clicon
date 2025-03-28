@@ -13,7 +13,7 @@ const BottomNav = () => {
             <p className="text-sm cursor-pointer ml-1">Track orders</p>
           </Link>
           <Link to={"/customer-support"} className="flex items-center">
-            <img src="/public//Headphones.svg" alt="" />
+            <img src="/public/Headphones.svg" alt="" />
             <p className="text-sm cursor-pointer ml-1">Customer Support</p>
           </Link>
           <Link to={"/help"} className="flex items-center">

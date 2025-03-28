@@ -26,10 +26,7 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": [
-        "https://example.com/iphone15-front.jpg",
-        "https://example.com/iphone15-back.jpg"
-      ],
+      "images": ["/images/tv.png"],
       "variants": [
         {
           "color": "Black",

@@ -6,7 +6,7 @@ const Header = () => {
     <div>
       <Nav />
       <BottomNav />
-      <div className="w-full h-px bg-[var(--gray-50)]"></div>
+      <div className="w-full h-px bg-gray-50"></div>
     </div>
   );
 };

@@ -4,15 +4,15 @@
 @import "tailwindcss";
 
 @theme {
-  --primary: #fa8232;
-  --secondary: #2484c2;
-  --secondary-700: #1b6392;
-  --gray: #5f6c72;
-  --gray-50: #f2f4f5;
-  --success: #2db224;
-  --warning: #ebc80c;
-  --danger: #ee5858;
-  --warning-300: #f3de6d;
+  --color-primary: #fa8232;
+  --color-secondary: #2484c2;
+  --color-secondary-700: #1b6392;
+  --color-gray: #5f6c72;
+  --color-gray-50: #f2f4f5;
+  --color-success: #2db224;
+  --color-warning: #ebc80c;
+  --color-danger: #ee5858;
+  --color-warning-300: #f3de6d;
 }
 body {
   font-family: "Public Sans", sans-serif;
