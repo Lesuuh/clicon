@@ -7,8 +7,8 @@ const Nav = () => {
   const [navState, setNavState] = useState(false);
 
   return (
-    <nav className="bg-secondary-700 relative">
-      <div className="hidden md:block px-4 md:px-10 lg:px-40">
+    <nav className=" relative bg-secondary-700 px-5 md:px-20 mx-auto max-w-[1400px]">
+      <div className="hidden md:block">
         <TopNav />
       </div>
       <hr className="text-gray" />

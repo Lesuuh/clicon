@@ -4,28 +4,28 @@ import CategoryNav from "./CategoryNav";
 
 const BottomNav = () => {
   return (
-    <div className="hidden md:flex md:items-center w-full py-[20px] px-4 md:px-10 lg:px-40">
+    <div className="hidden md:flex md:items-center w-full py-[20px] bg-white px-5 md:px-20 mx-auto max-w-[1400px]">
       <div className=" w-full flex flex- items-center justify-between">
         <div className="flex items-center gap-4">
           <CategoryNav />
           <Link to={"/track-orders"} className="flex items-center">
-            <img src="/public//MapPinLine.svg" alt="" />
+            <img src="/icons/MapPinLine.svg" alt="" className="w-5" />
             <p className="text-sm cursor-pointer ml-1">Track orders</p>
           </Link>
           <Link to={"/customer-support"} className="flex items-center">
-            <img src="/public/Headphones.svg" alt="" />
+            <img src="/icons/Headphones.svg" alt="" className="w-5" />
             <p className="text-sm cursor-pointer ml-1">Customer Support</p>
           </Link>
           <Link to={"/help"} className="flex items-center">
-            <img src="/public/Info.svg" alt="" />
+            <img src="/icons/Info.svg" alt="" className="w-5" />
             <p className="text-sm cursor-pointer ml-1">Need help</p>
           </Link>
         </div>
 
-        <p className="flex items-center">
-          <img src="/public/PhoneCall.svg" alt="" className="mr-2" />
-          +234-906-725-2273
-        </p>
+        <div className="flex items-center text-sm">
+          <img src="/icons/PhoneCall.svg" alt="" className="mr-2  w-5" />
+          <p>+234-906-725-2273</p>
+        </div>
       </div>
     </div>
   );

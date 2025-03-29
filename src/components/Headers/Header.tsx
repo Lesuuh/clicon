@@ -3,7 +3,7 @@ import Nav from "./Nav";
 
 const Header = () => {
   return (
-    <div>
+    <div className="w-full ">
       <Nav />
       <BottomNav />
       <div className="w-full h-px bg-gray-50"></div>

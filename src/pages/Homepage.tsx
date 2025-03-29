@@ -3,6 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { ArrowRight, Minus } from "lucide-react";
 
+// svgs
+import PackageIcon from "../components/icons/PackageIcon";
+import TrophyIcon from "@/components/icons/TrophyIcon";
+console.log(PackageIcon);
+
 type Product = {
   id: number;
   name: string;
@@ -25,11 +30,11 @@ const Homepage = () => {
   console.log(data);
 
   return (
-    <main className="px-4 md:px-20 lg:px-40 ">
+    <main className="px-4 md:px-20 w-full max-w-[1400px] mx-auto">
       {/* hero section */}
-      <div className="my-10 w-full  flex flex-col sm:flex-row  gap-4 items-center">
+      <div className="my-10 flex flex-col lg:flex-row gap-4 w-full">
         {/* first */}
-        <div className="flex w-full lg:w-[65%]  bg-gray-50 p-5 md:p-10 rounded-sm relative h-full">
+        <div className="flex bg-gray-50 p-5 md:p-10 rounded-sm relative">
           <div className="h-auto flex flex-col justify-center gap-2 items-start">
             <p className="text-secondary text-xs flex items-center">
               <Minus />
@@ -46,7 +51,11 @@ const Homepage = () => {
             </Button>
           </div>
           <div>
-            <img src="images/console.png" alt="" className="h-full w-full" />
+            <img
+              src="images/console.png"
+              alt=""
+              className="h-full w-full object-cover"
+            />
           </div>
           <span className="absolute right-8 bg-secondary text-white rounded-full h-12 text-xs w-12 flex justify-center items-center border-white border-2">
             $299
@@ -54,9 +63,9 @@ const Homepage = () => {
         </div>
 
         {/* second */}
-        <div className="hidden lg:flex flex-col md:my-0 my-5 gap-2 flex-1 w-full">
-          <div className="bg-black relative text-white p-5 rounded-sm flex items-start ">
-            <div className="z-10 flex flex-col w-[40%]">
+        <div className=" hidden w-full lg:w-[50%] h-full sm:flex flex-row lg:flex-col gap-4">
+          <div className="bg-black relative text-white p-5 rounded-sm  w-full">
+            <div className="z-10 flex flex-col items-start w-[50%]">
               <p className="text-warning text-xs">SUMMER SALES</p>
               <p>New Google Pixel 6 Pro</p>
               <Button className="bg-primary  text-white text-xs px-4 py-2 rounded-xs my-4">
@@ -64,24 +73,35 @@ const Homepage = () => {
                 <ArrowRight />
               </Button>
             </div>
-            <div className="absolute bottom-0 right-0 ">
-              <img src="/images/image 5.png" alt="" className="w-30" />
+            <div className="absolute bottom-0 right-0">
+              <img src="/images/image 5.png" alt="" className="w-35" />
             </div>
             <span className="bg-warning absolute text-xs font-medium text-black right-6 top-5 px-2 py-1">
               29% OFF
             </span>
           </div>
 
-          <div className="bg-gray-50 flex  items-center justify-between  rounded-sm p-5">
+          <div className="bg-gray-50 flex w-full  items-center justify-between  rounded-sm p-5">
             <img src="/images/image 4.png" alt="" className="py-4 w-30" />
-            <div className="w-[50%]">
-              <h2 className="font-bold text-xl my-1">Xiaomi FlipBuds Pro</h2>
-              <p className="text-secondary">$299 USD</p>
-              <Button className="bg-primary  text-white text-xs px-4 py-2 rounded-xs ">
+            <div className="flex items-start justify-center flex-col gap-3">
+              <h2 className="font-bold text-xl">Xiaomi FlipBuds Pro</h2>
+              <p className="text-secondary font-medium text-sm">$299 USD</p>
+              <Button className="bg-primary  text-white text-xs  rounded-xs ">
                 SHOP NOW
                 <ArrowRight />
               </Button>
             </div>
+          </div>
+        </div>
+      </div>
+      {/* ----------------- ---------- */}
+      <div className="flex items-center-justify-between flex-col border-1 border-gray-50">
+        <div>
+          <div className="w-6 h-6 text-blue-500">
+            <PackageIcon />
+          </div>
+          <div>
+            <TrophyIcon />
           </div>
         </div>
       </div>
