@@ -11,6 +11,7 @@ import CategoryComponent from "@/components/Homepage/CategoryComponent";
 import JustLaunched from "@/components/Promotions/JustLaunched";
 import ServiceHightlights from "@/components/Promotions/ServiceHighlights";
 import SpotLightDeal from "@/components/Promotions/SpotLightDeal";
+import LatestNews from "@/components/Homepage/LatestNews";
 
 const fetchProducts = async (): Promise<ProductTypes[]> => {
   const { data } = await axios.get<ProductTypes[]>(
@@ -70,6 +71,9 @@ const Homepage = () => {
 
       {/* spotlight deal */}
       <SpotLightDeal />
+
+      {/* ------------latest news-------------- */}
+      <LatestNews />
     </main>
   );
 };

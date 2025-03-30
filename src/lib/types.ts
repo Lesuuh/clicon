@@ -61,3 +61,13 @@ export interface OrderItemTypes {
   quantity: number;
   price: number;
 }
+
+export interface BlogsType {
+  id: number;
+  name: string;
+  date: Date;
+  comments: number;
+  title: string;
+  content: string;
+  image: string;
+}

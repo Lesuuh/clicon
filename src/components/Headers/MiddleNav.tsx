@@ -1,6 +1,6 @@
 import { IoMenu } from "react-icons/io5";
-import Logo from "../common/Logo";
-import SearchBar from "../common/SearchBar";
+import Logo from "../Logo";
+import SearchBar from "../SearchBar";
 import { Link } from "react-router";
 
 interface MiddleNavProps {

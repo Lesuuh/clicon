@@ -12,3 +12,12 @@ export function truncateText(text: string, maxLength: number) {
   const truncatedText = text.slice(0, maxLength) + "...";
   return truncatedText;
 }
+
+export function formatDate(date: string | number | Date) {
+  return new Date(date).toLocaleDateString("en", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
