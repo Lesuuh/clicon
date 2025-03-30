@@ -4,7 +4,7 @@ export interface ProductTypes {
   description: string;
   price: number;
   discount: number;
-  category: string;
+  category: { id: number; name: string };
   brand: string;
   rating: number;
   reviews: { user: string; comment: string; rating: number }[];

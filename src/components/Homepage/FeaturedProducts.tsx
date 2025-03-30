@@ -63,7 +63,7 @@ const FeaturedProducts = () => {
 
   const filterBasedOnCategory = (category: CategoriesTypes) => {
     const filtered = products?.filter(
-      (product) => product.category === category.slug
+      (product) => product.category.id === category.id
     );
     console.log(filtered);
     setFeaturedProductsState(filtered || []);

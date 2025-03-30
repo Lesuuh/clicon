@@ -63,15 +63,33 @@ const CategoryComponent = () => {
 
   const filterBasedOnCategory = (category: CategoriesTypes) => {
     const filtered = products?.filter(
-      (product) => product.category === category.slug
+      (product) => product.category.id === category.id
     );
     console.log(filtered);
     setFeaturedProductsState(filtered || []);
   };
 
+  //   getting a random category
+  const [randomCategory, setRandomCategory] = useState<CategoriesTypes | null>(
+    null
+  );
 
+  useEffect(() => {
+    const randomCategory =
+      categories && categories[Math.floor(Math.random() * categories.length)];
+    setRandomCategory(randomCategory || null);
+  }, [categories]);
+  console.log(randomCategory);
 
   const slicedCategories = categories?.slice(0, 4);
+
+  //   getting the products for the random category
+
+  const randomCategoryProducts = products?.filter(
+    (product) => product?.id === randomCategory?.id
+  );
+
+  console.log(randomCategoryProducts);
 
   if (isLoadingProducts || isLoadingCategories) {
     return (
@@ -118,7 +136,7 @@ const CategoryComponent = () => {
       <div className="w-full">
         <div className="flex  lg:items-start justify-between flex-col lg:flex-row w-full mb-3">
           <p className="text-base font-medium text-left w-full lg:w-[30%]">
-            Computer Accessories
+            {randomCategory?.name}
           </p>
           {/* navigations */}
           <div className="flex w-full justify-between lg:justify-end">

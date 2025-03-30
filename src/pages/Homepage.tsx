@@ -8,17 +8,19 @@ import HeroBanner from "@/components/Homepage/HeroBanner";
 import FeaturedProducts from "@/components/Homepage/FeaturedProducts";
 import { ScaleLoader } from "react-spinners";
 import NotFound from "./NotFound";
-import { UserTypes } from "@/lib/types";
+import { ProductTypes } from "@/lib/types";
 import Banner from "@/components/Homepage/Banner";
 import CategoryComponent from "@/components/Homepage/CategoryComponent";
 
-const fetchProducts = async (): Promise<UserTypes[]> => {
-  const { data } = await axios.get<UserTypes[]>("http://localhost:8000/users");
+const fetchProducts = async (): Promise<ProductTypes[]> => {
+  const { data } = await axios.get<ProductTypes[]>(
+    "http://localhost:8000/products"
+  );
   return data;
 };
 
 const Homepage = () => {
-  const { data, isLoading, error } = useQuery<UserTypes[]>({
+  const { data, isLoading, error } = useQuery<ProductTypes[]>({
     queryKey: ["users"], // Unique key for caching
     queryFn: fetchProducts,
   });
