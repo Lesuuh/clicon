@@ -12,7 +12,7 @@ const AppRoutes = () => {
           <Route index element={<Homepage />} />
           <Route path="shop" element={<ShopPage />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFound message="Page not found" />} />
       </Routes>
     </div>
   );
