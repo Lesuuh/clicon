@@ -59,8 +59,8 @@ const Categories = () => {
       <h2 className="text-center text-xl font-bold mb-4">
         Shop with Categories
       </h2>
-      <Carousel className="relative px-4 md:px-10">
-        <CarouselContent className="flex gap-2">
+      <Carousel className="relative px-4 md:px-10 ">
+        <CarouselContent className="flex gap-2 items-stretch">
           {data?.map((category) => (
             <CarouselItem
               key={category.id}

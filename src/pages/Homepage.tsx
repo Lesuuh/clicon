@@ -10,6 +10,7 @@ import { ScaleLoader } from "react-spinners";
 import NotFound from "./NotFound";
 import { UserTypes } from "@/lib/types";
 import Banner from "@/components/Homepage/Banner";
+import CategoryComponent from "@/components/Homepage/CategoryComponent";
 
 const fetchProducts = async (): Promise<UserTypes[]> => {
   const { data } = await axios.get<UserTypes[]>("http://localhost:8000/users");
@@ -61,6 +62,9 @@ const Homepage = () => {
 
       {/* -----------BANNER ------------ */}
       <Banner />
+
+      {/* category component */}
+      <CategoryComponent />
     </main>
   );
 };

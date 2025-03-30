@@ -23,7 +23,7 @@ const fetchCategories = async (): Promise<CategoriesTypes[]> => {
   return data;
 };
 
-const FeaturedProducts = () => {
+const CategoryComponent = () => {
   const {
     data: products,
     isLoading: isLoadingProducts,
@@ -69,6 +69,8 @@ const FeaturedProducts = () => {
     setFeaturedProductsState(filtered || []);
   };
 
+
+
   const slicedCategories = categories?.slice(0, 4);
 
   if (isLoadingProducts || isLoadingCategories) {
@@ -97,8 +99,8 @@ const FeaturedProducts = () => {
     );
   }
   return (
-    <section className="my-10 flex flex-col md:flex-row  gap-4 items-start w-full">
-      <div className="bg-warning-300 flex flex-col p-5 items-center space-y-2">
+    <section className="my-10 flex  md:flex-row   gap-4 items-start w-full">
+      <div className="bg-warning-300 flex flex-col order-2 p-5 items-center space-y-2">
         <p className="text-primary text-xs font-bold">COMPUTER & ACCESSORIES</p>
         <h3 className="text-2xl text-gray-950 ">32% Discount</h3>
         <p className="text-xs text-gray-600">For all electronics products</p>
@@ -108,7 +110,7 @@ const FeaturedProducts = () => {
             END OF CHRISTMAS
           </span>
         </p>
-        <Button className="bg-primary text-white my-3">
+        <Button className="bg-primary text-white my-3 text-[.7rem]">
           SHOP NOW <ArrowRight />
         </Button>
         <img src="/public/images/Image.jpg" alt="" className="w-full" />
@@ -116,7 +118,7 @@ const FeaturedProducts = () => {
       <div className="w-full">
         <div className="flex  lg:items-start justify-between flex-col lg:flex-row w-full mb-3">
           <p className="text-base font-medium text-left w-full lg:w-[30%]">
-            Featured Products
+            Computer Accessories
           </p>
           {/* navigations */}
           <div className="flex w-full justify-between lg:justify-end">
@@ -202,4 +204,4 @@ const FeaturedProducts = () => {
   );
 };
 
-export default FeaturedProducts;
+export default CategoryComponent;
