@@ -26,7 +26,427 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/tv.png"],
+      "images": ["/images/Image (11).png"],
+      "variants": [
+        {
+          "color": "Black",
+          "storage": "128GB",
+          "price": 999.99
+        },
+        {
+          "color": "Silver",
+          "storage": "256GB",
+          "price": 1099.99
+        }
+      ],
+      "shipping": {
+        "weight": "200g",
+        "dimensions": { "width": "7cm", "height": "14cm", "depth": "0.8cm" },
+        "availableRegions": ["US", "UK", "Canada"]
+      },
+      "seller": {
+        "id": 1,
+        "storeName": "Apple Official Store",
+        "location": "California, USA"
+      },
+      "bestDeals": true,
+      "featured": true,
+      "hot": true,
+      "soldOut": true
+    },
+    {
+      "id": 2,
+      "name": "Apple iPhone 15 Pro",
+      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "price": 999.99,
+      "discount": 5,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviews": [
+        { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
+        { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
+      ],
+      "stock": 50,
+      "images": ["/images/console.png"],
+      "variants": [
+        {
+          "color": "Black",
+          "storage": "128GB",
+          "price": 999.99
+        },
+        {
+          "color": "Silver",
+          "storage": "256GB",
+          "price": 1099.99
+        }
+      ],
+      "shipping": {
+        "weight": "200g",
+        "dimensions": { "width": "7cm", "height": "14cm", "depth": "0.8cm" },
+        "availableRegions": ["US", "UK", "Canada"]
+      },
+      "seller": {
+        "id": 1,
+        "storeName": "Apple Official Store",
+        "location": "California, USA"
+      },
+      "bestDeals": true,
+      "featured": true,
+      "hot": true,
+      "soldOut": true
+    },
+    {
+      "id": 3,
+      "name": "Apple iPhone 15 Pro",
+      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "price": 999.99,
+      "discount": 5,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviews": [
+        { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
+        { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
+      ],
+      "stock": 50,
+      "images": ["/images/Image (1).png"],
+      "variants": [
+        {
+          "color": "Black",
+          "storage": "128GB",
+          "price": 999.99
+        },
+        {
+          "color": "Silver",
+          "storage": "256GB",
+          "price": 1099.99
+        }
+      ],
+      "shipping": {
+        "weight": "200g",
+        "dimensions": { "width": "7cm", "height": "14cm", "depth": "0.8cm" },
+        "availableRegions": ["US", "UK", "Canada"]
+      },
+      "seller": {
+        "id": 1,
+        "storeName": "Apple Official Store",
+        "location": "California, USA"
+      },
+      "bestDeals": true,
+      "featured": true,
+      "hot": true,
+      "soldOut": true
+    },
+    {
+      "id": 4,
+      "name": "Apple iPhone 15 Pro",
+      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "price": 999.99,
+      "discount": 5,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviews": [
+        { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
+        { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
+      ],
+      "stock": 50,
+      "images": ["/images/Image (2).png"],
+      "variants": [
+        {
+          "color": "Black",
+          "storage": "128GB",
+          "price": 999.99
+        },
+        {
+          "color": "Silver",
+          "storage": "256GB",
+          "price": 1099.99
+        }
+      ],
+      "shipping": {
+        "weight": "200g",
+        "dimensions": { "width": "7cm", "height": "14cm", "depth": "0.8cm" },
+        "availableRegions": ["US", "UK", "Canada"]
+      },
+      "seller": {
+        "id": 1,
+        "storeName": "Apple Official Store",
+        "location": "California, USA"
+      },
+      "bestDeals": true,
+      "featured": true,
+      "hot": true,
+      "soldOut": true
+    },
+    {
+      "id": 5,
+      "name": "Apple iPhone 15 Pro",
+      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "price": 999.99,
+      "discount": 5,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviews": [
+        { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
+        { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
+      ],
+      "stock": 50,
+      "images": ["/images/Image (3).png"],
+      "variants": [
+        {
+          "color": "Black",
+          "storage": "128GB",
+          "price": 999.99
+        },
+        {
+          "color": "Silver",
+          "storage": "256GB",
+          "price": 1099.99
+        }
+      ],
+      "shipping": {
+        "weight": "200g",
+        "dimensions": { "width": "7cm", "height": "14cm", "depth": "0.8cm" },
+        "availableRegions": ["US", "UK", "Canada"]
+      },
+      "seller": {
+        "id": 1,
+        "storeName": "Apple Official Store",
+        "location": "California, USA"
+      },
+      "bestDeals": true,
+      "featured": true,
+      "hot": true,
+      "soldOut": true
+    },
+    {
+      "id": 6,
+      "name": "Apple iPhone 15 Pro",
+      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "price": 999.99,
+      "discount": 5,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviews": [
+        { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
+        { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
+      ],
+      "stock": 50,
+      "images": ["/images/Image (4).png"],
+      "variants": [
+        {
+          "color": "Black",
+          "storage": "128GB",
+          "price": 999.99
+        },
+        {
+          "color": "Silver",
+          "storage": "256GB",
+          "price": 1099.99
+        }
+      ],
+      "shipping": {
+        "weight": "200g",
+        "dimensions": { "width": "7cm", "height": "14cm", "depth": "0.8cm" },
+        "availableRegions": ["US", "UK", "Canada"]
+      },
+      "seller": {
+        "id": 1,
+        "storeName": "Apple Official Store",
+        "location": "California, USA"
+      },
+      "bestDeals": true,
+      "featured": true,
+      "hot": true,
+      "soldOut": true
+    },
+    {
+      "id": 7,
+      "name": "Apple iPhone 15 Pro",
+      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "price": 999.99,
+      "discount": 5,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviews": [
+        { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
+        { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
+      ],
+      "stock": 50,
+      "images": ["/images/Image (5).png"],
+      "variants": [
+        {
+          "color": "Black",
+          "storage": "128GB",
+          "price": 999.99
+        },
+        {
+          "color": "Silver",
+          "storage": "256GB",
+          "price": 1099.99
+        }
+      ],
+      "shipping": {
+        "weight": "200g",
+        "dimensions": { "width": "7cm", "height": "14cm", "depth": "0.8cm" },
+        "availableRegions": ["US", "UK", "Canada"]
+      },
+      "seller": {
+        "id": 1,
+        "storeName": "Apple Official Store",
+        "location": "California, USA"
+      },
+      "bestDeals": true,
+      "featured": true,
+      "hot": true,
+      "soldOut": true
+    },
+    {
+      "id": 8,
+      "name": "Apple iPhone 15 Pro",
+      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "price": 999.99,
+      "discount": 5,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviews": [
+        { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
+        { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
+      ],
+      "stock": 50,
+      "images": ["/images/Image (6).png"],
+      "variants": [
+        {
+          "color": "Black",
+          "storage": "128GB",
+          "price": 999.99
+        },
+        {
+          "color": "Silver",
+          "storage": "256GB",
+          "price": 1099.99
+        }
+      ],
+      "shipping": {
+        "weight": "200g",
+        "dimensions": { "width": "7cm", "height": "14cm", "depth": "0.8cm" },
+        "availableRegions": ["US", "UK", "Canada"]
+      },
+      "seller": {
+        "id": 1,
+        "storeName": "Apple Official Store",
+        "location": "California, USA"
+      },
+      "bestDeals": true,
+      "featured": true,
+      "hot": true,
+      "soldOut": true
+    },
+    {
+      "id": 9,
+      "name": "Apple iPhone 15 Pro",
+      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "price": 999.99,
+      "discount": 5,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviews": [
+        { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
+        { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
+      ],
+      "stock": 50,
+      "images": ["/images/Image (7).png"],
+      "variants": [
+        {
+          "color": "Black",
+          "storage": "128GB",
+          "price": 999.99
+        },
+        {
+          "color": "Silver",
+          "storage": "256GB",
+          "price": 1099.99
+        }
+      ],
+      "shipping": {
+        "weight": "200g",
+        "dimensions": { "width": "7cm", "height": "14cm", "depth": "0.8cm" },
+        "availableRegions": ["US", "UK", "Canada"]
+      },
+      "seller": {
+        "id": 1,
+        "storeName": "Apple Official Store",
+        "location": "California, USA"
+      },
+      "bestDeals": true,
+      "featured": true,
+      "hot": true,
+      "soldOut": true
+    },
+    {
+      "id": 10,
+      "name": "Apple iPhone 15 Pro",
+      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "price": 999.99,
+      "discount": 5,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviews": [
+        { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
+        { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
+      ],
+      "stock": 50,
+      "images": ["/images/Image (8).png"],
+      "variants": [
+        {
+          "color": "Black",
+          "storage": "128GB",
+          "price": 999.99
+        },
+        {
+          "color": "Silver",
+          "storage": "256GB",
+          "price": 1099.99
+        }
+      ],
+      "shipping": {
+        "weight": "200g",
+        "dimensions": { "width": "7cm", "height": "14cm", "depth": "0.8cm" },
+        "availableRegions": ["US", "UK", "Canada"]
+      },
+      "seller": {
+        "id": 1,
+        "storeName": "Apple Official Store",
+        "location": "California, USA"
+      },
+      "bestDeals": true,
+      "featured": true,
+      "hot": true,
+      "soldOut": true
+    },
+    {
+      "id": 11,
+      "name": "Apple iPhone 15 Pro",
+      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "price": 999.99,
+      "discount": 5,
+      "category": "smartphones",
+      "brand": "Apple",
+      "rating": 4.8,
+      "reviews": [
+        { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
+        { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
+      ],
+      "stock": 50,
+      "images": ["/images/Image (9).png"],
       "variants": [
         {
           "color": "Black",
@@ -57,9 +477,66 @@
   ],
 
   "categories": [
-    { "id": 1, "name": "Smartphones", "slug": "smartphones" },
-    { "id": 2, "name": "Laptops", "slug": "laptops" },
-    { "id": 3, "name": "Accessories", "slug": "accessories" }
+    {
+      "id": 1,
+      "name": "Computer & Laptops",
+      "slug": "computer-laptops",
+      "image": "/public/images/Image (6).png"
+    },
+    {
+      "id": 2,
+      "name": "Computer Accessories",
+      "slug": "computer-accessories",
+      "image": "/public/images/Image (8).png"
+    },
+    {
+      "id": 3,
+      "name": "SmartPhone",
+      "slug": "smartphone",
+      "image": "/public/images/Image (7).png"
+    },
+    {
+      "id": 4,
+      "name": "Headphone",
+      "slug": "headphone",
+      "image": "/public/images/Image (13).png"
+    },
+    {
+      "id": 5,
+      "name": "Mobile Accessories",
+      "slug": "mobile-accessories",
+      "image": "/public/images/Image (17).png"
+    },
+    {
+      "id": 6,
+      "name": "Gaming Consoles",
+      "slug": "gaming-consoles",
+      "image": "/public/images/Image-1.png"
+    },
+    {
+      "id": 7,
+      "name": "Camera & Photo",
+      "slug": "camera-photo",
+      "image": "/public/images/Image (9).png"
+    },
+    {
+      "id": 8,
+      "name": "TV & Home Appliance",
+      "slug": "tv-home-appliance",
+      "image": "/public/images/tv.png"
+    },
+    {
+      "id": 9,
+      "name": "Watches & Accessories",
+      "slug": "watches-accessories",
+      "image": "/public/images/Image (3).png"
+    },
+    {
+      "id": 10,
+      "name": "Wearable Technology",
+      "slug": "wearable-technology",
+      "image": "/public/images/Image 4.png"
+    }
   ],
 
   "sellers": [
