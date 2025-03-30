@@ -523,49 +523,49 @@
       "id": 1,
       "name": "Computer & Laptops",
       "slug": "computer-laptops",
-      "image": "/public/images/Image (6).png"
+      "image": "/images/Image (6).png"
     },
     {
       "id": 2,
       "name": "Computer Accessories",
       "slug": "computer-accessories",
-      "image": "/public/images/Image (8).png"
+      "image": "/images/Image (8).png"
     },
     {
       "id": 3,
       "name": "SmartPhones",
       "slug": "smartphones",
-      "image": "/public/images/Image (7).png"
+      "image": "/images/Image (7).png"
     },
     {
       "id": 4,
       "name": "Headphones",
       "slug": "headphones",
-      "image": "/public/images/Image (13).png"
+      "image": "/images/Image (13).png"
     },
     {
       "id": 5,
       "name": "Mobile Accessories",
       "slug": "mobile-accessories",
-      "image": "/public/images/Image (17).png"
+      "image": "/images/Image (17).png"
     },
     {
       "id": 6,
       "name": "Gaming Consoles",
       "slug": "gaming-consoles",
-      "image": "/public/images/Image-1.png"
+      "image": "/images/Image-1.png"
     },
     {
       "id": 7,
       "name": "Camera & Photo",
       "slug": "camera-photo",
-      "image": "/public/images/Image (9).png"
+      "image": "/images/Image (9).png"
     },
     {
       "id": 8,
       "name": "TV & Home Appliance",
       "slug": "tv-home-appliance",
-      "image": "/public/images/tv.png"
+      "image": "/images/tv.png"
     },
     {
       "id": 9,
@@ -577,7 +577,7 @@
       "id": 10,
       "name": "Wearable Technology",
       "slug": "wearable-technology",
-      "image": "/public/images/Image 4.png"
+      "image": "/images/Image 4.png"
     }
   ],
 

@@ -20,7 +20,7 @@ const DiscountBanner = ({ side }: { side: string }) => {
       <Button className="bg-primary text-white my-3 text-[.7rem]">
         SHOP NOW <ArrowRight />
       </Button>
-      <img src="/public/images/Image.jpg" alt="" className="w-full" />
+      <img src="/images/Image.jpg" alt="" className="w-full" />
     </div>
   );
 };

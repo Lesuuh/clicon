@@ -20,11 +20,7 @@ const JustLaunched = () => {
             SHOP NOW <ArrowRight />
           </Button>
         </div>
-        <img
-          src="/public//images/Image 6.png"
-          alt=""
-          className="w-40 object-cover"
-        />
+        <img src="/images/Image 6.png" alt="" className="w-40 object-cover" />
       </div>
 
       {/* Second Banner */}
@@ -42,7 +38,7 @@ const JustLaunched = () => {
           </Button>
         </div>
         <img
-          src="/public/images/Image (15).png"
+          src="/images/Image (15).png"
           alt=""
           className="w-40 object-cover"
         />

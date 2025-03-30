@@ -20,11 +20,7 @@ const SpotLightDeal = () => {
         <span className="absolute right-0 md:left-0 top-3 md:top-6 bg-primary-200 text-black font-bold rounded-full h-14 md:h-18 text-xs w-14 md:w-18 flex justify-center items-center border-white border-2 md:border-4">
           $2998
         </span>
-        <img
-          src="/public/images/Image (22).png"
-          alt=""
-          className="w-full md:w-100"
-        />
+        <img src="/images/Image (22).png" alt="" className="w-full md:w-100" />
       </div>
     </section>
   );
