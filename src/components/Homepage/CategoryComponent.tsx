@@ -45,19 +45,17 @@ const CategoryComponent = () => {
   const slicedCategories = categories?.slice(0, 4);
 
   //   getting a random category
-  const random =
-    categories && categories[Math.floor(Math.random() * categories.length)];
-  console.log(random);
 
   const [randomCategory, setRandomCategory] = useState<
     CategoriesTypes | undefined
   >(undefined);
 
   useEffect(() => {
-    if (randomCategory === undefined && random) {
-      setRandomCategory(random);
+    if (categories?.length) {
+      const randomIndex = Math.floor(Math.random() * categories.length);
+      setRandomCategory(categories[randomIndex]);
     }
-  }, [randomCategory, random]);
+  }, [categories]);
 
   console.log(randomCategory);
 
@@ -65,18 +63,15 @@ const CategoryComponent = () => {
   const [randomCategoryProductsState, setRandomCategoryProductsState] =
     useState<ProductTypes[]>([]);
 
-  const randomCategoryProducts = products?.filter(
-    (product) => product.category?.id === randomCategory?.id
-  );
-
   useEffect(() => {
-    if (randomCategoryProductsState.length === 0 && randomCategory != null) {
+    if (randomCategory) {
+      const randomCategoryProducts = products?.filter(
+        (product) => product.category?.id === randomCategory?.id
+      );
       setRandomCategoryProductsState(randomCategoryProducts || []);
     }
-  }, [randomCategoryProductsState, randomCategory, randomCategoryProducts]);
-
-  console.log(randomCategory);
-  //   console.log(randomCategoryProductsState);
+  }, [randomCategory, products]);
+  console.log(randomCategoryProductsState);
 
   if (isLoadingProducts || isLoadingCategories) {
     return (
