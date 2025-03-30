@@ -3,7 +3,7 @@ import CreditCard from "../icons/CreditCard";
 import TrophyIcon from "../icons/TrophyIcon";
 import PackageIcon from "../icons/PackageIcon";
 
-const HeroBanner = () => {
+const ServiceHightlights = () => {
   return (
     <section className="flex items-center-justify-between flex-col border-1 border-gray-50">
       <div className="grid grid-cols-2 p-3 sm:grid-cols-4">
@@ -40,4 +40,4 @@ const HeroBanner = () => {
   );
 };
 
-export default HeroBanner;
+export default ServiceHightlights;

@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
 
-const Banner = () => {
+const JustLaunched = () => {
   return (
     <section className="my-10 w-full flex flex-col sm:flex-row items-stretch justify-between gap-4">
       {/* First Banner */}
@@ -51,4 +51,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default JustLaunched;

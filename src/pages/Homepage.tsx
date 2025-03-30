@@ -1,16 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-
 import Hero from "@/components/Homepage/Hero";
 import BestDeals from "@/components/Homepage/BestDeals";
 import Categories from "@/components/Homepage/Categories";
-import HeroBanner from "@/components/Homepage/HeroBanner";
 import FeaturedProducts from "@/components/Homepage/FeaturedProducts";
 import { ScaleLoader } from "react-spinners";
 import NotFound from "./NotFound";
 import { ProductTypes } from "@/lib/types";
-import Banner from "@/components/Homepage/Banner";
 import CategoryComponent from "@/components/Homepage/CategoryComponent";
+import JustLaunched from "@/components/Promotions/JustLaunched";
+import ServiceHightlights from "@/components/Promotions/ServiceHighlights";
 
 const fetchProducts = async (): Promise<ProductTypes[]> => {
   const { data } = await axios.get<ProductTypes[]>(
@@ -51,7 +50,7 @@ const Homepage = () => {
       <Hero />
 
       {/* HERO BANNER */}
-      <HeroBanner />
+      <ServiceHightlights />
 
       {/* -------------BEST DEALS -------------- */}
       <BestDeals />
@@ -62,8 +61,8 @@ const Homepage = () => {
       {/* -----------FEATURED PRODUCTS ---------- */}
       <FeaturedProducts />
 
-      {/* -----------BANNER ------------ */}
-      <Banner />
+      {/* -----------Just BANNER ------------ */}
+      <JustLaunched />
 
       {/* category component */}
       <CategoryComponent />

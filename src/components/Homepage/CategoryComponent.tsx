@@ -9,7 +9,7 @@ import { ScaleLoader } from "react-spinners";
 import NotFound from "@/pages/NotFound";
 import { CategoriesTypes, ProductTypes } from "@/lib/types";
 import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import DiscountBanner from "../Promotions/DiscountBanner";
 
 const fetchFeaturedProducts = async (): Promise<ProductTypes[]> => {
   const respone = await fetch("http://localhost:8000/products");
@@ -73,6 +73,19 @@ const CategoryComponent = () => {
   }, [randomCategory, products]);
   console.log(randomCategoryProductsState);
 
+  //   getting all the category products
+  const allCategoryProducts = () => {
+    return randomCategoryProductsState;
+  };
+
+  //    filter based on category
+  //   const filterBasedOnCategory = (categories: CategoriesTypes) => {
+  //     const filteredProducts = products?.filter(
+  //       (product) => product.id === categories?.id
+  //     );
+  //     setRandomCategoryProductsState(filteredProducts || []);
+  //   };
+
   if (isLoadingProducts || isLoadingCategories) {
     return (
       <ScaleLoader
@@ -99,22 +112,8 @@ const CategoryComponent = () => {
     );
   }
   return (
-    <section className="my-10 flex  md:flex-row   gap-4 items-start w-full">
-      <div className="bg-warning-300 flex flex-col order-2 p-5 items-center space-y-2">
-        <p className="text-primary text-xs font-bold">COMPUTER & ACCESSORIES</p>
-        <h3 className="text-2xl text-gray-950 ">32% Discount</h3>
-        <p className="text-xs text-gray-600">For all electronics products</p>
-        <p className="text-xs">
-          Offers ends in{" "}
-          <span className="px-2 py-1 bg-white text-gray-950 text-sm">
-            END OF CHRISTMAS
-          </span>
-        </p>
-        <Button className="bg-primary text-white my-3 text-[.7rem]">
-          SHOP NOW <ArrowRight />
-        </Button>
-        <img src="/public/images/Image.jpg" alt="" className="w-full" />
-      </div>
+    <section className="my-10 flex flex-col  md:flex-row   gap-4 items-start w-full">
+      <DiscountBanner side="right"/>
       <div className="w-full">
         <div className="flex  lg:items-start justify-between flex-col lg:flex-row w-full mb-3">
           <p className="text-base font-medium text-left w-full lg:w-[30%]">
@@ -124,19 +123,21 @@ const CategoryComponent = () => {
           <div className="flex w-full justify-between lg:justify-end">
             <ul className="flex items-center flex-wrap gap-2  lg:mr-5">
               <p
-                className="text-[.6rem] text-gray cursor-pointer px-1 rounded-sm hover:text-primary"
-                onClick={() => allFeaturedProducts()}
+                className=" hidden text-[.6rem] text-gray cursor-pointer px-1 rounded-sm hover:text-primary"
+                onClick={() => allCategoryProducts()}
               >
                 All Products
               </p>
               {slicedCategories?.map((item) => (
-                <li
-                  key={item.id}
-                  className="text-[.6rem] text-gray cursor-pointer px-1 rounded-sm hover:text-primary"
-                  onClick={() => filterBasedOnCategory(item)}
-                >
-                  {item.name}
-                </li>
+                <Link to={`/products/?category=${item.slug}`}>
+                  <li
+                    key={item.id}
+                    className="text-[.6rem] text-gray cursor-pointer px-1 rounded-sm hover:text-primary"
+                    //   onClick={() => filterBasedOnCategory(item)}
+                  >
+                    {item.name}
+                  </li>
+                </Link>
               ))}
             </ul>
             <Link

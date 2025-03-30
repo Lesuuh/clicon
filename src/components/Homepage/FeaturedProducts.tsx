@@ -9,7 +9,7 @@ import { ScaleLoader } from "react-spinners";
 import NotFound from "@/pages/NotFound";
 import { CategoriesTypes, ProductTypes } from "@/lib/types";
 import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import DiscountBanner from "../Promotions/DiscountBanner";
 
 const fetchFeaturedProducts = async (): Promise<ProductTypes[]> => {
   const respone = await fetch("http://localhost:8000/products");
@@ -65,7 +65,6 @@ const FeaturedProducts = () => {
     const filtered = products?.filter(
       (product) => product.category.id === category.id
     );
-    console.log(filtered);
     setFeaturedProductsState(filtered || []);
   };
 
@@ -98,21 +97,7 @@ const FeaturedProducts = () => {
   }
   return (
     <section className="my-10 flex flex-col md:flex-row  gap-4 items-start w-full">
-      <div className="bg-warning-300 flex flex-col p-5 items-center space-y-2">
-        <p className="text-primary text-xs font-bold">COMPUTER & ACCESSORIES</p>
-        <h3 className="text-2xl text-gray-950 ">32% Discount</h3>
-        <p className="text-xs text-gray-600">For all electronics products</p>
-        <p className="text-xs">
-          Offers ends in{" "}
-          <span className="px-2 py-1 bg-white text-gray-950 text-sm">
-            END OF CHRISTMAS
-          </span>
-        </p>
-        <Button className="bg-primary text-white my-3">
-          SHOP NOW <ArrowRight />
-        </Button>
-        <img src="/public/images/Image.jpg" alt="" className="w-full" />
-      </div>
+      <DiscountBanner side="left" />
       <div className="w-full">
         <div className="flex  lg:items-start justify-between flex-col lg:flex-row w-full mb-3">
           <p className="text-base font-medium text-left w-full lg:w-[30%]">
