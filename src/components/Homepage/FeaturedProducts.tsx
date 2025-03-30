@@ -1,7 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 import { HeartIcon } from "../icons/HeartIcon";
-
 import { EyeIcon } from "../icons/EyeIcon";
 import CartIcon from "../icons/CartIcon";
 import { truncateText } from "@/lib/utils";
@@ -9,6 +8,8 @@ import { useQuery } from "@tanstack/react-query";
 import { ScaleLoader } from "react-spinners";
 import NotFound from "@/pages/NotFound";
 import { CategoriesTypes, ProductTypes } from "@/lib/types";
+import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
 const fetchFeaturedProducts = async (): Promise<ProductTypes[]> => {
   const respone = await fetch("http://localhost:8000/products");
@@ -41,17 +42,34 @@ const FeaturedProducts = () => {
     queryFn: fetchCategories,
   });
 
-  const slicedCategories = categories?.slice(0, 4);
+  const featuredProducts = products?.filter(
+    (product) => product.featured === true
+  );
 
-  // handles all products
+  const [featuredProductsState, setFeaturedProductsState] = useState<
+    ProductTypes[]
+  >(featuredProducts || []);
+
+  useEffect(() => {
+    if (featuredProductsState.length === 0 && featuredProducts?.length) {
+      setFeaturedProductsState(featuredProducts);
+    }
+  }, [featuredProducts, featuredProductsState]);
+
+  // Handles all featured products
   const allFeaturedProducts = () => {
-    const filteredFilteredProducts = products?.filter(
-      (product) => product.featured === true
-    );
-    console.log(filteredFilteredProducts);
+    setFeaturedProductsState(featuredProducts || []);
   };
 
-  allFeaturedProducts();
+  const filterBasedOnCategory = (category: CategoriesTypes) => {
+    const filtered = products?.filter(
+      (product) => product.category === category.slug
+    );
+    console.log(filtered);
+    setFeaturedProductsState(filtered || []);
+  };
+
+  const slicedCategories = categories?.slice(0, 4);
 
   if (isLoadingProducts || isLoadingCategories) {
     return (
@@ -79,35 +97,60 @@ const FeaturedProducts = () => {
     );
   }
   return (
-    <section className="my-10 flex items-start">
-      <div>
-        <img src="/public/images/Image.jpg" alt="" />
+    <section className="my-10 flex flex-col md:flex-row gap-4 items-start w-full">
+      <div className="bg-warning-300 flex flex-col p-5 items-center space-y-2">
+        <p className="text-primary text-xs font-bold">COMPUTER & ACCESSORIES</p>
+        <h3 className="text-2xl text-gray-950 ">32% Discount</h3>
+        <p className="text-xs text-gray-600">For all electronics products</p>
+        <p className="text-xs">
+          Offers ends in{" "}
+          <span className="px-2 py-1 bg-white text-gray-950 text-sm">
+            END OF CHRISTMAS
+          </span>
+        </p>
+        <Button className="bg-primary text-white my-3">
+          SHOP NOW <ArrowRight />
+        </Button>
+        <img src="/public/images/Image.jpg" alt="" className="w-full" />
       </div>
-      <div className="">
-        <div className="w-full flex justify-between items-center">
-          <div className="flex items-center justify-between w-full">
-            <p className="text-xl font-medium">Featured Products</p>
-            <div className="flex items-center gap-3">
-              <ul className="flex items-center gap-2">
-                <p className="text-xs">All Products</p>
-                {slicedCategories?.map((item) => (
-                  <li className="text-xs">{item.name}</li>
-                ))}
-              </ul>
-              <Link
-                to="products"
-                className="text-secondary-500 text-xs flex items-center"
+      <div className="w-full">
+        <div className="flex  lg:items-start justify-between flex-col lg:flex-row w-full">
+          <p className="text-base font-medium text-left w-full lg:w-[30%]">
+            Featured Products
+          </p>
+          {/* navigations */}
+          <div className="flex w-full justify-between lg:justify-end">
+            <ul className="flex items-center flex-wrap gap-2  lg:mr-5">
+              <p
+                className="text-[.6rem] text-gray cursor-pointer border-gray-100 px-1 rounded-sm"
+                onClick={() => allFeaturedProducts()}
               >
-                Browse all Products <ArrowRight />
-              </Link>
-            </div>
+                All Products
+              </p>
+              {slicedCategories?.map((item) => (
+                <li
+                  key={item.id}
+                  className="text-[.6rem] text-gray cursor-pointer border-1 border-gray-100 px-1 rounded-sm"
+                  onClick={() => filterBasedOnCategory(item)}
+                >
+                  {item.name}
+                </li>
+              ))}
+            </ul>
+            <Link
+              to="products"
+              className="text-primary text-[.6rem] flex items-center"
+            >
+              <p> Browse all Products </p>
+              <ArrowRight className="w-5" />
+            </Link>
           </div>
         </div>
 
         {/* container */}
         <div className="flex flex-col sm:flex-row">
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  border border-gray-200">
-            {products?.map((item: ProductTypes) => (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  border border-gray-200 w-full">
+            {featuredProductsState?.map((item: ProductTypes) => (
               <div
                 key={item.id}
                 className="group relative border border-gray-200 p-4  flex flex-col items-center justify-between transition-all duration-300 ease-in-out hover:shadow-lg "

@@ -270,7 +270,7 @@
       "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
       "price": 999.99,
       "discount": 5,
-      "category": "smartphones",
+      "category": "headphone",
       "brand": "Apple",
       "rating": 4.8,
       "reviews": [
@@ -312,7 +312,7 @@
       "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
       "price": 999.99,
       "discount": 5,
-      "category": "smartphones",
+      "category": "smartphone",
       "brand": "Apple",
       "rating": 4.8,
       "reviews": [
@@ -354,7 +354,7 @@
       "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
       "price": 999.99,
       "discount": 5,
-      "category": "smartphones",
+      "category": "smartphone",
       "brand": "Apple",
       "rating": 4.8,
       "reviews": [
@@ -396,7 +396,7 @@
       "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
       "price": 999.99,
       "discount": 5,
-      "category": "smartphones",
+      "category": "computer-accessories",
       "brand": "Apple",
       "rating": 4.8,
       "reviews": [
@@ -438,7 +438,7 @@
       "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
       "price": 999.99,
       "discount": 5,
-      "category": "smartphones",
+      "category": "computer-laptops",
       "brand": "Apple",
       "rating": 4.8,
       "reviews": [

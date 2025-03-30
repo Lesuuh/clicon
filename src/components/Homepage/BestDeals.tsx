@@ -13,7 +13,7 @@ import { ProductTypes } from "@/lib/types";
 const fetchProducts = async (): Promise<ProductTypes[]> => {
   const response = await fetch("http://localhost:8000/products");
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   return data;
 };
 
@@ -67,7 +67,7 @@ const BestDeals = () => {
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
-  console.log(data);
+  // console.log(data);
 
   if (isLoading) {
     return (
