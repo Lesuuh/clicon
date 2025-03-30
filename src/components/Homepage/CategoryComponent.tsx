@@ -42,54 +42,41 @@ const CategoryComponent = () => {
     queryFn: fetchCategories,
   });
 
-  const featuredProducts = products?.filter(
-    (product) => product.featured === true
-  );
-
-  const [featuredProductsState, setFeaturedProductsState] = useState<
-    ProductTypes[]
-  >(featuredProducts || []);
-
-  useEffect(() => {
-    if (featuredProductsState.length === 0 && featuredProducts?.length) {
-      setFeaturedProductsState(featuredProducts);
-    }
-  }, [featuredProducts, featuredProductsState]);
-
-  // Handles all featured products
-  const allFeaturedProducts = () => {
-    setFeaturedProductsState(featuredProducts || []);
-  };
-
-  const filterBasedOnCategory = (category: CategoriesTypes) => {
-    const filtered = products?.filter(
-      (product) => product.category.id === category.id
-    );
-    console.log(filtered);
-    setFeaturedProductsState(filtered || []);
-  };
-
-  //   getting a random category
-  const [randomCategory, setRandomCategory] = useState<CategoriesTypes | null>(
-    null
-  );
-
-  useEffect(() => {
-    const randomCategory =
-      categories && categories[Math.floor(Math.random() * categories.length)];
-    setRandomCategory(randomCategory || null);
-  }, [categories]);
-  console.log(randomCategory);
-
   const slicedCategories = categories?.slice(0, 4);
 
+  //   getting a random category
+  const random =
+    categories && categories[Math.floor(Math.random() * categories.length)];
+  console.log(random);
+
+  const [randomCategory, setRandomCategory] = useState<
+    CategoriesTypes | undefined
+  >(undefined);
+
+  useEffect(() => {
+    if (randomCategory === undefined && random) {
+      setRandomCategory(random);
+    }
+  }, [randomCategory, random]);
+
+  console.log(randomCategory);
+
   //   getting the products for the random category
+  const [randomCategoryProductsState, setRandomCategoryProductsState] =
+    useState<ProductTypes[]>([]);
 
   const randomCategoryProducts = products?.filter(
-    (product) => product?.id === randomCategory?.id
+    (product) => product.category?.id === randomCategory?.id
   );
 
-  console.log(randomCategoryProducts);
+  useEffect(() => {
+    if (randomCategoryProductsState.length === 0 && randomCategory != null) {
+      setRandomCategoryProductsState(randomCategoryProducts || []);
+    }
+  }, [randomCategoryProductsState, randomCategory, randomCategoryProducts]);
+
+  console.log(randomCategory);
+  //   console.log(randomCategoryProductsState);
 
   if (isLoadingProducts || isLoadingCategories) {
     return (
@@ -170,7 +157,7 @@ const CategoryComponent = () => {
         {/* container */}
         <div className="flex flex-col sm:flex-row">
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  border border-gray-200 w-full">
-            {featuredProductsState?.map((item: ProductTypes) => (
+            {randomCategoryProductsState?.map((item: ProductTypes) => (
               <div
                 key={item.id}
                 className="group relative border border-gray-200 p-4  flex flex-col items-center justify-between transition-all duration-300 ease-in-out hover:shadow-lg "
