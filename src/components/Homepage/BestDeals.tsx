@@ -8,33 +8,9 @@ import { Link } from "react-router";
 import { ScaleLoader } from "react-spinners";
 import { useQuery } from "@tanstack/react-query";
 import NotFound from "@/pages/NotFound";
+import { ProductTypes } from "@/lib/types";
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  discount: number;
-  category: string;
-  brand: string;
-  rating: number;
-  reviews: { user: string; comment: string; rating: number }[];
-  stock: number;
-  images: string[];
-  variants: { color: string; storage: string; price: number }[];
-  shipping: {
-    weight: string;
-    dimensions: { width: string; height: string; depth: string };
-    availableRegions: string[];
-  };
-  seller: { id: number; storeName: string; location: string };
-  bestDeals: boolean;
-  featured: boolean;
-  hot: boolean;
-  soldOut: boolean;
-}
-
-const fetchProducts = async (): Promise<Product[]> => {
+const fetchProducts = async (): Promise<ProductTypes[]> => {
   const response = await fetch("http://localhost:8000/products");
   const data = await response.json();
   console.log(data);
@@ -163,25 +139,33 @@ const BestDeals = () => {
             </p>
             <div className="my-1 flex items-center justify-between gap-2">
               <HeartIcon className="bg-primary-100 px-1.5 rounded-sm w-8 h-8" />
-              <Button className="flex-2">ADD TO CART</Button>
+              <Button className="flex-2 text-white text-xs">ADD TO CART</Button>
               <EyeIcon className="bg-primary-100 px-1.5 rounded-sm w-8 h-8" />
             </div>
           </div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  border border-gray-200">
-          {data?.map((item: Product) => (
+          {data?.map((item: ProductTypes) => (
             <div
               key={item.id}
-              className="group relative border border-gray-200 p-4 lg:pb-0 space-y-3 flex flex-col items-center justify-center transition-all duration-300 ease-in-out hover:shadow-lg "
+              className="group relative border border-gray-200 p-4 flex flex-col items-center justify-between transition-all duration-300 ease-in-out hover:shadow-lg "
             >
-              <p className="hidden absolute top-3 left-2 text-[0.5rem] text-white font-light rounded-sm bg-gray-600 px-2 py-1">
-                {item.soldOut && "SOLD OUT"}
-              </p>
-              <p className="hidden absolute top-3 left-2 text-[.5rem] text-white font-light rounded-sm bg-red-600 px-2 py-1">
-                {item.soldOut && "HOT"}
-              </p>
-              <p className="z-10 absolute top-3 left-2 text-[.5rem] text-black font-bold rounded-sm bg-warning px-2 py-1">
-                {item.soldOut && `${item.discount}% OFF`}
+              {item.soldOut ? (
+                <p className=" absolute top-3 left-2 text-[.5rem] text-white font-light rounded-sm bg-gray-600 px-2 py-1 z-30">
+                  SOLD OUT
+                </p>
+              ) : item.hot ? (
+                <p className=" absolute top-3 left-2 text-[.5rem] text-white font-light rounded-sm bg-red-600 px-2 py-1 z-30">
+                  HOT
+                </p>
+              ) : null}
+
+              <p
+                className={` absolute top-3 right-2 text-[.5rem] text-black font-bold rounded-sm bg-warning px-2 py-1 ${
+                  item.soldOut && "opacity-0"
+                } z-30`}
+              >
+                {item.discount && `${item.discount}% OFF`}
               </p>
               <div className="relative">
                 <img

@@ -91,9 +91,9 @@
         "storeName": "Apple Official Store",
         "location": "California, USA"
       },
-      "bestDeals": true,
-      "featured": true,
-      "hot": true,
+      "bestDeals": false,
+      "featured": false,
+      "hot": false,
       "soldOut": true
     },
     {
@@ -136,7 +136,7 @@
       "bestDeals": true,
       "featured": true,
       "hot": true,
-      "soldOut": true
+      "soldOut": false
     },
     {
       "id": 4,
@@ -175,8 +175,8 @@
         "storeName": "Apple Official Store",
         "location": "California, USA"
       },
-      "bestDeals": true,
-      "featured": true,
+      "bestDeals": false,
+      "featured": false,
       "hot": true,
       "soldOut": true
     },
@@ -220,7 +220,7 @@
       "bestDeals": true,
       "featured": true,
       "hot": true,
-      "soldOut": true
+      "soldOut": false
     },
     {
       "id": 6,
@@ -259,9 +259,9 @@
         "storeName": "Apple Official Store",
         "location": "California, USA"
       },
-      "bestDeals": true,
+      "bestDeals": false,
       "featured": true,
-      "hot": true,
+      "hot": false,
       "soldOut": true
     },
     {
@@ -302,9 +302,9 @@
         "location": "California, USA"
       },
       "bestDeals": true,
-      "featured": true,
-      "hot": true,
-      "soldOut": true
+      "featured": false,
+      "hot": false,
+      "soldOut": false
     },
     {
       "id": 8,
@@ -343,7 +343,7 @@
         "storeName": "Apple Official Store",
         "location": "California, USA"
       },
-      "bestDeals": true,
+      "bestDeals": false,
       "featured": true,
       "hot": true,
       "soldOut": true
@@ -386,8 +386,8 @@
         "location": "California, USA"
       },
       "bestDeals": true,
-      "featured": true,
-      "hot": true,
+      "featured": false,
+      "hot": false,
       "soldOut": true
     },
     {
@@ -470,8 +470,8 @@
         "location": "California, USA"
       },
       "bestDeals": true,
-      "featured": true,
-      "hot": true,
+      "featured": false,
+      "hot": false,
       "soldOut": true
     }
   ],

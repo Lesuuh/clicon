@@ -9,21 +9,11 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { ScaleLoader } from "react-spinners";
 import NotFound from "@/pages/NotFound";
+import { CategoriesTypes } from "@/lib/types";
 
-interface Categories {
-  id: number;
-  slug: string;
-  name: string;
-  image: string;
-}
-
-const fetchCategories = async (): Promise<Categories[]> => {
+const fetchCategories = async (): Promise<CategoriesTypes[]> => {
   const response = await fetch("http://localhost:8000/categories");
   const data = await response.json();
-
-  // Simulate a 5-second delay
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-
   return data;
 };
 

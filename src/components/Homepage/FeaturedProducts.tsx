@@ -8,23 +8,56 @@ import { truncateText } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { ScaleLoader } from "react-spinners";
 import NotFound from "@/pages/NotFound";
+import { CategoriesTypes, ProductTypes } from "@/lib/types";
 
-const fetchFeaturedProducts = async () => {
-  const respone = await fetch("https://localhost:8000/products");
+const fetchFeaturedProducts = async (): Promise<ProductTypes[]> => {
+  const respone = await fetch("http://localhost:8000/products");
   const data = await respone.json();
   return data;
 };
 
+const fetchCategories = async (): Promise<CategoriesTypes[]> => {
+  const response = await fetch("http://localhost:8000/categories");
+  const data = await response.json();
+  return data;
+};
+
 const FeaturedProducts = () => {
-  const { data, isLoading, error } = useQuery({
+  const {
+    data: products,
+    isLoading: isLoadingProducts,
+    error: errorProducts,
+  } = useQuery({
     queryKey: ["products"],
     queryFn: fetchFeaturedProducts,
   });
-  if (isLoading) {
+
+  const {
+    data: categories,
+    isLoading: isLoadingCategories,
+    error: errorCategories,
+  } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
+
+  const slicedCategories = categories?.slice(0, 4);
+
+  // handles all products
+  const allFeaturedProducts = () => {
+    const filteredFilteredProducts = products?.filter(
+      (product) => product.featured === true
+    );
+    console.log(filteredFilteredProducts);
+  };
+
+  allFeaturedProducts();
+
+  if (isLoadingProducts || isLoadingCategories) {
     return (
       <ScaleLoader
         color="text-primary"
-        loading={isLoading}
+        loading={isLoadingProducts || isLoadingCategories}
         // cssOverride={override}
         height={15}
         width={5}
@@ -34,51 +67,67 @@ const FeaturedProducts = () => {
     );
   }
 
-  if (error) {
-    return <NotFound message={error.message} />;
+  if (errorProducts || errorCategories) {
+    return (
+      <NotFound
+        message={
+          errorProducts?.message ||
+          errorCategories?.message ||
+          "An error occurred"
+        }
+      />
+    );
   }
   return (
-    <section className="my-10 flex">
+    <section className="my-10 flex items-start">
       <div>
         <img src="/public/images/Image.jpg" alt="" />
       </div>
-      <div className="my-10">
+      <div className="">
         <div className="w-full flex justify-between items-center">
-          <p className="flex flex-col">
-            Featured Products
-            <span className="text-xs">
-              {"  "}
-              Deals ends in{" "}
-              <span className="bg-warning-300 py-1 px-2">
-                16d: 21h: 57m: 2s
-              </span>
-            </span>
-          </p>
-
-          <Link
-            to="products"
-            className="text-secondary-500 text-xs flex items-center"
-          >
-            Browse all Products <ArrowRight />
-          </Link>
+          <div className="flex items-center justify-between w-full">
+            <p className="text-xl font-medium">Featured Products</p>
+            <div className="flex items-center gap-3">
+              <ul className="flex items-center gap-2">
+                <p className="text-xs">All Products</p>
+                {slicedCategories?.map((item) => (
+                  <li className="text-xs">{item.name}</li>
+                ))}
+              </ul>
+              <Link
+                to="products"
+                className="text-secondary-500 text-xs flex items-center"
+              >
+                Browse all Products <ArrowRight />
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* container */}
         <div className="flex flex-col sm:flex-row">
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  border border-gray-200">
-            {data?.map((item: Product) => (
+            {products?.map((item: ProductTypes) => (
               <div
                 key={item.id}
-                className="group relative border border-gray-200 p-4 lg:pb-0 space-y-3 flex flex-col items-center justify-center transition-all duration-300 ease-in-out hover:shadow-lg "
+                className="group relative border border-gray-200 p-4  flex flex-col items-center justify-between transition-all duration-300 ease-in-out hover:shadow-lg "
               >
-                <p className="hidden absolute top-3 left-2 text-[0.5rem] text-white font-light rounded-sm bg-gray-600 px-2 py-1">
-                  {item.soldOut && "SOLD OUT"}
-                </p>
-                <p className="hidden absolute top-3 left-2 text-[.5rem] text-white font-light rounded-sm bg-red-600 px-2 py-1">
-                  {item.soldOut && "HOT"}
-                </p>
-                <p className="z-10 absolute top-3 left-2 text-[.5rem] text-black font-bold rounded-sm bg-warning px-2 py-1">
-                  {item.soldOut && `${item.discount}% OFF`}
+                {item.soldOut ? (
+                  <p className=" absolute top-3 left-2 text-[.5rem] text-white font-light rounded-sm bg-gray-600 px-2 py-1 z-30">
+                    SOLD OUT
+                  </p>
+                ) : item.hot ? (
+                  <p className=" absolute top-3 left-2 text-[.5rem] text-white font-light rounded-sm bg-red-600 px-2 py-1 z-30">
+                    HOT
+                  </p>
+                ) : null}
+
+                <p
+                  className={` absolute top-3 right-2 text-[.5rem] text-black font-bold rounded-sm bg-warning px-2 py-1 ${
+                    item.soldOut && "opacity-0"
+                  } z-30`}
+                >
+                  {item.discount && `${item.discount}% OFF`}
                 </p>
                 <div className="relative">
                   <img
