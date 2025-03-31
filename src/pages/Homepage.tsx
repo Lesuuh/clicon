@@ -77,7 +77,7 @@ const Homepage = () => {
       <LatestNews />
 
       {/* --------- News Letters ----------- */}
-      <Newsletter/>
+      <Newsletter />
     </main>
   );
 };

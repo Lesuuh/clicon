@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 
 const Newsletter = () => {
   return (
-    <section className=" px-4 md:px-20 w-full max-w-[1400px] mx-auto bg-secondary my-10 p-5 flex items-center justify-center flex-col rounded-sm">
+    <section className=" px-4 md:px-20 w-full max-w-[1400px] mx-auto bg-secondary mt-10 p-5 flex items-center justify-center flex-col ">
       <h2 className="text-white text-xl mb-3 text-center">
         Subscribe to our Newsletter
       </h2>
