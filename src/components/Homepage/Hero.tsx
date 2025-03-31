@@ -1,10 +1,9 @@
 import { ArrowRight, Minus } from "lucide-react";
 import { Button } from "../ui/button";
 
-
 const Hero = () => {
   return (
-    <section className="my-10 flex flex-col lg:flex-row gap-4 w-full">
+    <section className="my-10 flex flex-col lg:flex-row gap-4 px-4 md:px-20 w-full max-w-[1400px] mx-auto">
       {/* first */}
       <div className="flex bg-gray-50 p-5 md:p-10 rounded-sm relative">
         <div className="h-auto flex flex-col justify-center gap-2 items-start">

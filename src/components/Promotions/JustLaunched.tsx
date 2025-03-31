@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 const JustLaunched = () => {
   return (
-    <section className="my-10 w-full flex flex-col sm:flex-row items-stretch justify-between gap-4">
+    <section className="px-4 md:px-20  max-w-[1400px] mx-auto my-10 w-full flex flex-col sm:flex-row items-stretch justify-between gap-4">
       {/* First Banner */}
       <div className="flex w-full flex-col md:flex-row items-center p-5 md:px-10 rounded-sm bg-gray-50 space-y-2">
         <div className="flex flex-col items-start gap-2">

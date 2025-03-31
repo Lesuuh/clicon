@@ -55,7 +55,7 @@ const Categories = () => {
     return <NotFound message={error.message} />;
   }
   return (
-    <section className="my-10">
+    <section className="px-4 md:px-20 w-full max-w-[1400px] mx-auto my-10">
       <h2 className="text-center text-xl font-bold mb-4">
         Shop with Categories
       </h2>

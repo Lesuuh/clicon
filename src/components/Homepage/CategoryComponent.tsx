@@ -112,7 +112,7 @@ const CategoryComponent = () => {
     );
   }
   return (
-    <section className="my-10 flex flex-col  md:flex-row   gap-4 items-start w-full">
+    <section className="px-4 md:px-20  max-w-[1400px] mx-auto my-10 flex flex-col  md:flex-row   gap-4 items-start w-full">
       <DiscountBanner side="right" />
       <div className="w-full">
         <div className="flex  lg:items-start justify-between flex-col lg:flex-row w-full mb-3">

@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 const BlogCard = ({ blog }: { blog: BlogsTypes }) => {
   const { comments, content, date, image, name, title } = blog;
   return (
-    <div className="shadow-xl rounded-sm p-4 bg-white flex flex-col justify-between items-start">
+    <div className="shadow-xl rounded-sm p-5 md:p-6 bg-white flex flex-col justify-between items-start">
       <img src={image} alt={title} />
       <div className="flex flex-row justify-start gap-2 mt-5">
         <div className="flex items-center">

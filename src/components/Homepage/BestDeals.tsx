@@ -2,7 +2,7 @@ import { truncateText } from "@/lib/utils";
 import CartIcon from "../icons/CartIcon";
 import { EyeIcon } from "../icons/EyeIcon";
 import { HeartIcon } from "../icons/HeartIcon";
-import { ArrowRight} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 import { ScaleLoader } from "react-spinners";
 import { useQuery } from "@tanstack/react-query";
@@ -87,7 +87,7 @@ const BestDeals = () => {
     return <NotFound message={error.message} />;
   }
   return (
-    <section className="my-10">
+    <section className="px-4 md:px-20 w-full max-w-[1400px] mx-auto my-10">
       <div className="w-full flex justify-between items-center">
         <p className="flex flex-col">
           Best Deals

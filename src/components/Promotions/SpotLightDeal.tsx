@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 const SpotLightDeal = () => {
   return (
-    <section className="p-5 md:p-10 w-full md:flex justify-between items-center bg-primary-100 rounded-sm">
+    <section className="px-4 md:px-20 max-w-[1400px] mx-auto p-5 md:p-10 w-full md:flex justify-between items-center bg-primary-100 rounded-sm">
       <div className="flex items-start flex-col gap-2">
         <p className="px-2 py-1 bg-secondary-500 text-white text-[.6rem]">
           SAVE UP TO $200

@@ -58,9 +58,9 @@ const homePageBlogs = blogsArray.slice(0, homePageBlogsNumber);
 
 const LatestNews = () => {
   return (
-    <section className="my-10 bg-gray-50 p-4 ">
+    <section className="px-4 md:px-20  w-full max-w-[1400px]  mx-auto my-10 bg-gray-50 p-5 md:p-10">
       <h2 className="text-2xl font-bold text-center mb-3">Latest News</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 rounded-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 rounded-sm ">
         {homePageBlogs.map((blog) => (
           <BlogCard key={blog.id} blog={blog} />
         ))}

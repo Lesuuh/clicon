@@ -12,6 +12,7 @@ import JustLaunched from "@/components/Promotions/JustLaunched";
 import ServiceHightlights from "@/components/Promotions/ServiceHighlights";
 import SpotLightDeal from "@/components/Promotions/SpotLightDeal";
 import LatestNews from "@/components/Homepage/LatestNews";
+import Newsletter from "@/components/Homepage/Newsletter";
 
 // const fetchProducts = async (): Promise<ProductTypes[]> => {
 //   const { data } = await axios.get<ProductTypes[]>(
@@ -47,7 +48,7 @@ const Homepage = () => {
   // }
 
   return (
-    <main className="px-4 md:px-20 w-full max-w-[1400px] mx-auto">
+    <main>
       {/* -------- hero section --------- */}
       <Hero />
 
@@ -74,6 +75,9 @@ const Homepage = () => {
 
       {/* ------------latest news-------------- */}
       <LatestNews />
+
+      {/* --------- News Letters ----------- */}
+      <Newsletter/>
     </main>
   );
 };

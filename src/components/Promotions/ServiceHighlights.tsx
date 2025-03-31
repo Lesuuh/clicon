@@ -5,7 +5,7 @@ import PackageIcon from "../icons/PackageIcon";
 
 const ServiceHightlights = () => {
   return (
-    <section className="flex items-center-justify-between flex-col border-1 border-gray-50">
+    <section className="px-4 md:px-20 w-full max-w-[1400px] mx-auto flex items-center-justify-between flex-col border-1 border-gray-50">
       <div className="grid grid-cols-2 p-3 sm:grid-cols-4">
         <div className="flex items-center  gap-2 sm:gap-4">
           <PackageIcon className="w-4 sm:w-6" />
