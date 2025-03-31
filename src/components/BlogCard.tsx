@@ -2,7 +2,7 @@ import { BlogsTypes } from "@/lib/types";
 import { formatDate, truncateText } from "@/lib/utils";
 import { ArrowRight, Calendar, UserCircle2 } from "lucide-react";
 import { FaCommentDots } from "react-icons/fa6";
-import { Button } from "../ui/button";
+import { Button } from "./ui/button";
 
 const BlogCard = ({ blog }: { blog: BlogsTypes }) => {
   const { comments, content, date, image, name, title } = blog;

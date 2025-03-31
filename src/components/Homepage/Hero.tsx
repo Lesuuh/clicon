@@ -1,5 +1,6 @@
 import { ArrowRight, Minus } from "lucide-react";
 import { Button } from "../ui/button";
+import { Link } from "react-router";
 
 const Hero = () => {
   return (
@@ -16,8 +17,8 @@ const Hero = () => {
             Save up to 50% on select Xbox games. Get 3 months of PC Game Pass
             for $2 USD.
           </p>
-          <Button className="bg-primary  text-white text-xs px-4 py-2 rounded-xs my-4">
-            SHOP NOW
+          <Button className="bg-primary  text-white text-xs px-4 py-2 rounded-xs my-4 cursor-pointer">
+            <Link to="/shop">SHOP NOW</Link>
             <ArrowRight />
           </Button>
         </div>
