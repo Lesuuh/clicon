@@ -62,7 +62,7 @@ export interface OrderItemTypes {
   price: number;
 }
 
-export interface BlogsType {
+export interface BlogsTypes {
   id: number;
   name: string;
   date: Date;

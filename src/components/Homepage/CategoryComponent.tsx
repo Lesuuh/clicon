@@ -74,9 +74,9 @@ const CategoryComponent = () => {
   console.log(randomCategoryProductsState);
 
   //   getting all the category products
-  const allCategoryProducts = () => {
-    return randomCategoryProductsState;
-  };
+  // const allCategoryProducts = () => {
+  //   return randomCategoryProductsState;
+  // };
 
   //    filter based on category
   //   const filterBasedOnCategory = (categories: CategoriesTypes) => {
@@ -113,7 +113,7 @@ const CategoryComponent = () => {
   }
   return (
     <section className="my-10 flex flex-col  md:flex-row   gap-4 items-start w-full">
-      <DiscountBanner side="right"/>
+      <DiscountBanner side="right" />
       <div className="w-full">
         <div className="flex  lg:items-start justify-between flex-col lg:flex-row w-full mb-3">
           <p className="text-base font-medium text-left w-full lg:w-[30%]">
@@ -122,14 +122,14 @@ const CategoryComponent = () => {
           {/* navigations */}
           <div className="flex w-full justify-between lg:justify-end">
             <ul className="flex items-center flex-wrap gap-2  lg:mr-5">
-              <p
-                className=" hidden text-[.6rem] text-gray cursor-pointer px-1 rounded-sm hover:text-primary"
+              {/* <p
+                className=" text-[.6rem] text-gray cursor-pointer px-1 rounded-sm hover:text-primary"
                 onClick={() => allCategoryProducts()}
               >
                 All Products
-              </p>
+              </p> */}
               {slicedCategories?.map((item) => (
-                <Link to={`/products/?category=${item.slug}`}>
+                <Link key={item.id} to={`/products/?category=${item.slug}`}>
                   <li
                     key={item.id}
                     className="text-[.6rem] text-gray cursor-pointer px-1 rounded-sm hover:text-primary"
