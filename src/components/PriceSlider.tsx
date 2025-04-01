@@ -4,8 +4,21 @@ import {
   RangeSliderFilledTrack,
   RangeSliderThumb,
 } from "@chakra-ui/react";
-import { ChakraProvider } from "@chakra-ui/react";
+// import { ChakraProvider } from "@chakra-ui/react";
 import { useState } from "react";
+
+import { extendTheme, ChakraProvider } from "@chakra-ui/react";
+
+const customTheme = extendTheme({
+  styles: {
+    global: {
+      // Define styles specific to Chakra components
+      "input, div": {
+        borderColor: "inherit", // Ensure Chakra doesn't override border colors
+      },
+    },
+  },
+});
 
 const PriceSlider = () => {
   const customColor = "#FA8232";
@@ -24,8 +37,8 @@ const PriceSlider = () => {
   };
 
   return (
-    <ChakraProvider resetCSS={false}>
-      <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-md mx-auto">
+      <ChakraProvider theme={customTheme} resetCSS={false}>
         {/* Slider */}
         <RangeSlider
           aria-label={["min", "max"]}
@@ -70,8 +83,8 @@ const PriceSlider = () => {
             className="max-w-30 px-2 py-1 border border-gray-200 placeholder:text-[.7rem] focus:outline-none text-gray-500 text-[.7rem] font-normal"
           />
         </div>
-      </div>
-    </ChakraProvider>
+      </ChakraProvider>
+    </div>
   );
 };
 

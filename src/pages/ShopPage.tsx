@@ -12,7 +12,7 @@ import { CategoriesTypes, ProductTypes } from "@/lib/types";
 import { Separator } from "@radix-ui/react-select";
 
 import { useQuery } from "@tanstack/react-query";
-import { ChevronRight } from "lucide-react";
+import { Check, ChevronRight } from "lucide-react";
 import { Link } from "react-router";
 
 const fetchProducts = async () => {
@@ -26,6 +26,42 @@ const fetchCategories = async () => {
   const data = response.json();
   return data;
 };
+
+const prices = [
+  "All Price",
+  "Under $20",
+  "$25 to $100",
+  "$100 to $300",
+  "$300 to $500",
+  "$500 to $1,000",
+  "$1,000 to $10,000",
+];
+
+const popularBrands = [
+  "Apple",
+  "Samsung",
+  "Microsoft",
+  "Sony",
+  "Dell",
+  "HP",
+  "Intel",
+  "LG",
+  "Google",
+  "Lenovo",
+  "AMD",
+  "NVIDIA",
+  "Asus",
+  "Razer",
+  "Huawei",
+  "Canon",
+  "Panasonic",
+  "One Plus",
+  "GoPro",
+  "Fitbit",
+  "Xiaomi",
+  "Tecno",
+  "Nikon",
+];
 
 const ShopPage = () => {
   const {
@@ -51,7 +87,11 @@ const ShopPage = () => {
   }
 
   if (productsLoading || categoriesLoading) {
-    return <p>Loading {productsLoading ? "products" : "categories"}</p>;
+    return (
+      <p className="flex justify-center items-center h-screen w-full">
+        Loading {productsLoading ? "products" : "categories"}
+      </p>
+    );
   }
 
   return (
@@ -98,8 +138,8 @@ const ShopPage = () => {
                       id={`radioInput${cat.id}`}
                       className="sr-only peer"
                     />
-                    <div className="w-3 h-3 bg-white border border-gray-300 rounded-full  peer-checked:border-primary peer-checked:border-[3.5px]"></div>
-                    <li className="text-[.7rem] ml-2 peer-checked:text-black peer-checked:font-bold-">
+                    <div className="w-3 h-3 bg-white border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-[3.5px] !important"></div>
+                    <li className="text-[.7rem] ml-2 peer-checked:text-black peer-checked:font-medium">
                       {cat.name}
                     </li>
                   </label>
@@ -110,12 +150,58 @@ const ShopPage = () => {
             <div className="mt-5">
               <h2 className="text-xs font-medium">PRICE TAG</h2>
               <div className="w-full">
-                <PriceSlider />
+                {/* <PriceSlider /> */}
+                {/* Preset Price Options */}
+                <ul className="price-options mt-2">
+                  {prices.map((price, index) => (
+                    <label
+                      htmlFor={`price-${index}`}
+                      className="flex items-center text-gray-500 font-normal pb-2"
+                    >
+                      <input
+                        type="radio"
+                        name="price"
+                        id={`price-${index}`}
+                        className="sr-only peer"
+                      />
+                      <div className="w-3 h-3 bg-white border border-blue-gray rounded-full peer-checked:border-primary peer-checked:border-2 !important"></div>
+                      <li
+                        key={index}
+                        className="text-[.7rem] ml-2 peer-checked:text-black peer-checked:font-medium"
+                      >
+                        {price}
+                      </li>
+                    </label>
+                  ))}
+                </ul>
               </div>
             </div>
             <Separator className="w-full border-t border-gray-300" />
             <div>
               <h2 className="text-xs font-medium">POPULAR BRANDS</h2>
+              <div>
+                <ul className="w-full grid grid-cols-2 mt-2 mb-2 gap-2">
+                  {popularBrands.map((pop, index) => (
+                    <li key={index}>
+                      <label
+                        htmlFor="popular-brand"
+                        className=" flex items-center text-[.6rem]"
+                      >
+                        <input
+                          type="checkbox"
+                          name="popular-brand"
+                          id="popular-brand"
+                          className="mr-1 w-3 border-primary border peer"
+                        />
+                        <div className="w-3 h-3 bg-white border-gray rounded-xs border peer-checked:border-primary peer-checked:bg-primary mr-1">
+                          <Check size={12} className="text-white" />
+                        </div>
+                        {pop}
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
             <Separator className="w-full border-t border-gray-300" />
             <div>
