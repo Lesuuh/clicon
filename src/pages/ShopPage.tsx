@@ -1,5 +1,6 @@
 import { HomeIcon } from "@/components/icons/HomeIcon";
-import PriceSlider from "@/components/PriceSlider";
+import SingleCheckIcon from "@/components/icons/SingleCheckIcon";
+// import PriceSlider from "@/components/PriceSlider";
 import ProductCard from "@/components/products/ProductCard";
 import {
   Breadcrumb,
@@ -12,8 +13,17 @@ import { CategoriesTypes, ProductTypes } from "@/lib/types";
 import { Separator } from "@radix-ui/react-select";
 
 import { useQuery } from "@tanstack/react-query";
-import { Check, ChevronRight } from "lucide-react";
+import { ChevronRight, X } from "lucide-react";
 import { Link } from "react-router";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import SearchIcon from "@/components/icons/SearchIcon";
+import { Button } from "@/components/ui/button";
 
 const fetchProducts = async () => {
   const response = await fetch("http://localhost:8000/products");
@@ -28,7 +38,7 @@ const fetchCategories = async () => {
 };
 
 const prices = [
-  "All Price",
+  "All Prices",
   "Under $20",
   "$25 to $100",
   "$100 to $300",
@@ -61,6 +71,29 @@ const popularBrands = [
   "Xiaomi",
   "Tecno",
   "Nikon",
+];
+
+const popularTags = [
+  "Smartphones",
+  "Laptops",
+  "Headphones",
+  "Tablets",
+  "Wearables",
+  "Cameras",
+  "Smartwatches",
+  "Gaming Consoles",
+  "Home Appliances",
+  "Speakers",
+  "Televisions",
+  "Chargers",
+  "Accessories",
+  "Bluetooth",
+  "4K",
+  "Gaming Laptops",
+  "Smart Home",
+  "Apple",
+  "Samsung",
+  "Android",
 ];
 
 const ShopPage = () => {
@@ -146,8 +179,8 @@ const ShopPage = () => {
                 ))}
               </ul>
             </div>
-            <Separator className="w-full border-t border-gray-300" />
-            <div className="mt-5">
+            <Separator className="w-full my-5 border-t border-gray-300" />
+            <div className="">
               <h2 className="text-xs font-medium">PRICE TAG</h2>
               <div className="w-full">
                 {/* <PriceSlider /> */}
@@ -176,7 +209,7 @@ const ShopPage = () => {
                 </ul>
               </div>
             </div>
-            <Separator className="w-full border-t border-gray-300" />
+            <Separator className="w-full my-5 border-t border-gray-300" />
             <div>
               <h2 className="text-xs font-medium">POPULAR BRANDS</h2>
               <div>
@@ -184,17 +217,17 @@ const ShopPage = () => {
                   {popularBrands.map((pop, index) => (
                     <li key={index}>
                       <label
-                        htmlFor="popular-brand"
-                        className=" flex items-center text-[.6rem]"
+                        htmlFor={`popular-brand-${pop}`}
+                        className=" flex items-center text-[.6rem] cursor-pointer"
                       >
                         <input
                           type="checkbox"
-                          name="popular-brand"
-                          id="popular-brand"
-                          className="mr-1 w-3 border-primary border peer"
+                          name={`popular-brand-${pop}`}
+                          id={`popular-brand-${pop}`}
+                          className="sr-only peer"
                         />
-                        <div className="w-3 h-3 bg-white border-gray rounded-xs border peer-checked:border-primary peer-checked:bg-primary mr-1">
-                          <Check size={12} className="text-white" />
+                        <div className="w-3 h-3 bg-white border-gray rounded-xs border peer-checked:border-primary peer-checked:bg-primary mr-1 flex items-center justify-center">
+                          <SingleCheckIcon className="text-white" />
                         </div>
                         {pop}
                       </label>
@@ -203,15 +236,74 @@ const ShopPage = () => {
                 </ul>
               </div>
             </div>
-            <Separator className="w-full border-t border-gray-300" />
+            <Separator className="w-full my-5 border-t border-gray-300" />
             <div>
               <h2 className="text-xs font-medium">POPULAR TAGS</h2>
+              <div>
+                <ul className="flex flex-wrap gap-2 mt-2">
+                  {popularTags.map((tag, index) => (
+                    <li
+                      key={index}
+                      className="text-[.6rem] text-gray-700 border border-gray-50 px-2 py-1 hover:border-primary hover:text-primary hover:bg-primary-100 rounded-xs cursor-pointer"
+                    >
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </aside>
 
         {/* main */}
         <main className="">
+          <div className="mb-3">
+            <div className="flex items-center justify-between w-full">
+              <form action="" className="w-[50%] relative">
+                <input
+                  type="text"
+                  placeholder="Search for anything..."
+                  className="w-full max-w-full px-4 py-2 border rounded-xs text-[.8rem]"
+                />
+
+                <Button
+                  className="w-0 bg-transparent hover:bg-transparent cursor-pointer text-black absolute top-1/2 right-4 transform -translate-y-1/2"
+                  variant="default"
+                >
+                  <SearchIcon className="w-4" />
+                </Button>
+              </form>
+              <div className="flex items-center ">
+                <p className="mr-3 text-[.8rem]">Sort by:</p>
+                <div>
+                  <Select>
+                    <SelectTrigger className="w-[180px] focus:outline-none ">
+                      <SelectValue placeholder="Most Popular" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white">
+                      <SelectItem value="light">Most Popular</SelectItem>
+                      <SelectItem value="price-high">Prices: High</SelectItem>
+                      <SelectItem value="price-low">Prices: Low</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between bg-gray-50 py-3 px-4 mt-4">
+              <div className="flex items-center text-[.8rem]">
+                <p className="mr-1 text-gray ">Active Filters:</p>
+                <p className="flex items-center">
+                  Electronic Devices <X size={15} className="text-gray ml-1" />
+                </p>
+              </div>
+              <p className="font-medium text-[.8rem]">
+                65,783
+                <span className="ml-2 font-normal text-gray">
+                  Results found.
+                </span>
+              </p>
+            </div>
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 w-full">
             {products?.map((item: ProductTypes) => (
               <ProductCard key={item.id} item={item} />
@@ -219,7 +311,6 @@ const ShopPage = () => {
           </div>
         </main>
       </div>
-      <div>Shop page</div>
     </section>
   );
 };
