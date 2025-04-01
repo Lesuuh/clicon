@@ -82,40 +82,45 @@ const ShopPage = () => {
       </div>
       <div className="flex px-4 md:px-20 w-full mx-auto max-w-[1400px] gap-4">
         <aside className="w-[30%]">
-          <div>
-            <h2 className="text-xs font-medium">CATEGORY</h2>
-            <ul className="mt-2">
-              {categories.map((cat: CategoriesTypes) => (
-                <label
-                  key={cat.id}
-                  htmlFor={`radioInput${cat.id}`}
-                  className="flex items-center text-gray-500 font-normal pb-2"
-                >
-                  <input
-                    type="radio"
-                    name="category"
-                    id={`radioInput${cat.id}`}
-                    className="sr-only peer"
-                  />
-                  <div className="w-3 h-3 bg-white border border-gray-300 rounded-full  peer-checked:border-primary peer-checked:border-[3.5px]"></div>
-                  <li className="text-[.7rem] ml-2 peer-checked:text-black peer-checked:font-bold-">
-                    {cat.name}
-                  </li>
-                </label>
-              ))}
-            </ul>
-          </div>
-          <Separator className="w-full border-t border-gray-300" />
-          <div>
-            <h2 className="text-xs font-medium">PRICE TAG</h2>
-          </div>
-          <Separator className="w-full border-t border-gray-300" />
-          <div>
-            <h2 className="text-xs font-medium">POPULAR BRANDS</h2>
-          </div>
-          <Separator className="w-full border-t border-gray-300" />
-          <div>
-            <h2 className="text-xs font-medium">POPULAR TAGS</h2>
+          <div className="">
+            <div>
+              <h2 className="text-xs font-medium">CATEGORY</h2>
+              <ul className="mt-2">
+                {categories.map((cat: CategoriesTypes) => (
+                  <label
+                    key={cat.id}
+                    htmlFor={`radioInput${cat.id}`}
+                    className="flex items-center text-gray-500 font-normal pb-2"
+                  >
+                    <input
+                      type="radio"
+                      name="category"
+                      id={`radioInput${cat.id}`}
+                      className="sr-only peer"
+                    />
+                    <div className="w-3 h-3 bg-white border border-gray-300 rounded-full  peer-checked:border-primary peer-checked:border-[3.5px]"></div>
+                    <li className="text-[.7rem] ml-2 peer-checked:text-black peer-checked:font-bold-">
+                      {cat.name}
+                    </li>
+                  </label>
+                ))}
+              </ul>
+            </div>
+            <Separator className="w-full border-t border-gray-300" />
+            <div className="mt-5">
+              <h2 className="text-xs font-medium">PRICE TAG</h2>
+              <div className="w-full">
+                <PriceSlider />
+              </div>
+            </div>
+            <Separator className="w-full border-t border-gray-300" />
+            <div>
+              <h2 className="text-xs font-medium">POPULAR BRANDS</h2>
+            </div>
+            <Separator className="w-full border-t border-gray-300" />
+            <div>
+              <h2 className="text-xs font-medium">POPULAR TAGS</h2>
+            </div>
           </div>
         </aside>
 
@@ -123,13 +128,12 @@ const ShopPage = () => {
         <main className="">
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 w-full">
             {products?.map((item: ProductTypes) => (
-              <ProductCard item={item} />
+              <ProductCard key={item.id} item={item} />
             ))}
           </div>
         </main>
       </div>
       <div>Shop page</div>
-      <PriceSlider />
     </section>
   );
 };
