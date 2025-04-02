@@ -30,7 +30,6 @@ const Footer = () => {
   }
 
   const categories = data?.slice(0, 6);
-  console.log(categories);
   return (
     <div className="w-full bg-black pt-10 text-white">
       <div className="px-4 md:px-20 max-w-[1400px] mx-auto mb-5">

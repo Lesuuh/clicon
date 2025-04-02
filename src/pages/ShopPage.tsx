@@ -1,6 +1,5 @@
 import { HomeIcon } from "@/components/icons/HomeIcon";
 import SingleCheckIcon from "@/components/icons/SingleCheckIcon";
-// import PriceSlider from "@/components/PriceSlider";
 import ProductCard from "@/components/products/ProductCard";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -10,8 +9,6 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { CategoriesTypes, ProductTypes } from "@/lib/types";
-// import { Separator } from "@radix-ui/react-select";
-
 import { useQuery } from "@tanstack/react-query";
 import {
   ArrowDownUp,
@@ -32,23 +29,22 @@ import SearchIcon from "@/components/icons/SearchIcon";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
-  // DrawerClose,
   DrawerContent,
   DrawerDescription,
-  // DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  // DrawerTrigger,
 } from "@/components/ui/drawer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClipLoaderSpinner from "@/components/icons/ClipLoaderSpinner";
 
+// FETCHING PRODUCTS DATA
 const fetchProducts = async () => {
   const response = await fetch("http://localhost:8000/products");
   const data = response.json();
   return data;
 };
 
+// FETCHING CATEGORIES DATA
 const fetchCategories = async () => {
   const response = await fetch("http://localhost:8000/categories");
   const data = response.json();
@@ -133,16 +129,29 @@ const ShopPage = () => {
     queryFn: fetchCategories,
   });
 
-  // state for sorting
+  // STATE FOR SORTING
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  // state for filtering
+  // STATE FOR FILTERING
   const [openFilter, setOpenFilter] = useState(false);
 
+  // RENDERED STATE
+  const [filteredState, setfilteredState] = useState(products);
+
+  useEffect(() => {
+    if (products) {
+      setfilteredState(products);
+    }
+  }, [products]);
+
+  console.log(filteredState);
+
+  // ERROR
   if (productsError || categoriesError) {
     return <p>{productsError?.message || categoriesError?.message}</p>;
   }
 
+  // LOADING
   if (productsLoading || categoriesLoading) {
     return (
       <p className="flex justify-center items-center h-screen w-full">
@@ -154,7 +163,6 @@ const ShopPage = () => {
   return (
     <section className="my-10 relative">
       {/* ------------------- filtering buttons ----------------- */}
-
       <div className="fixed text-[.7rem] flex items-center bottom-10 z-40 left-1/2 transform -translate-x-1/2 px-4 rounded-4xl bg-black text-white h-10 py-2">
         <div className="flex items-center ">
           <p className="mr-1" onClick={() => setOpenDrawer(true)}>
@@ -340,7 +348,6 @@ const ShopPage = () => {
       </div>
 
       {/* main content */}
-
       <div className="bg-gray-50 max-w-[1400px]  py-3 mb-5 gap-4 px-4 md:px-20 w-full mx-auto">
         <Breadcrumb>
           <BreadcrumbList>
