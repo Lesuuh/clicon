@@ -1,6 +1,6 @@
 import { ProductTypes } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClipLoaderSpinner from "@/components/icons/ClipLoaderSpinner";
 import CategorySidebar from "@/components/products/CategorySidebar";
 import BreadCrumbs from "@/components/products/BreadCrumbs";
@@ -19,7 +19,7 @@ const fetchProducts = async () => {
 
 interface FiltersProps {
   category: string;
-  price: string;
+  price: { min: number | null; max: number | null };
   popularBrand: string[];
 }
 
@@ -38,26 +38,30 @@ const ShopPage = () => {
   const [openFilter, setOpenFilter] = useState(false);
 
   // RENDERED STATE
-  let filteredProducts = products || [];
+  // let filteredProducts = products || [];
+  const [filteredProducts, setFilteredProducts] = useState(products || []);
 
   // URL PARAMS
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
-  console.log(query);
+  // console.log(query);
 
   // SEARCH FILTERING
-  if (query) {
-    const searchProducts = filteredProducts?.filter((item: ProductTypes) =>
-      item.name.toLowerCase().includes(query.toLowerCase())
-    );
-    filteredProducts = searchProducts;
-    console.log(filteredProducts, "filt");
-  }
+  useEffect(() => {
+    if (query) {
+      const searchProducts = (products || []).filter((item: ProductTypes) =>
+        item.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredProducts(searchProducts);
+    } else {
+      setFilteredProducts(products || []);
+    }
+  }, [query, products]);
 
   // CATEGORY, PRICE AND  BRAND FILTER
   const [filters, setFilters] = useState<FiltersProps>({
     category: "",
-    price: "",
+    price: { min: null, max: null },
     popularBrand: [],
   });
 
@@ -65,11 +69,20 @@ const ShopPage = () => {
 
   // get the selected category
   const handleRadioCategory = (filterName: string, value: string) => {
+    console.log(filterName, value);
     setFilters((prevFilter) => ({ ...prevFilter, [filterName]: value }));
   };
 
-  const handleRadioPrice = (filterName: string, value: string) => {
-    setFilters((prevFilter) => ({ ...prevFilter, [filterName]: value }));
+  const handleRadioPrice = (
+    filterName: string,
+    { min, max }: { min: number; max: number }
+  ) => {
+    setFilters((prevFilter) => ({
+      ...prevFilter,
+      [filterName]: { min, max },
+    }));
+
+    console.log(filterName, { min, max });
   };
 
   const handlePopularBrand = (brand: string, isChecked: boolean) => {
@@ -84,6 +97,35 @@ const ShopPage = () => {
       return { ...prevFilter, popularBrand: updatedBrands };
     });
   };
+
+  // if(filters.price ==)
+
+  // filter the products
+  useEffect(() => {
+    let updatedProducts = products || [];
+
+    if (filters.category) {
+      updatedProducts = updatedProducts.filter(
+        (product: ProductTypes) => product.category.name === filters.category
+      );
+    }
+    if (filters.price) {
+      const { min, max } = filters.price;
+
+      updatedProducts = updatedProducts.filter(
+        (product: ProductTypes) =>
+          (min === null || product.price >= min) &&
+          (max === null || product.price <= max)
+      );
+    }
+    if (filters.popularBrand.length > 0) {
+      updatedProducts = updatedProducts.filter((product: ProductTypes) =>
+        filters.popularBrand.includes(product.brand)
+      );
+    }
+
+    setFilteredProducts(updatedProducts);
+  }, [filters, products]);
 
   // ERROR
   if (productsError) {

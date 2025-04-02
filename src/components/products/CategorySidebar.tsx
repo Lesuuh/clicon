@@ -7,18 +7,18 @@ import { useQuery } from "@tanstack/react-query";
 // FETCHING CATEGORIES DATA
 const fetchCategories = async () => {
   const response = await fetch("http://localhost:8000/categories");
-  const data = response.json();
+  const data = await response.json();
   return data;
 };
 
 const prices = [
-  "All Prices",
-  "Under $20",
-  "$25 to $100",
-  "$100 to $300",
-  "$300 to $500",
-  "$500 to $1,000",
-  "$1,000 to $10,000",
+  { label: "All Prices", min: 0, max: 100000 },
+  { label: "Under $20", min: 0, max: 20 },
+  { label: "$25 to $100", min: 25, max: 100 },
+  { label: "$100 to $300", min: 100, max: 300 },
+  { label: "$300 to $500", min: 300, max: 500 },
+  { label: "$500 to $1,000", min: 500, max: 1000 },
+  { label: "$1,000 to $10,000", min: 1000, max: 10000 },
 ];
 
 const popularBrands = [
@@ -72,7 +72,10 @@ const popularTags = [
 
 interface filtersProps {
   handleRadioCategory: (name: string, value: string) => void;
-  handleRadioPrice: (name: string, value: string) => void;
+  handleRadioPrice: (
+    name: string,
+    { min, max }: { min: number; max: number }
+  ) => void;
   handlePopularBrand: (name: string, value: boolean) => void;
 }
 
@@ -111,21 +114,22 @@ const CategorySidebar = ({
           <div className="mt-2">
             {categories.map((cat: CategoriesTypes) => {
               const inputId = `radioInput${cat.id}`;
+              // console.log(inputId)
               return (
                 <label
                   key={cat.id}
                   htmlFor={inputId}
                   className="flex items-center text-gray-500 font-normal pb-2 cursor-pointer"
-                  // onClick={() => handleRadioCategory(cat.slug)}
                 >
                   <input
                     type="radio"
                     name="category"
                     id={inputId}
-                    value={cat.slug}
-                    onChange={(e) =>
-                      handleRadioCategory(e.target.name, e.target.value)
-                    }
+                    value={cat.name}
+                    onChange={(e) => {
+                      console.log(e.target.name, e.target.value);
+                      handleRadioCategory(e.target.name, e.target.value);
+                    }}
                     className="sr-only peer"
                   />
                   <div className="w-3 h-3 bg-white border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-[3.5px] !important"></div>
@@ -147,21 +151,21 @@ const CategorySidebar = ({
                   key={index}
                   htmlFor={`price-${index}`}
                   className="flex items-center text-gray-500 font-normal pb-2 cursor-pointer"
-                  // onClick={() => handleRadioPrice(price)}
                 >
                   <input
                     type="radio"
                     name="price"
-                    value={price}
+                    value={JSON.stringify({ min: price.min, max: price.max })}
                     id={`price-${index}`}
-                    onChange={(e) =>
-                      handleRadioPrice(e.target.name, e.target.value)
-                    }
+                    onChange={(e) => {
+                      const { min, max } = JSON.parse(e.target.value);
+                      handleRadioPrice(e.target.name, { min, max });
+                    }}
                     className="sr-only peer"
                   />
                   <div className="w-3 h-3 bg-white border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-2"></div>
                   <span className="text-[.7rem] ml-2 peer-checked:text-black peer-checked:font-medium">
-                    {price}
+                    {price.label}
                   </span>
                 </label>
               ))}
