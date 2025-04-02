@@ -70,7 +70,17 @@ const popularTags = [
   "Android",
 ];
 
-const CategorySidebar = () => {
+interface filtersProps {
+  handleRadioCategory: (name: string, value: string) => void;
+  handleRadioPrice: (name: string, value: string) => void;
+  handlePopularBrand: (name: string, value: boolean) => void;
+}
+
+const CategorySidebar = ({
+  handleRadioCategory,
+  handleRadioPrice,
+  handlePopularBrand,
+}: filtersProps) => {
   const {
     data: categories,
     isLoading: categoriesLoading,
@@ -79,14 +89,6 @@ const CategorySidebar = () => {
     queryKey: ["categories"],
     queryFn: fetchCategories,
   });
-
-  const handleRadioCategory = (btn: string) => {
-    console.log(btn, "was clicked");
-  };
-
-  const handleRadioPrice = (btn: string) => {
-    console.log(btn, "price");
-  };
 
   // ERROR
   if (categoriesError) {
@@ -114,12 +116,16 @@ const CategorySidebar = () => {
                   key={cat.id}
                   htmlFor={inputId}
                   className="flex items-center text-gray-500 font-normal pb-2 cursor-pointer"
-                  onClick={() => handleRadioCategory(cat.slug)}
+                  // onClick={() => handleRadioCategory(cat.slug)}
                 >
                   <input
                     type="radio"
                     name="category"
                     id={inputId}
+                    value={cat.slug}
+                    onChange={(e) =>
+                      handleRadioCategory(e.target.name, e.target.value)
+                    }
                     className="sr-only peer"
                   />
                   <div className="w-3 h-3 bg-white border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-[3.5px] !important"></div>
@@ -141,12 +147,16 @@ const CategorySidebar = () => {
                   key={index}
                   htmlFor={`price-${index}`}
                   className="flex items-center text-gray-500 font-normal pb-2 cursor-pointer"
-                  onClick={() => handleRadioPrice()}
+                  // onClick={() => handleRadioPrice(price)}
                 >
                   <input
                     type="radio"
                     name="price"
+                    value={price}
                     id={`price-${index}`}
+                    onChange={(e) =>
+                      handleRadioPrice(e.target.name, e.target.value)
+                    }
                     className="sr-only peer"
                   />
                   <div className="w-3 h-3 bg-white border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-2"></div>
@@ -171,7 +181,11 @@ const CategorySidebar = () => {
                   >
                     <input
                       type="checkbox"
-                      name={`popular-brand-${pop}`}
+                      name={`popularBrand`}
+                      value={pop}
+                      onChange={(e) =>
+                        handlePopularBrand(pop, e.target.checked)
+                      }
                       id={`popular-brand-${pop}`}
                       className="sr-only peer"
                     />

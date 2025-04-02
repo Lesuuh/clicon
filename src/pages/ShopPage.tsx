@@ -13,9 +13,15 @@ import FilteringButtons from "@/components/products/FilteringButtons";
 // FETCHING PRODUCTS DATA
 const fetchProducts = async () => {
   const response = await fetch("http://localhost:8000/products");
-  const data = response.json();
+  const data = await response.json();
   return data;
 };
+
+interface FiltersProps {
+  category: string;
+  price: string;
+  popularBrand: string[];
+}
 
 const ShopPage = () => {
   const {
@@ -49,14 +55,35 @@ const ShopPage = () => {
   }
 
   // CATEGORY, PRICE AND  BRAND FILTER
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<FiltersProps>({
     category: "",
     price: "",
-    brand: "",
+    popularBrand: [],
   });
 
+  console.log(filters);
+
   // get the selected category
-  
+  const handleRadioCategory = (filterName: string, value: string) => {
+    setFilters((prevFilter) => ({ ...prevFilter, [filterName]: value }));
+  };
+
+  const handleRadioPrice = (filterName: string, value: string) => {
+    setFilters((prevFilter) => ({ ...prevFilter, [filterName]: value }));
+  };
+
+  const handlePopularBrand = (brand: string, isChecked: boolean) => {
+    setFilters((prevFilter) => {
+      const updatedBrands = [...prevFilter.popularBrand];
+      if (isChecked) {
+        updatedBrands.push(brand);
+      } else {
+        const filteredBrands = updatedBrands.filter((b) => b !== brand);
+        return { ...prevFilter, popularBrand: filteredBrands };
+      }
+      return { ...prevFilter, popularBrand: updatedBrands };
+    });
+  };
 
   // ERROR
   if (productsError) {
@@ -87,7 +114,11 @@ const ShopPage = () => {
 
       <BreadCrumbs />
       <div className="flex px-4 md:px-20 w-full mx-auto max-w-[1400px] gap-4">
-        <CategorySidebar />
+        <CategorySidebar
+          handleRadioCategory={handleRadioCategory}
+          handleRadioPrice={handleRadioPrice}
+          handlePopularBrand={handlePopularBrand}
+        />
         <ProductsMainContent filteredProducts={filteredProducts} />
       </div>
     </section>
