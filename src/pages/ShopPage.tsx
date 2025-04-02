@@ -129,6 +129,32 @@ const ShopPage = () => {
     setFilteredProducts(updatedProducts);
   }, [filters, products]);
 
+  // sorting
+  const [sortBy, setSortBy] = useState("most-popular");
+  console.log(sortBy);
+
+  useEffect(() => {
+    if (!products) return;
+    let sortedProducts = [...products];
+    if (sortBy === "most-popular") {
+      sortedProducts = sortedProducts?.sort(
+        (a: ProductTypes, b: ProductTypes) => b.rating - a.rating
+      );
+    }
+    if (sortBy === "price-high") {
+      sortedProducts = sortedProducts?.sort(
+        (a: ProductTypes, b: ProductTypes) => b.price - a.price
+      );
+    }
+    if (sortBy === "price-low") {
+      sortedProducts = sortedProducts?.sort(
+        (a: ProductTypes, b: ProductTypes) => a.price - b.price
+      );
+    }
+
+    setFilteredProducts(sortedProducts);
+  }, [sortBy, products]);
+
   // ERROR
   if (productsError) {
     return <p>{productsError?.message}</p>;
@@ -163,7 +189,10 @@ const ShopPage = () => {
           handleRadioPrice={handleRadioPrice}
           handlePopularBrand={handlePopularBrand}
         />
-        <ProductsMainContent filteredProducts={filteredProducts} />
+        <ProductsMainContent
+          filteredProducts={filteredProducts}
+          setSortBy={setSortBy}
+        />
       </div>
     </section>
   );

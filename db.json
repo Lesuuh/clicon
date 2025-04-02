@@ -20,7 +20,7 @@
       "discount": 5,
       "category": { "id": 3, "name": "SmartPhones" },
       "brand": "Apple",
-      "rating": 4.8,
+      "rating": 4.9,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
@@ -62,7 +62,7 @@
       "discount": 5,
       "category": { "id": 10, "name": "Wearable Technology" },
       "brand": "Lg",
-      "rating": 4.8,
+      "rating": 4.0,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
@@ -104,7 +104,7 @@
       "discount": 5,
       "category": { "id": 9, "name": "Watches & Accessories" },
       "brand": "Apple",
-      "rating": 4.8,
+      "rating": 3.8,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
@@ -146,7 +146,7 @@
       "discount": 5,
       "category": { "id": 8, "name": "TV & Home Appliance" },
       "brand": "Samsung",
-      "rating": 4.8,
+      "rating": 5.0,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
@@ -230,7 +230,7 @@
       "discount": 5,
       "category": { "id": 6, "name": "Gaming Consoles" },
       "brand": "Sony",
-      "rating": 4.8,
+      "rating": 2.9,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
@@ -436,7 +436,7 @@
       "id": 11,
       "name": "Apple Mac 4 Pro",
       "description": "Apple Mac 4 Pro with A17 Pro chip and 48MP camera.",
-      "price": 999.99,
+      "price": 875.99,
       "discount": 5,
       "category": { "id": 1, "name": "Computer & Laptops" },
       "brand": "Apple",

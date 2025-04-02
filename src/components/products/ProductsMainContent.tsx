@@ -10,10 +10,13 @@ import {
 import { Suspense } from "react";
 import { ProductTypes } from "@/lib/types";
 import ProductCard from "./ProductCard";
+
 const ProductsMainContent = ({
   filteredProducts,
+  setSortBy,
 }: {
   filteredProducts: ProductTypes[];
+  setSortBy: (value: string) => void;
 }) => {
   return (
     <main className="w-full">
@@ -23,12 +26,12 @@ const ProductsMainContent = ({
           <div className="md:flex items-center hidden">
             <p className="mr-3 text-[.8rem]">Sort by:</p>
             <div>
-              <Select>
+              <Select onValueChange={(value) => setSortBy(value)}>
                 <SelectTrigger className="w-[180px] focus:outline-none ">
                   <SelectValue placeholder="Most Popular" />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
-                  <SelectItem value="light">Most Popular</SelectItem>
+                  <SelectItem value="most-popular">Most Popular</SelectItem>
                   <SelectItem value="price-high">Prices: High</SelectItem>
                   <SelectItem value="price-low">Prices: Low</SelectItem>
                 </SelectContent>
@@ -44,7 +47,7 @@ const ProductsMainContent = ({
             </p>
           </div>
           <div className="ml-auto text-[.6rem] md:text-[.8rem] flex items-center">
-            <p className="font-medium">{filteredProducts.length}</p>
+            <p className="font-medium">{filteredProducts?.length}</p>
             <span className="ml-2 font-normal text-gray">
               {`${
                 filteredProducts.length === 1 ? "Result" : "Results"
