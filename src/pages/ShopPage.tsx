@@ -120,7 +120,9 @@ const ShopPage = () => {
     }
     if (filters.popularBrand.length > 0) {
       updatedProducts = updatedProducts.filter((product: ProductTypes) =>
-        filters.popularBrand.some((brand) => brand.toLowerCase() === product.brand.toLowerCase())
+        filters.popularBrand.some(
+          (brand) => brand.toLowerCase() === product.brand.toLowerCase()
+        )
       );
     }
 
