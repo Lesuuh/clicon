@@ -17,7 +17,7 @@ import {
   ListFilter,
   X,
 } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import {
   Select,
   SelectContent,
@@ -25,7 +25,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import SearchIcon from "@/components/icons/SearchIcon";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -34,8 +33,9 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import ClipLoaderSpinner from "@/components/icons/ClipLoaderSpinner";
+import Search from "@/components/Search";
 
 // FETCHING PRODUCTS DATA
 const fetchProducts = async () => {
@@ -136,15 +136,19 @@ const ShopPage = () => {
   const [openFilter, setOpenFilter] = useState(false);
 
   // RENDERED STATE
-  const [filteredState, setfilteredState] = useState(products);
+  let filteredProducts = products || [];
 
-  useEffect(() => {
-    if (products) {
-      setfilteredState(products);
-    }
-  }, [products]);
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("q") || "";
+  console.log(query);
 
-  console.log(filteredState);
+  if (query) {
+    const searchProducts = filteredProducts?.filter((item: ProductTypes) =>
+      item.name.toLowerCase().includes(query.toLowerCase())
+    );
+    filteredProducts = searchProducts;
+    console.log(filteredProducts, "filt");
+  }
 
   // ERROR
   if (productsError || categoriesError) {
@@ -472,23 +476,10 @@ const ShopPage = () => {
         </aside>
 
         {/* main */}
-        <main className="">
+        <main className="w-full">
           <div className="mb-3">
             <div className="flex items-center justify-between w-full">
-              <form action="" className="w-full md:w-[50%] relative">
-                <input
-                  type="text"
-                  placeholder="Search for anything..."
-                  className="w-full max-w-full px-4 py-2 border rounded-xs text-[.8rem]"
-                />
-
-                <Button
-                  className="w-0 bg-transparent hover:bg-transparent cursor-pointer text-black absolute top-1/2 right-4 transform -translate-y-1/2"
-                  variant="default"
-                >
-                  <SearchIcon className="w-4" />
-                </Button>
-              </form>
+              <Search />
               <div className="md:flex items-center hidden">
                 <p className="mr-3 text-[.8rem]">Sort by:</p>
                 <div>
@@ -513,18 +504,29 @@ const ShopPage = () => {
                 </p>
               </div>
               <div className="ml-auto text-[.6rem] md:text-[.8rem] flex items-center">
-                <p className="font-medium">65,783</p>
+                <p className="font-medium">{filteredProducts.length}</p>
                 <span className="ml-2 font-normal text-gray">
-                  Results found.
+                  {`${
+                    filteredProducts.length === 1 ? "Result" : "Results"
+                  }  found.`}
                 </span>
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 w-full">
-            {products?.map((item: ProductTypes) => (
-              <ProductCard key={item.id} item={item} />
-            ))}
-          </div>
+          <Suspense>
+            {filteredProducts.length > 0 ? (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 w-full">
+                {filteredProducts?.map((item: ProductTypes) => (
+                  <ProductCard key={item.id} item={item} />
+                ))}
+              </div>
+            ) : (
+              <div className="flex items-center my-5  md:my-10 justify-center w-full flex-col">
+                <h2 className="text-2xl font-bold">Sorry</h2>
+                <p className="text-gray">No Products Found</p>
+              </div>
+            )}
+          </Suspense>
         </main>
       </div>
     </section>
