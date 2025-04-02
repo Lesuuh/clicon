@@ -2,18 +2,24 @@ import { HomeIcon } from "@/components/icons/HomeIcon";
 import SingleCheckIcon from "@/components/icons/SingleCheckIcon";
 // import PriceSlider from "@/components/PriceSlider";
 import ProductCard from "@/components/products/ProductCard";
+import { Separator } from "@/components/ui/separator";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { CategoriesTypes, ProductTypes } from "@/lib/types";
-import { Separator } from "@radix-ui/react-select";
+// import { Separator } from "@radix-ui/react-select";
 
 import { useQuery } from "@tanstack/react-query";
-import { ChevronRight, X } from "lucide-react";
+import {
+  ArrowDownUp,
+  ArrowLeft,
+  ChevronRight,
+  ListFilter,
+  X,
+} from "lucide-react";
 import { Link } from "react-router";
 import {
   Select,
@@ -24,6 +30,18 @@ import {
 } from "@/components/ui/select";
 import SearchIcon from "@/components/icons/SearchIcon";
 import { Button } from "@/components/ui/button";
+import {
+  Drawer,
+  // DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  // DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  // DrawerTrigger,
+} from "@/components/ui/drawer";
+import { useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 const fetchProducts = async () => {
   const response = await fetch("http://localhost:8000/products");
@@ -115,6 +133,12 @@ const ShopPage = () => {
     queryFn: fetchCategories,
   });
 
+  // state for sorting
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  // state for filtering
+  const [openFilter, setOpenFilter] = useState(false);
+
   if (productsError || categoriesError) {
     return <p>{productsError?.message || categoriesError?.message}</p>;
   }
@@ -122,39 +146,223 @@ const ShopPage = () => {
   if (productsLoading || categoriesLoading) {
     return (
       <p className="flex justify-center items-center h-screen w-full">
-        Loading {productsLoading ? "products" : "categories"}
+        <ClipLoader color="" size={50} loading={true} />
       </p>
     );
   }
 
   return (
-    <section className="my-10 ">
+    <section className="my-10 relative">
+      {/* ------------------- filtering buttons ----------------- */}
+
+      <div className="fixed text-[.7rem] flex items-center bottom-10 z-40 left-1/2 transform -translate-x-1/2 px-4 rounded-4xl bg-black text-white h-10 py-2">
+        <div className="flex items-center ">
+          <p className="mr-1" onClick={() => setOpenDrawer(true)}>
+            Sort by{" "}
+          </p>{" "}
+          <ArrowDownUp size={15} />
+        </div>
+        <Separator
+          orientation="vertical"
+          className="h-[80%] mx-2 w-[1px] border border-gray-50"
+        />
+        <div className="flex items-center" onClick={() => setOpenFilter(true)}>
+          <p className="mr-1">Filters</p> <ListFilter />
+        </div>
+      </div>
+
+      {/* {---------------------------- drawer  for sorting --------------------------} */}
+      <Drawer open={openDrawer} onOpenChange={setOpenDrawer}>
+        <DrawerContent className="bg-white">
+          <DrawerHeader>
+            <DrawerTitle className="flex items-center">
+              Sort by{" "}
+              <X className="ml-auto" onClick={() => setOpenDrawer(false)} />
+            </DrawerTitle>
+            <Separator className="w-full mt-1 border-t border-gray-300" />
+            <DrawerDescription>
+              <div className="flex flex-col w-full my-5 space-y-5">
+                <label htmlFor="popular" className="flex items-center w-full">
+                  Most Popular
+                  <input
+                    type="radio"
+                    name="sort"
+                    id="popular"
+                    className="ml-auto sr-only peer"
+                  />
+                  <div className="w-4 h-4 ml-auto bg-white border-gray-400 border-2 rounded-full peer-checked:border-primary peer-checked:bg-primary "></div>
+                </label>
+                <label htmlFor="high" className="flex items-center w-full">
+                  Prices: High to Low
+                  <input
+                    type="radio"
+                    name="sort"
+                    id="high"
+                    className="sr-only peer"
+                  />
+                  <div className="w-4 h-4 ml-auto bg-white border-gray-400 border-2 rounded-full peer-checked:border-primary peer-checked:bg-primary "></div>
+                </label>
+                <label htmlFor="low" className="flex items-center w-full">
+                  Prices: Low to High
+                  <input
+                    type="radio"
+                    name="sort"
+                    id="low"
+                    className="sr-only peer"
+                  />
+                  <div className="w-4 h-4 ml-auto bg-white border-gray-400 border-2 rounded-full peer-checked:border-primary peer-checked:bg-primary "></div>
+                </label>
+              </div>
+            </DrawerDescription>
+          </DrawerHeader>
+        </DrawerContent>
+      </Drawer>
+
+      {/* ---------------- mobile filtering ----------- */}
+      <div
+        className={`${
+          openFilter ? "fixed" : "hidden"
+        } overflow-y-auto py-5 h-full top-0 left-0 px-5 z-40 bg-white `}
+      >
+        <div
+          className="flex items-center mb-3"
+          onClick={() => setOpenFilter(false)}
+        >
+          <ArrowLeft className="mr-1 w-5" />
+          <p>Filter</p>
+        </div>
+        <div className="w-full overflow-y-auto relative">
+          <div className="mb-10">
+            <div>
+              <h2 className="text-xs font-medium">CATEGORY</h2>
+              <ul className="mt-2">
+                {categories.map((cat: CategoriesTypes) => (
+                  <label
+                    key={cat.id}
+                    htmlFor={`radioInput${cat.id}`}
+                    className="flex items-center text-gray-500 font-normal pb-2 cursor-pointer"
+                  >
+                    <input
+                      type="radio"
+                      name="category"
+                      id={`radioInput${cat.id}`}
+                      className="sr-only peer"
+                    />
+                    <div className="w-3 h-3 bg-white border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-[3.5px]"></div>
+                    <span className="text-[.7rem] ml-2 peer-checked:text-black peer-checked:font-medium">
+                      {cat.name}
+                    </span>
+                  </label>
+                ))}
+              </ul>
+            </div>
+            <Separator className="w-full my-5 border-t border-gray-300" />
+            <div className="">
+              <h2 className="text-xs font-medium">PRICE TAG</h2>
+              <div className="w-full">
+                {/* <PriceSlider /> */}
+                {/* Preset Price Options */}
+                <ul className="price-options mt-2">
+                  {prices.map((price, index) => (
+                    <label
+                      key={index}
+                      htmlFor={`price-${index}`}
+                      className="flex items-center text-gray-500 font-normal pb-2 cursor-pointer"
+                    >
+                      <input
+                        type="radio"
+                        name="price"
+                        id={`price-${index}`}
+                        className="sr-only peer"
+                      />
+                      <div className="w-3 h-3 bg-white border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-2"></div>
+                      <span className="text-[.7rem] ml-2 peer-checked:text-black peer-checked:font-medium">
+                        {price}
+                      </span>
+                    </label>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <Separator className="w-full my-5 border-t border-gray-300" />
+            <div>
+              <h2 className="text-xs font-medium">POPULAR BRANDS</h2>
+              <div>
+                <ul className="w-full grid grid-cols-2 mt-2 mb-2 gap-2">
+                  {popularBrands.map((pop, index) => (
+                    <li key={index}>
+                      <label
+                        htmlFor={`popular-brand-${pop}`}
+                        className=" flex items-center text-[.6rem] cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          name={`popular-brand-${pop}`}
+                          id={`popular-brand-${pop}`}
+                          className="sr-only peer"
+                        />
+                        <div className="w-3 h-3 bg-white border-gray rounded-xs border peer-checked:border-primary peer-checked:bg-primary mr-1 flex items-center justify-center">
+                          <SingleCheckIcon className="text-white" />
+                        </div>
+                        {pop}
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <Separator className="w-full my-5 border-t border-gray-300" />
+            <div>
+              <h2 className="text-xs font-medium">POPULAR TAGS</h2>
+              <div>
+                <ul className="flex flex-wrap gap-2 mt-2">
+                  {popularTags.map((tag, index) => (
+                    <li
+                      key={index}
+                      className="text-[.6rem] text-gray-700 border border-gray-50 px-2 py-1 hover:border-primary hover:text-primary hover:bg-primary-100 rounded-xs cursor-pointer"
+                    >
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="fixed bg-white bottom-0 left-1/2 transform -translate-x-1/2 px-[500px] py-2">
+            <div className="flex items-center gap-10">
+              <Button variant="outline" className="text-[.7rem] text-primary">
+                Reset
+              </Button>
+              <Button className="text-white text-[.7rem]">Apply</Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* main content */}
+
       <div className="bg-gray-50 max-w-[1400px]  py-3 mb-5 gap-4 px-4 md:px-20 w-full mx-auto">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <Link to="/">
-                <BreadcrumbLink className="flex items-end text-gray text-[.7rem]">
-                  <HomeIcon className="text-gray w-3 mr-1" />
-                  Home
-                </BreadcrumbLink>
+              <Link to="/" className="flex items-end text-gray text-[.7rem]">
+                <HomeIcon className="text-gray w-3 mr-1" />
+                Home
               </Link>
             </BreadcrumbItem>
             <BreadcrumbSeparator>
               <ChevronRight absoluteStrokeWidth className="text-gray w-2" />
             </BreadcrumbSeparator>
             <BreadcrumbItem>
-              <Link to="/shop">
-                <BreadcrumbLink className="text-gray  text-[.7rem]">
-                  Shop
-                </BreadcrumbLink>
+              <Link to="/shop" className="text-gray  text-[.7rem]">
+                Shop
               </Link>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>
       <div className="flex px-4 md:px-20 w-full mx-auto max-w-[1400px] gap-4">
-        <aside className="w-[30%]">
+        <aside className="w-[30%] hidden md:block">
           <div className="">
             <div>
               <h2 className="text-xs font-medium">CATEGORY</h2>
@@ -188,6 +396,7 @@ const ShopPage = () => {
                 <ul className="price-options mt-2">
                   {prices.map((price, index) => (
                     <label
+                      key={index}
                       htmlFor={`price-${index}`}
                       className="flex items-center text-gray-500 font-normal pb-2"
                     >
@@ -259,7 +468,7 @@ const ShopPage = () => {
         <main className="">
           <div className="mb-3">
             <div className="flex items-center justify-between w-full">
-              <form action="" className="w-[50%] relative">
+              <form action="" className="w-full md:w-[50%] relative">
                 <input
                   type="text"
                   placeholder="Search for anything..."
@@ -273,7 +482,7 @@ const ShopPage = () => {
                   <SearchIcon className="w-4" />
                 </Button>
               </form>
-              <div className="flex items-center ">
+              <div className="md:flex items-center hidden">
                 <p className="mr-3 text-[.8rem]">Sort by:</p>
                 <div>
                   <Select>
@@ -290,18 +499,18 @@ const ShopPage = () => {
               </div>
             </div>
             <div className="flex items-center justify-between bg-gray-50 py-3 px-4 mt-4">
-              <div className="flex items-center text-[.8rem]">
+              <div className="md:flex hidden items-center text-[.8rem]">
                 <p className="mr-1 text-gray ">Active Filters:</p>
-                <p className="flex items-center">
+                <p className="flex items-center ">
                   Electronic Devices <X size={15} className="text-gray ml-1" />
                 </p>
               </div>
-              <p className="font-medium text-[.8rem]">
-                65,783
+              <div className="ml-auto text-[.6rem] md:text-[.8rem] flex items-center">
+                <p className="font-medium">65,783</p>
                 <span className="ml-2 font-normal text-gray">
                   Results found.
                 </span>
-              </p>
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 w-full">

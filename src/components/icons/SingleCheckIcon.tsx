@@ -11,9 +11,9 @@ const SingleCheckIcon = ({ className }: { className: string }) => {
       <path
         d="M11.8125 3.9375L5.6875 10.0625L2.625 7"
         stroke="white"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
