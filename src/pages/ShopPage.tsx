@@ -41,7 +41,7 @@ import {
   // DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useState } from "react";
-import { ClipLoader } from "react-spinners";
+import ClipLoaderSpinner from "@/components/icons/ClipLoaderSpinner";
 
 const fetchProducts = async () => {
   const response = await fetch("http://localhost:8000/products");
@@ -146,7 +146,7 @@ const ShopPage = () => {
   if (productsLoading || categoriesLoading) {
     return (
       <p className="flex justify-center items-center h-screen w-full">
-        <ClipLoader color="" size={50} loading={true} />
+        <ClipLoaderSpinner />
       </p>
     );
   }
