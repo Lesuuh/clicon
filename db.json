@@ -56,12 +56,12 @@
     },
     {
       "id": 2,
-      "name": "Apple Smart glasses 15 Pro",
-      "description": "Apple smart glasses 15 Pro with A17 Pro chip and 48MP camera.",
+      "name": "Lg Smart glasses 15 Pro",
+      "description": "Lg smart glasses 15 Pro with A17 Pro chip and 48MP camera.",
       "price": 29.99,
       "discount": 5,
       "category": { "id": 10, "name": "Wearable Technology" },
-      "brand": "Apple",
+      "brand": "Lg",
       "rating": 4.8,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
@@ -145,7 +145,7 @@
       "price": 1099.99,
       "discount": 5,
       "category": { "id": 8, "name": "TV & Home Appliance" },
-      "brand": "Apple",
+      "brand": "Samsung",
       "rating": 4.8,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
@@ -187,7 +187,7 @@
       "price": 199.99,
       "discount": 5,
       "category": { "id": 7, "name": "Camera & Photo" },
-      "brand": "Apple",
+      "brand": "Nikon",
       "rating": 4.8,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
@@ -229,7 +229,7 @@
       "price": 409.99,
       "discount": 5,
       "category": { "id": 6, "name": "Gaming Consoles" },
-      "brand": "Apple",
+      "brand": "Sony",
       "rating": 4.8,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
@@ -271,7 +271,7 @@
       "price": 1999.99,
       "discount": 5,
       "category": { "id": 5, "name": "Mobile Accessories" },
-      "brand": "Apple",
+      "brand": "Samsung",
       "rating": 4.8,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
@@ -313,7 +313,7 @@
       "price": 999.99,
       "discount": 5,
       "category": { "id": 4, "name": "Headphones" },
-      "brand": "Apple",
+      "brand": "Oriamo",
       "rating": 4.8,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
@@ -355,7 +355,7 @@
       "price": 999.99,
       "discount": 5,
       "category": { "id": 3, "name": "SmartPhones" },
-      "brand": "Apple",
+      "brand": "Samsung",
       "rating": 4.8,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
@@ -397,7 +397,7 @@
       "price": 999.99,
       "discount": 5,
       "category": { "id": 2, "name": "Computer Accessories" },
-      "brand": "Apple",
+      "brand": "Hp",
       "rating": 4.8,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
@@ -481,7 +481,7 @@
       "price": 999.99,
       "discount": 5,
       "category": { "id": 3, "name": "SmartPhones" },
-      "brand": "Apple",
+      "brand": "Tecno",
       "rating": 4.8,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },

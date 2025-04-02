@@ -44,7 +44,6 @@ const ShopPage = () => {
   // URL PARAMS
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
-  // console.log(query);
 
   // SEARCH FILTERING
   useEffect(() => {
@@ -106,7 +105,8 @@ const ShopPage = () => {
 
     if (filters.category) {
       updatedProducts = updatedProducts.filter(
-        (product: ProductTypes) => product.category.name === filters.category
+        (product: ProductTypes) =>
+          product.category.name.toLowerCase() === filters.category.toLowerCase()
       );
     }
     if (filters.price) {
@@ -120,7 +120,7 @@ const ShopPage = () => {
     }
     if (filters.popularBrand.length > 0) {
       updatedProducts = updatedProducts.filter((product: ProductTypes) =>
-        filters.popularBrand.includes(product.brand)
+        filters.popularBrand.some((brand) => brand.toLowerCase() === product.brand.toLowerCase())
       );
     }
 
