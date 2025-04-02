@@ -137,13 +137,13 @@ const MobileCategorySidebar = ({
                 {prices.map((price, index) => (
                   <label
                     key={index}
-                    htmlFor={`price-${index}`}
+                    htmlFor={`price-${index}` + index + 1}
                     className="flex items-center text-gray-500 font-normal pb-2 cursor-pointer"
                   >
                     <input
                       type="radio"
                       name="price"
-                      id={`price-${index}`}
+                      id={`price-${index}` + index + 1}
                       className="sr-only peer"
                     />
                     <div className="w-3 h-3 bg-white border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-2"></div>
@@ -163,13 +163,13 @@ const MobileCategorySidebar = ({
                 {popularBrands.map((pop, index) => (
                   <li key={index}>
                     <label
-                      htmlFor={`popular-brand-${pop}`}
+                      htmlFor={`popular-brand-${pop}` + index + 1}
                       className=" flex items-center text-[.6rem] cursor-pointer"
                     >
                       <input
                         type="checkbox"
                         name={`popular-brand-${pop}`}
-                        id={`popular-brand-${pop}`}
+                        id={`popular-brand-${pop}` + index + 1}
                         className="sr-only peer"
                       />
                       <div className="w-3 h-3 bg-white border-gray rounded-xs border peer-checked:border-primary peer-checked:bg-primary mr-1 flex items-center justify-center">

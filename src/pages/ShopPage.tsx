@@ -48,9 +48,15 @@ const ShopPage = () => {
     console.log(filteredProducts, "filt");
   }
 
+  // CATEGORY, PRICE AND  BRAND FILTER
+  const [filters, setFilters] = useState({
+    category: "",
+    price: "",
+    brand: "",
+  });
 
-
-  // CATEGORY, PRICE AND TAGS BRAND FILTER
+  // get the selected category
+  
 
   // ERROR
   if (productsError) {

@@ -80,8 +80,12 @@ const CategorySidebar = () => {
     queryFn: fetchCategories,
   });
 
-  const handleClick = (btn: string) => {
+  const handleRadioCategory = (btn: string) => {
     console.log(btn, "was clicked");
+  };
+
+  const handleRadioPrice = (btn: string) => {
+    console.log(btn, "price");
   };
 
   // ERROR
@@ -110,7 +114,7 @@ const CategorySidebar = () => {
                   key={cat.id}
                   htmlFor={inputId}
                   className="flex items-center text-gray-500 font-normal pb-2 cursor-pointer"
-                  onClick={() => handleClick(cat.slug)}
+                  onClick={() => handleRadioCategory(cat.slug)}
                 >
                   <input
                     type="radio"
@@ -131,14 +135,13 @@ const CategorySidebar = () => {
         <div className="">
           <h2 className="text-xs font-medium">PRICE TAG</h2>
           <div className="w-full">
-            {/* <PriceSlider /> */}
-            {/* Preset Price Options */}
             <ul className="price-options mt-2">
               {prices.map((price, index) => (
                 <label
                   key={index}
                   htmlFor={`price-${index}`}
-                  className="flex items-center text-gray-500 font-normal pb-2"
+                  className="flex items-center text-gray-500 font-normal pb-2 cursor-pointer"
+                  onClick={() => handleRadioPrice()}
                 >
                   <input
                     type="radio"
@@ -146,13 +149,10 @@ const CategorySidebar = () => {
                     id={`price-${index}`}
                     className="sr-only peer"
                   />
-                  <div className="w-3 h-3 bg-white border border-blue-gray rounded-full peer-checked:border-primary peer-checked:border-2 !important"></div>
-                  <li
-                    key={index}
-                    className="text-[.7rem] ml-2 peer-checked:text-black peer-checked:font-medium"
-                  >
+                  <div className="w-3 h-3 bg-white border border-gray-300 rounded-full peer-checked:border-primary peer-checked:border-2"></div>
+                  <span className="text-[.7rem] ml-2 peer-checked:text-black peer-checked:font-medium">
                     {price}
-                  </li>
+                  </span>
                 </label>
               ))}
             </ul>
