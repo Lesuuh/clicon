@@ -1,11 +1,21 @@
 import { Button } from "@/components/ui/button";
+import { auth, db } from "@/services/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { setDoc, doc } from "firebase/firestore";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const LoginPage = () => {
   const [isSignUp, setIsSignUp] = useState(false); // State to toggle between Sign In and Sign Up
   const [passwordPreview, setPasswordPreview] = useState(false);
   const [confirmPasswordPreview, setConfirmPasswordPreview] = useState(false);
+  const navigate = useNavigate();
+
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: "",
@@ -15,6 +25,69 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
+
+  const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setLoginDetails((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleCreateAccountChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    setCreateAccountDetails((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const {
+    fullName,
+    email: registerEmail,
+    password: registerPassword,
+  } = createAccountDetails;
+
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      const user = auth.currentUser;
+      console.log(user);
+      if (user) {
+        await setDoc(doc(db, "Users", user.uid), {
+          fullName: fullName,
+          email: registerEmail,
+          password: registerPassword,
+        });
+      }
+      toast.success("User registration successful", { position: "top-center" });
+    } catch (error) {
+      console.log(error);
+      if (error instanceof Error) {
+        toast.error(error.message, { position: "top-center" });
+      } else {
+        toast.error("An unknown error occurred", { position: "top-center" });
+      }
+    }
+  };
+
+  const { email: loginEmail, password: loginPassword } = loginDetails;
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      toast.success("Login successful");
+      navigate("/profile");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message, { position: "top-center" });
+      } else {
+        toast.error("An unknown error occurred", { position: "top-center" });
+      }
+    }
+  };
 
   return (
     <section className="my-10 mx-auto w-full max-w-[1400px] px-5 md:px-20 flex items-center justify-between">
@@ -50,7 +123,7 @@ const LoginPage = () => {
 
         {/* Form */}
         {!isSignUp ? (
-          <form action="" className="space-y-4 w-full">
+          <form onSubmit={handleLogin} className="space-y-4 w-full">
             <div className="flex flex-col">
               <label htmlFor="email" className="text-[.7rem] font-semibold">
                 Email Address
@@ -59,6 +132,8 @@ const LoginPage = () => {
                 type="email"
                 name="email"
                 id="email"
+                value={loginDetails.email}
+                onChange={(e) => handleLoginChange(e)}
                 className="border text-[.7rem] px-2 py-1 rounded-xs border-gray-300"
               />
             </div>
@@ -71,6 +146,8 @@ const LoginPage = () => {
                 type="password"
                 name="password"
                 id="password"
+                value={loginDetails.password}
+                onChange={(e) => handleLoginChange(e)}
                 className="border text-[.7rem] px-2 py-1 rounded-xs border-gray-300"
               />
             </div>
@@ -79,15 +156,17 @@ const LoginPage = () => {
             </Button>
           </form>
         ) : (
-          <form action="" className="space-y-4 w-full">
+          <form onSubmit={handleRegister} className="space-y-4 w-full">
             <div className="flex flex-col">
               <label htmlFor="name" className="text-[.7rem]">
                 Full Name
               </label>
               <input
                 type="text"
-                name="name"
+                name="fullName"
                 id="name"
+                value={createAccountDetails.fullName}
+                onChange={(e) => handleCreateAccountChange(e)}
                 className="border text-[.7rem] px-2 py-1 rounded-xs border-gray-300"
               />
             </div>
@@ -99,6 +178,8 @@ const LoginPage = () => {
                 type="email"
                 name="email"
                 id="email"
+                value={createAccountDetails.email}
+                onChange={(e) => handleCreateAccountChange(e)}
                 className="border text-[.7rem] px-2 py-1 rounded-xs border-gray-300"
               />
             </div>
@@ -111,6 +192,8 @@ const LoginPage = () => {
                   type={passwordPreview ? "text" : "password"}
                   name="password"
                   id="password"
+                  value={createAccountDetails.password}
+                  onChange={(e) => handleCreateAccountChange(e)}
                   className="border text-[.7rem] px-2 py-1 rounded-xs border-gray-300"
                 />
                 <div className="absolute  top-1/2 right-3 transform -translate-y-1/2 flex items-center">
@@ -139,6 +222,8 @@ const LoginPage = () => {
                   type={confirmPasswordPreview ? "text" : "password"}
                   name="confirmPassword"
                   id="cpassword"
+                  value={createAccountDetails.password}
+                  onChange={(e) => handleCreateAccountChange(e)}
                   className="border text-[.7rem] px-2 py-1 rounded-xs border-gray-300"
                 />
                 <div className="absolute  top-1/2 right-3 transform -translate-y-1/2 flex items-center">
