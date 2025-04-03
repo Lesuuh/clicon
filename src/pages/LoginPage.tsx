@@ -3,12 +3,14 @@ import { auth, db } from "@/services/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { googleProvider } from "@/services/auth";
 
 const LoginPage = () => {
   const [isSignUp, setIsSignUp] = useState(false); // State to toggle between Sign In and Sign Up
@@ -85,6 +87,33 @@ const LoginPage = () => {
         toast.error(error.message, { position: "top-center" });
       } else {
         toast.error("An unknown error occurred", { position: "top-center" });
+      }
+    }
+  };
+
+  // signup with google
+  const registerWithGoogle = async () => {
+    try {
+      // await the result of then sign in process
+      const result = await signInWithPopup(auth, googleProvider);
+      // get the user
+      const user = result.user;
+
+      const userRef = doc(db, "Users", user.uid);
+      const userDoc = await getDoc(userRef);
+
+      if (!userDoc.exists()) {
+        setDoc(userRef, {
+          fullName: user.displayName,
+          email: user.email,
+          isVerified: user.emailVerified,
+        });
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("An unknown error occurred");
       }
     }
   };
@@ -258,7 +287,10 @@ const LoginPage = () => {
 
         {/* Social Login Buttons */}
         <div className="flex flex-col w-full gap-4">
-          <Button className="bg-white text-gray border-[1px] text-[.7rem] rounded-xs border-gray-200 relative hover:bg-white hover:border-primary hover:text-primary cursor-pointer">
+          <Button
+            onClick={() => registerWithGoogle()}
+            className="bg-white text-gray border-[1px] text-[.7rem] rounded-xs border-gray-200 relative hover:bg-white hover:border-primary hover:text-primary cursor-pointer"
+          >
             Login with Google
             <img
               src="/public/icons/Google.png"
@@ -266,14 +298,14 @@ const LoginPage = () => {
               className="absolute left-3 top-1/2 transform -translate-y-1/2"
             />
           </Button>
-          <Button className="bg-white text-gray border-[1px] text-[.7rem] rounded-xs border-gray-200 relative hover:bg-white hover:border-primary hover:text-primary cursor-pointer">
+          {/* <Button className="bg-white text-gray border-[1px] text-[.7rem] rounded-xs border-gray-200 relative hover:bg-white hover:border-primary hover:text-primary cursor-pointer">
             Login with Facebook
             <img
               src="/public/icons/facebook-logo.png"
               alt="google icon"
               className="absolute left-3 top-1/2 transform -translate-y-1/2 w-6"
             />
-          </Button>
+          </Button> */}
         </div>
       </div>
     </section>
