@@ -9,13 +9,14 @@ import { ArrowRight, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { googleProvider } from "@/services/auth";
 
 const LoginPage = () => {
-  const [isSignUp, setIsSignUp] = useState(false); // State to toggle between Sign In and Sign Up
-  const [passwordPreview, setPasswordPreview] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [signupPasswordPreview, setSignUpPasswordPreview] = useState(false);
   const [confirmPasswordPreview, setConfirmPasswordPreview] = useState(false);
+  const [loginPasswordPreview, setLoginPasswordPreview] = useState(false);
   const navigate = useNavigate();
 
   const [loginDetails, setLoginDetails] = useState({
@@ -169,16 +170,35 @@ const LoginPage = () => {
             <div className="flex flex-col">
               <div className="text-[.7rem] font-semibold flex justify-between items-center">
                 <label htmlFor="password">Password</label>
-                <p className="text-secondary ">Forget Password</p>
+                <Link to="/resetPassword">
+                  <p className="text-secondary ">Forget Password</p>
+                </Link>
               </div>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={loginDetails.password}
-                onChange={(e) => handleLoginChange(e)}
-                className="border text-[.7rem] px-2 py-1 rounded-xs border-gray-300"
-              />
+              <div className="flex flex-col relative">
+                <input
+                  type={loginPasswordPreview ? "text" : "password"}
+                  name="password"
+                  id="password"
+                  value={loginDetails.password}
+                  onChange={(e) => handleLoginChange(e)}
+                  className="border text-[.7rem] px-2 py-1 rounded-xs border-gray-300"
+                />{" "}
+                <div className="absolute  top-1/2 right-3 transform -translate-y-1/2 flex items-center">
+                  {loginPasswordPreview ? (
+                    <EyeOff
+                      onClick={() => setLoginPasswordPreview(false)}
+                      size={16}
+                      className="text-gray"
+                    />
+                  ) : (
+                    <Eye
+                      onClick={() => setLoginPasswordPreview(true)}
+                      size={16}
+                      className="text-gray"
+                    />
+                  )}
+                </div>
+              </div>
             </div>
             <Button className="w-full text-white text-[.7rem] rounded-xs">
               SIGN IN <ArrowRight />
@@ -218,7 +238,7 @@ const LoginPage = () => {
               </label>
               <div className="relative flex flex-col">
                 <input
-                  type={passwordPreview ? "text" : "password"}
+                  type={signupPasswordPreview ? "text" : "password"}
                   name="password"
                   id="password"
                   value={createAccountDetails.password}
@@ -226,15 +246,15 @@ const LoginPage = () => {
                   className="border text-[.7rem] px-2 py-1 rounded-xs border-gray-300"
                 />
                 <div className="absolute  top-1/2 right-3 transform -translate-y-1/2 flex items-center">
-                  {passwordPreview ? (
+                  {signupPasswordPreview ? (
                     <EyeOff
-                      onClick={() => setPasswordPreview(false)}
+                      onClick={() => setSignUpPasswordPreview(false)}
                       size={16}
                       className="text-gray"
                     />
                   ) : (
                     <Eye
-                      onClick={() => setPasswordPreview(true)}
+                      onClick={() => setSignUpPasswordPreview(true)}
                       size={16}
                       className="text-gray"
                     />
