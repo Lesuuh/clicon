@@ -18,7 +18,7 @@ const Hero = () => {
             for $2 USD.
           </p>
           <Button className="bg-primary  text-white text-xs px-4 py-2 rounded-xs my-4 cursor-pointer">
-            <Link to="/shop">SHOP NOW</Link>
+            <Link to="/products">SHOP NOW</Link>
             <ArrowRight />
           </Button>
         </div>

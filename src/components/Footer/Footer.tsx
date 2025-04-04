@@ -36,7 +36,7 @@ const Footer = () => {
         <div className="top grid grid-cols-2  md:grid-cols-4 gap-4">
           <div>
             <img
-              src="/public/icons/Logo.png"
+              src="/icons/Logo.png"
               alt="clicon-logo"
               className="w-20 md:w-30"
             />
@@ -88,7 +88,7 @@ const Footer = () => {
             <div className="flex items-start md:flex-col gap-2 md:gap-0">
               <div className="md:px-4 md:py-4 md:w-[150px] flex md:bg-[#303639] text-white ">
                 <img
-                  src="/public/icons/Icon=google-play 1.svg"
+                  src="/icons/Icon=google-play 1.svg"
                   alt=""
                   className="w-8 md:w-10"
                 />
@@ -99,7 +99,7 @@ const Footer = () => {
               </div>
               <div className="md:px-4 md:py-4 md:w-[150px] flex md:bg-[#303639] text-white md:mt-2">
                 <img
-                  src="/public/icons/Apple---Negative 1.svg"
+                  src="/icons/Apple---Negative 1.svg"
                   alt=""
                   className="w-8 md:w-10"
                 />

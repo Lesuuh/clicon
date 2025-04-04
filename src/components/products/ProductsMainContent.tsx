@@ -10,6 +10,7 @@ import {
 import { Suspense } from "react";
 import { ProductTypes } from "@/lib/types";
 import ProductCard from "./ProductCard";
+import { Link } from "react-router";
 
 const ProductsMainContent = ({
   filteredProducts,
@@ -60,7 +61,9 @@ const ProductsMainContent = ({
         {filteredProducts.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 w-full">
             {filteredProducts?.map((item: ProductTypes) => (
-              <ProductCard key={item.id} item={item} />
+              <Link to={`/products/${item.id}`} key={item.id}>
+                <ProductCard item={item} />
+              </Link>
             ))}
           </div>
         ) : (

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { auth } from "@/services/firebase";
 import ResetPassword from "@/pages/ResetPassword";
 import VerifyEmailPage from "@/pages/VerifyEmailPage";
+import ProductDetails from "@/pages/ProductDetails";
 
 // Define or import the User type
 type User = {
@@ -37,7 +38,7 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Homepage />} />
-          <Route path="shop" element={<ShopPage />} />
+          <Route path="products" element={<ShopPage />} />
           <Route
             path="login"
             element={userState ? <Navigate to="/profile" /> : <LoginPage />}
@@ -45,6 +46,7 @@ const AppRoutes = () => {
           <Route path="profile" element={<ProfilePage />} />
           <Route path="resetPassword" element={<ResetPassword />} />
           <Route path="verifyEmail" element={<VerifyEmailPage />} />
+          <Route path="products/:id" element={<ProductDetails />} />
           <Route path="*" element={<NotFound message="Page not found" />} />
         </Route>
       </Routes>
