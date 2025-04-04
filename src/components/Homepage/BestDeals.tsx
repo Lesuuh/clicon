@@ -4,11 +4,11 @@ import { EyeIcon } from "../icons/EyeIcon";
 import { HeartIcon } from "../icons/HeartIcon";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
-import { ScaleLoader } from "react-spinners";
 import { useQuery } from "@tanstack/react-query";
 import NotFound from "@/pages/NotFound";
 import { ProductTypes } from "@/lib/types";
 import DealOfTheDay from "../Promotions/DealOfTheDay";
+import ClipLoaderSpinner from "../icons/ClipLoaderSpinner";
 
 const fetchProducts = async (): Promise<ProductTypes[]> => {
   const response = await fetch("http://localhost:8000/products");
@@ -18,51 +18,6 @@ const fetchProducts = async (): Promise<ProductTypes[]> => {
 };
 
 const BestDeals = () => {
-  // best deals products
-
-  // const bestDeals = Array.from({ length: 8 }, (_, index) => ({
-  //   id: index + 1,
-  //   name: "Apple iPhone 15 Pro",
-  //   description: "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
-  //   price: 999.99,
-  //   discount: 5,
-  //   category: "smartphones",
-  //   brand: "Apple",
-  //   rating: 4.8,
-  //   reviews: [
-  //     { user: "JohnDoe", comment: "Great phone!", rating: 5 },
-  //     { user: "JaneDoe", comment: "Very expensive.", rating: 4 },
-  //   ],
-  //   stock: 50,
-  //   images: ["/images/Image (29).png"],
-  //   variants: [
-  //     {
-  //       color: "Black",
-  //       storage: "128GB",
-  //       price: 999.99,
-  //     },
-  //     {
-  //       color: "Silver",
-  //       storage: "256GB",
-  //       price: 1099.99,
-  //     },
-  //   ],
-  //   shipping: {
-  //     weight: "200g",
-  //     dimensions: { width: "7cm", height: "14cm", depth: "0.8cm" },
-  //     availableRegions: ["US", "UK", "Canada"],
-  //   },
-  //   seller: {
-  //     id: 1,
-  //     storeName: "Apple Official Store",
-  //     location: "California, USA",
-  //   },
-  //   bestDeals: true,
-  //   featured: true,
-  //   hot: true,
-  //   soldOut: true,
-  // }));
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
@@ -71,15 +26,9 @@ const BestDeals = () => {
 
   if (isLoading) {
     return (
-      <ScaleLoader
-        color="text-primary"
-        loading={isLoading}
-        // cssOverride={override}
-        height={15}
-        width={5}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+      <div className="w-full flex justify-center items-center my-10">
+        <ClipLoaderSpinner />
+      </div>
     );
   }
 

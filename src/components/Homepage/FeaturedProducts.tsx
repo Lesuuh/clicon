@@ -1,13 +1,13 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { ScaleLoader } from "react-spinners";
 import NotFound from "@/pages/NotFound";
 import { CategoriesTypes, ProductTypes } from "@/lib/types";
 import { useEffect, useState } from "react";
 import DiscountBanner from "../Promotions/DiscountBanner";
 
 import ProductCard from "../products/ProductCard";
+import ClipLoaderSpinner from "../icons/ClipLoaderSpinner";
 
 const fetchFeaturedProducts = async (): Promise<ProductTypes[]> => {
   const respone = await fetch("http://localhost:8000/products");
@@ -70,15 +70,9 @@ const FeaturedProducts = () => {
 
   if (isLoadingProducts || isLoadingCategories) {
     return (
-      <ScaleLoader
-        color="text-primary"
-        loading={isLoadingProducts || isLoadingCategories}
-        // cssOverride={override}
-        height={15}
-        width={5}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+      <div className="w-full flex justify-center items-center my-10">
+        <ClipLoaderSpinner />
+      </div>
     );
   }
 

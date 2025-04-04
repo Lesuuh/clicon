@@ -7,9 +7,9 @@ import {
   CarouselPrevious,
 } from "../ui/carousel";
 import { useQuery } from "@tanstack/react-query";
-import { ScaleLoader } from "react-spinners";
 import NotFound from "@/pages/NotFound";
 import { CategoriesTypes } from "@/lib/types";
+import ClipLoaderSpinner from "../icons/ClipLoaderSpinner";
 
 const fetchCategories = async (): Promise<CategoriesTypes[]> => {
   const response = await fetch("http://localhost:8000/categories");
@@ -39,15 +39,9 @@ const Categories = () => {
 
   if (isLoading) {
     return (
-      <ScaleLoader
-        color="text-primary"
-        loading={isLoading}
-        // cssOverride={override}
-        height={15}
-        width={5}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
+      <div className="w-full flex justify-center items-center my-10">
+        <ClipLoaderSpinner />
+      </div>
     );
   }
 
