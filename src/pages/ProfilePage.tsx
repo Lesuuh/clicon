@@ -44,7 +44,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="h-screen ">
+    <section className="my-10 mx-auto w-full max-w-[1400px] px-5 md:px-20 flex items-center justify-between">
       {userDetails ? (
         <div className="h-screen w-full">
           <h3>Welcome {userDetails.fullName}</h3>
@@ -57,7 +57,7 @@ const ProfilePage = () => {
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </section>
   );
 };
 

@@ -45,8 +45,8 @@ const AppRoutes = () => {
           <Route path="profile" element={<ProfilePage />} />
           <Route path="resetPassword" element={<ResetPassword />} />
           <Route path="verifyEmail" element={<VerifyEmailPage />} />
+          <Route path="*" element={<NotFound message="Page not found" />} />
         </Route>
-        <Route path="*" element={<NotFound message="Page not found" />} />
       </Routes>
     </div>
   );

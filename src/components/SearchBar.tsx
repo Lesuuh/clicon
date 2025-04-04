@@ -10,13 +10,14 @@ const SearchBar = () => {
   };
 
   return (
-    <form>
-      <div className="relative hidden md:flex">
+    <form className="w-full max-w-[500px]">
+      <div className="relative w-full hidden md:flex">
         <input
           type="text"
           name="search"
           id="search"
-          className="bg-white px-[20px]  h-[48px] md:w-[500px] lg:w[648px] rounded-[2px] shadow-sm"
+          className="w-full bg-white max-w-full px-4 py-2 border rounded-xs text-[.8rem]"
+          // className="bg-white px-[20px] py-1 md:w-[500px] lg:w[648px] rounded-[2px] shadow-sm"
           placeholder="Search for anything..."
           onChange={(e) => setSearchQuery(e.target.value)}
         />

@@ -33,11 +33,11 @@ const MobileNav = ({ navState, setNavState }: MobileNavProps) => {
     if (navState === true) setNavState(false);
   };
   return (
-    <div>
+    <div className="z-50 relative">
       {/* ---------------Mobile-------------- */}
       {navState && (
         <div
-          className={`h-screen w-[90%] overflow-y-auto pb-4 absolute top-0 left-0 bg-white text-gray-900 p-4 z-10`}
+          className={`h-screen w-[90%] overflow-y-auto pb-4 fixed top-0 left-0 bg-white text-gray-900 p-4 z-10`}
         >
           <div className="flex items-center">
             <IoClose size={25} onClick={handleNavClose} />
@@ -53,10 +53,10 @@ const MobileNav = ({ navState, setNavState }: MobileNavProps) => {
               MY CLICON ACCOUNT
             </h3>
             <div className="flex flex-col">
-              <Link to="/orders" className="text-sm">
+              <Link to="/orders" className="text-[.7rem]">
                 Orders
               </Link>
-              <Link to="/wishlist" className="text-sm">
+              <Link to="/wishlist" className="text-[.7rem]">
                 Wishlist
               </Link>
             </div>
@@ -72,7 +72,7 @@ const MobileNav = ({ navState, setNavState }: MobileNavProps) => {
             <ul>
               {categories.map((item) => (
                 <Link to={item.name} key={item.name}>
-                  <li className="text-sm py-1 flex items-center gap-2">
+                  <li className="text-[.7rem] py-1 flex items-center gap-2">
                     {item.icon} {item.name}
                   </li>
                 </Link>
@@ -84,13 +84,13 @@ const MobileNav = ({ navState, setNavState }: MobileNavProps) => {
             <h3 className="text-xs font-semibold py-2 text-primary">
               SERVICES
             </h3>
-            <Link to="/customer-support" className="text-sm">
+            <Link to="/customer-support" className="text-[.7rem]">
               Customer Support
             </Link>
-            <Link to="/contact" className="text-sm">
+            <Link to="/contact" className="text-[.7rem]">
               Contact us
             </Link>
-            <Link to="/help" className="text-sm">
+            <Link to="/help" className="text-[.7rem]">
               Need help
             </Link>
           </div>

@@ -849,7 +849,7 @@ const CategoryNav = () => {
       <button
         className={`${
           isHovered ? "bg-primary text-white" : "  bg-gray-50 text-gray-900"
-        }  flex items-center px-[24px] py-[14px] rounded-[2px] transition ease-in-out duration-100 text-sm`}
+        }  flex items-center px-[24px] py-2 rounded-[2px] transition ease-in-out duration-100 text-[.7rem]`}
         onMouseEnter={() => {
           hoverTimeout = setTimeout(() => {
             setIsHovered(true);
@@ -859,7 +859,7 @@ const CategoryNav = () => {
           if (hoverTimeout) clearTimeout(hoverTimeout);
         }}
       >
-        All categories{" "}
+        All categories
         {isHovered ? (
           <RxCaretUp size={25} className="ml-1" />
         ) : (
@@ -868,10 +868,10 @@ const CategoryNav = () => {
       </button>
 
       {isHovered && (
-        <div>
+        <div className="z-50 bg-white relative">
           {/* first-step */}
           <ul
-            className="absolute flex flex-col py-4 bg-white shadow-lg mt-2 w-50 h-auto px-4 rounded-md"
+            className="absolute flex flex-col py-4 bg-white shadow-lg mt-2 w-50 h-auto px-4 "
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -880,13 +880,13 @@ const CategoryNav = () => {
                 key={index}
                 className={`${
                   activeCategory ? "hover:bg-gray-100" : ""
-                } py-1 text-sm px-2`}
+                } py-1 text-[.7rem] text-gray px-2`}
                 onMouseEnter={() => setActiveCategory(item.name)}
               >
                 {item.name}
 
                 {activeCategory === item.name && (
-                  <ul className="absolute flex flex-col min-h-full py-4 left-full top-0 bg-white shadow-lg w-50  rounded-md">
+                  <ul className="absolute flex flex-col min-h-full py-4 left-full top-0 bg-white w-50  ">
                     {item.subcategories.map((sub, subIndex) => (
                       <div
                         key={subIndex}
@@ -907,10 +907,10 @@ const CategoryNav = () => {
                           </li>
                         </Link>
                         {isSubCategory === sub.name && (
-                          <ul className=" w-auto absolute left-full top-0 bg-white shadow-lg min-h-full p-4 rounded-md">
+                          <ul className=" w-auto absolute left-full top-0 bg-white  min-h-full p-4 ">
                             <div className="flex gap-4 items-start w-full">
                               <div>
-                                <h3 className="font-semibold text-base mb-2">
+                                <h3 className="font-semibold text-[.8rem] mb-2">
                                   FEATURED {sub.name.toUpperCase()}
                                 </h3>
                                 {sub.featured.map((feat, featIndex) => (
@@ -942,7 +942,7 @@ const CategoryNav = () => {
                                 <h3 className="font-bold text-xl">
                                   21% Discount
                                 </h3>
-                                <p className="text-gray-700 text-sm">
+                                <p className="text-gray-700 text-[.7rem]">
                                   Escape the noise, it's time to head the magin
                                   with Xiami Earbuds
                                 </p>

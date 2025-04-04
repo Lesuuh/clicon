@@ -14,14 +14,16 @@ const MiddleNav = ({ navState, setNavState }: MiddleNavProps) => {
     console.log("red");
   };
   return (
-    <div className="flex justify-between items-center py-[20px]">
+    <div className="flex justify-between items-center py-[15px]">
       <div className="flex items-center">
         <IoMenu
           onClick={handleNavOpen}
           size={25}
           className="mr-2 text-white md:hidden cursor-pointer"
         />
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
       </div>
       <SearchBar />
       <div className="flex items-center space-x-4">

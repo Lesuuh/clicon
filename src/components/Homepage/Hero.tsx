@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const Hero = () => {
   return (
-    <section className="my-10 flex flex-col lg:flex-row gap-4 px-4 md:px-20 w-full max-w-[1400px] mx-auto">
+    <section className="my-10 flex flex-col lg:flex-row gap-4 px-4 md:px-20 w-full max-w-[1400px] mx-auto z-10">
       {/* first */}
       <div className="flex bg-gray-50 p-5 md:p-10 rounded-sm relative">
         <div className="h-auto flex flex-col justify-center gap-2 items-start">
