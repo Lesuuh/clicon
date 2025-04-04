@@ -6,6 +6,9 @@ import NotFound from "@/pages/NotFound";
 import LoginPage from "@/pages/LoginPage";
 import ProfilePage from "@/pages/ProfilePage";
 import { useEffect, useState } from "react";
+import { auth } from "@/services/firebase";
+import ResetPassword from "@/pages/ResetPassword";
+import VerifyEmailPage from "@/pages/VerifyEmailPage";
 
 // Define or import the User type
 type User = {
@@ -13,9 +16,6 @@ type User = {
   email: string;
   displayName?: string;
 };
-import { auth } from "@/services/firebase";
-import ResetPassword from "@/pages/ResetPassword";
-import VerifyEmailPage from "@/pages/VerifyEmailPage";
 
 const AppRoutes = () => {
   const [userState, setUserState] = useState<User | null>(null);
