@@ -15,6 +15,7 @@ type User = {
 };
 import { auth } from "@/services/firebase";
 import ResetPassword from "@/pages/ResetPassword";
+import VerifyEmailPage from "@/pages/VerifyEmailPage";
 
 const AppRoutes = () => {
   const [userState, setUserState] = useState<User | null>(null);
@@ -43,6 +44,7 @@ const AppRoutes = () => {
           />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="resetPassword" element={<ResetPassword />} />
+          <Route path="verifyEmail" element={<VerifyEmailPage />} />
         </Route>
         <Route path="*" element={<NotFound message="Page not found" />} />
       </Routes>

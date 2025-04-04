@@ -1,35 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { auth } from "@/services/firebase";
-import { sendPasswordResetEmail } from "firebase/auth";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
-const ResetPassword = () => {
+const VerifyEmailPage = () => {
   const [email, setEmail] = useState("");
-
-  const actionCodeSettings = {
-    url: "http://localhost:5173/login",
-    handleCodeInApp: true,
+  const handleVerifyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
   };
-
-  const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      await sendPasswordResetEmail(auth, email, actionCodeSettings);
-      toast.success("Password reset link sent. Check your inbox");
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error("An unexpected error occurred.");
-      }
-    }
-  };
-
-  const handleResetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setEmail(value);
+  const handleVerifyEmail = () => {
+    console.log(email);
   };
   return (
     <section className="my-10 mx-auto w-full max-w-[1400px] px-5 md:px-20 flex items-center justify-between">
@@ -44,7 +23,7 @@ const ResetPassword = () => {
         </p>
 
         {/* Form */}
-        <form onSubmit={handleResetPassword} className="space-y-4 w-full ">
+        <form onSubmit={handleVerifyEmail} className="space-y-4 w-full ">
           <div className="flex flex-col">
             <label htmlFor="email" className="text-[.7rem]">
               Email Address
@@ -54,7 +33,7 @@ const ResetPassword = () => {
               name="email"
               id="email"
               value={email}
-              onChange={(e) => handleResetChange(e)}
+              onChange={(e) => handleVerifyChange(e)}
               className="border text-[.7rem] px-2 py-1 rounded-xs border-gray-300"
             />
           </div>
@@ -68,4 +47,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default VerifyEmailPage;
