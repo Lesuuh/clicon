@@ -1,16 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { auth, db } from "@/services/firebase";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
 import { ArrowRight, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { setDoc, doc, getDoc } from "firebase/firestore";
-import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router";
-import { googleProvider } from "@/services/auth";
+import { useAuthStore } from "@/store/authStore";
 
 const LoginPage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -18,6 +10,8 @@ const LoginPage = () => {
   const [confirmPasswordPreview, setConfirmPasswordPreview] = useState(false);
   const [loginPasswordPreview, setLoginPasswordPreview] = useState(false);
   const navigate = useNavigate();
+
+  const { login, register, loginWithGoogle } = useAuthStore((state) => state);
 
   const [loginDetails, setLoginDetails] = useState({
     email: "",
@@ -49,74 +43,76 @@ const LoginPage = () => {
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
-      const user = auth.currentUser;
-      console.log(user);
-      if (user) {
-        await setDoc(doc(db, "Users", user.uid), {
-          fullName: fullName,
-          email: registerEmail,
-          password: registerPassword,
-        });
-      }
-      toast.success("User registration successful", { position: "top-center" });
-    } catch (error) {
-      console.log(error);
-      if (error instanceof Error) {
-        toast.error(error.message, { position: "top-center" });
-      } else {
-        toast.error("An unknown error occurred", { position: "top-center" });
-      }
-    }
+    register(registerEmail, registerPassword, fullName, navigate);
+    // try {
+    //   await createUserWithEmailAndPassword(
+    //     auth,
+    //     registerEmail,
+    //     registerPassword
+    //   );
+    //   const user = auth.currentUser;
+    //   console.log(user);
+    //   if (user) {
+    //     await setDoc(doc(db, "Users", user.uid), {
+    //       fullName: fullName,
+    //       email: registerEmail,
+    //       password: registerPassword,
+    //     });
+    //   }
+    //   toast.success("User registration successful", { position: "top-center" });
+    // } catch (error) {
+    //   console.log(error);
+    //   if (error instanceof Error) {
+    //     toast.error(error.message, { position: "top-center" });
+    //   } else {
+    //     toast.error("An unknown error occurred", { position: "top-center" });
+    //   }
+    // }
   };
 
   const { email: loginEmail, password: loginPassword } = loginDetails;
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-      toast.success("Login successful");
-      navigate("/profile");
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(error.message, { position: "top-center" });
-      } else {
-        toast.error("An unknown error occurred", { position: "top-center" });
-      }
-    }
+    login(loginEmail, loginPassword, navigate);
+    // try {
+    //   await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+    //   toast.success("Login successful");
+    //   navigate("/profile");
+    // } catch (error) {
+    //   if (error instanceof Error) {
+    //     toast.error(error.message, { position: "top-center" });
+    //   } else {
+    //     toast.error("An unknown error occurred", { position: "top-center" });
+    //   }
+    // }
   };
 
   // signup with google
   const registerWithGoogle = async () => {
-    try {
-      // await the result of then sign in process
-      const result = await signInWithPopup(auth, googleProvider);
-      // get the user
-      const user = result.user;
+    loginWithGoogle(navigate);
+    // try {
+    //   const result = await signInWithPopup(auth, googleProvider);
 
-      const userRef = doc(db, "Users", user.uid);
-      const userDoc = await getDoc(userRef);
+    //   const user = result.user;
 
-      if (!userDoc.exists()) {
-        setDoc(userRef, {
-          fullName: user.displayName,
-          email: user.email,
-          isVerified: user.emailVerified,
-        });
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unknown error occurred");
-      }
-    }
+    //   const userRef = doc(db, "Users", user.uid);
+    //   const userDoc = await getDoc(userRef);
+
+    //   if (!userDoc.exists()) {
+    //     setDoc(userRef, {
+    //       fullName: user.displayName,
+    //       email: user.email,
+    //       isVerified: user.emailVerified,
+    //     });
+    //   }
+    // } catch (error) {
+    //   if (error instanceof Error) {
+    //     console.log(error.message);
+    //   } else {
+    //     console.log("An unknown error occurred");
+    //   }
+    // }
   };
 
   return (

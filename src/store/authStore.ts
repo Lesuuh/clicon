@@ -1,30 +1,44 @@
+import { googleProvider } from "@/services/auth";
 import { auth, db } from "@/services/firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { create } from "zustand";
+import { toast } from "react-toastify";
 
 interface AuthState {
   user: any;
+  userData: any;
   loading: boolean;
   error: any;
   initAuth: () => void;
-  login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string) => Promise<void>;
-  logOut: () => Promise<void>;
+  login: (
+    email: string,
+    password: string,
+    navigate: (path: string) => void
+  ) => Promise<void>;
+  register: (
+    email: string,
+    password: string,
+    fullname: string,
+    navigate: (path: string) => void
+  ) => Promise<void>;
+  loginWithGoogle: (navigate: (path: string) => void) => Promise<void>;
+  logOut: (navigate: (path: string) => void) => Promise<void>;
   fetchUserData: (uid: string) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
+  userData: null,
   loading: false,
   error: null,
 
-  //   initialize auth listener
   initAuth: () => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
@@ -36,8 +50,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     });
   },
 
-  // login with email and password
-  login: async (email: string, password: string) => {
+  login: async (email, password, navigate) => {
     set({ loading: true, error: null });
     try {
       const userCredentials = await signInWithEmailAndPassword(
@@ -48,13 +61,18 @@ export const useAuthStore = create<AuthState>((set) => ({
       const user = userCredentials.user;
       set({ user: user, loading: false });
       await useAuthStore.getState().fetchUserData(user.uid);
+
+      toast.success("Login successful!");
+      navigate("/profile");
     } catch (error) {
       set({ loading: false, error: error });
+      const errorMessage =
+        error instanceof Error ? error.message : "Login failed.";
+      toast.error(errorMessage);
     }
   },
 
-  //   register with email and password
-  register: async (email: string, password: string) => {
+  register: async (email, password, fullname, navigate) => {
     set({ loading: true, error: null });
     try {
       const userCredentials = await createUserWithEmailAndPassword(
@@ -63,30 +81,70 @@ export const useAuthStore = create<AuthState>((set) => ({
         password
       );
       const user = userCredentials.user;
-      //   storing data in firestore
       const userDocRef = doc(db, "Users", user.uid);
-      await setDoc(userDocRef, { email, password });
+
+      await setDoc(userDocRef, { email, fullname });
+
+      toast.success("Registration successful!");
+      navigate("/profile");
     } catch (error) {
       set({ loading: false, error: error });
+      const errorMessage =
+        error instanceof Error ? error.message : "Registration Failed";
+      toast.error(errorMessage);
     }
   },
 
-  logOut: async () => {
+  loginWithGoogle: async (navigate) => {
+    set({ loading: true, error: null });
+    try {
+      const provider = googleProvider;
+      const userCredentials = await signInWithPopup(auth, provider);
+      const user = userCredentials.user;
+      set({ user: user, loading: false });
+
+      const userDocRef = doc(db, "Users", user.uid);
+      const docSnap = await getDoc(userDocRef);
+
+      if (!docSnap.exists()) {
+        await setDoc(userDocRef, {
+          email: user.email,
+          displayName: user.displayName,
+          photoUrl: user.photoURL,
+        });
+      }
+
+      toast.success("Google Login successful!");
+      navigate("/profile");
+    } catch (error) {
+      set({ loading: false, error: error });
+      const errorMessage =
+        error instanceof Error ? error.message : "Google Login Failed";
+      toast.error(errorMessage);
+    }
+  },
+
+  logOut: async (navigate) => {
     set({ loading: true, error: null });
     try {
       await signOut(auth);
       set({ user: null, loading: false, error: null });
+      toast.success("Logged out successfully!");
+      navigate("/login");
     } catch (error) {
       set({ loading: false, error: error });
+      const errorMessage =
+        error instanceof Error ? error.message : "Logout failed";
+      toast.error(errorMessage);
     }
   },
 
-  fetchUserData: async (uid: string) => {
+  fetchUserData: async (uid) => {
     try {
       const docRef = doc(db, "Users", uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        set({ user: docSnap.data() });
+        set({ userData: docSnap.data() });
       } else {
         console.error("User does not exist");
       }
