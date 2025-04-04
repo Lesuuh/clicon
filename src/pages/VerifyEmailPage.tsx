@@ -15,18 +15,17 @@ const VerifyEmailPage = () => {
       <div className="mx-auto w-[350px] flex flex-col justify-center items-center shadow-2xl p-5 rounded-xs">
         {/* Heading */}
 
-        <h2 className="text-xl">Reset Password</h2>
+        <h2 className="text-xl">Verify Email</h2>
 
         <p className="text-[.7rem] text-gray text-center my-3">
-          Enter your email address, and we'll send you a link to reset your
-          password
+          Let's get your email verified! Check your inbox for the link.
         </p>
 
         {/* Form */}
         <form onSubmit={handleVerifyEmail} className="space-y-4 w-full ">
           <div className="flex flex-col">
             <label htmlFor="email" className="text-[.7rem]">
-              Email Address
+              Verify Email
             </label>
             <input
               type="email"
