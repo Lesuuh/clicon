@@ -19,7 +19,7 @@ const dashboardMenu = [
 
 const DashboardMenu = () => {
   return (
-    <div className="sm:w-[30%] rounded-xs">
+    <div className="sm:w-[30%] rounded-xs ">
       <ul className="flex flex-col gap-5 text-gray text-[.9rem] shadow-xl  rounded-xs p-4">
         {dashboardMenu.map((menu, index) => (
           <li key={index}>
@@ -32,6 +32,18 @@ const DashboardMenu = () => {
             </NavLink>
           </li>
         ))}
+
+        <div className="flex gap-2 ">
+          <img
+            src="https://avatar.iran.liara.run/public/32"
+            alt=""
+            className="w-10"
+          />
+          <div className="flex flex-col">
+            <p className="text-[.8rem] font-bold">Kelvin, Gilbert</p>
+            <p className="text-[.7rem]">kelvin.gilbert@gmailcom</p>
+          </div>
+        </div>
       </ul>
     </div>
   );
