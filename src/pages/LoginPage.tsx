@@ -121,7 +121,7 @@ const LoginPage = () => {
         {/* Heading */}
         <div className="heading flex justify-evenly items-center w-full">
           <h2
-            onClick={() => setIsSignUp(false)} // Set to Sign In
+            onClick={() => setIsSignUp(false)} 
             className={`cursor-pointer ${
               !isSignUp ? "font-bold" : "text-gray-500"
             }`}
@@ -129,7 +129,7 @@ const LoginPage = () => {
             Sign In
           </h2>
           <h2
-            onClick={() => setIsSignUp(true)} // Set to Sign Up
+            onClick={() => setIsSignUp(true)}
             className={`cursor-pointer ${
               isSignUp ? "font-bold" : "text-gray-500"
             }`}

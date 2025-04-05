@@ -202,10 +202,15 @@ const ProductDetails = () => {
 
       {/* descriptions and reviews */}
       <div className="border border-gray-200 my-10">
-        <div className="flex flex-row border py-2  border-gray-200 text-center justify-center gap-5">
-          <h2 className="text-[.6rem] font-medium">DESCRIPTIONS</h2>
-          <h2 className="text-[.6rem] font-medium">REVIEWS</h2>
-          <div></div>
+        <div className="flex flex-col border  border-gray-200 text-center justify-center gap-5">
+          <div className="flex flex-row items-center gap-5 justify-center">
+            <h2 className="text-[.6rem] font-medium pb-4 py-2 border-b-primary border-b-2">
+              DESCRIPTIONS
+            </h2>
+            <h2 className="text-[.6rem] font-medium pb-4 py-2 border-b-primary border-b-2">
+              REVIEWS
+            </h2>
+          </div>
         </div>
         <div className="p-3 flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-10">
           <div className="flex-2">
@@ -216,20 +221,23 @@ const ProductDetails = () => {
             <h3 className="text-[.6rem] font-semibold ">Features</h3>
             <div className="text-[.6rem]">
               <p className="flex items-center">
-                <Medal className="text-primary mr-2" size={16}/>
+                <Medal className="text-primary mr-2" size={16} />
                 Free 1 Year Warranty
               </p>
               <p className="flex items-center">
-                <Truck className="text-primary mr-2" size={16}/> Free Shipping & Fasted delivery
+                <Truck className="text-primary mr-2" size={16} /> Free Shipping
+                & Fasted delivery
               </p>
               <p className="flex items-center">
-                <Handshake className="text-primary mr-2" size={16}/> 100% Money-back guarantee
+                <Handshake className="text-primary mr-2" size={16} /> 100%
+                Money-back guarantee
               </p>
               <p className="flex items-center">
-                <Headphones className="text-primary mr-2" size={16}/> 24/7 Customer support
+                <Headphones className="text-primary mr-2" size={16} /> 24/7
+                Customer support
               </p>
               <p className="flex items-center">
-                <CreditCard className="text-primary mr-2" size={16}/>
+                <CreditCard className="text-primary mr-2" size={16} />
                 Secure payment method
               </p>
             </div>
