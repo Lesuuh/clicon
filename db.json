@@ -14,19 +14,24 @@
   "products": [
     {
       "id": 1,
-      "name": "Apple iPhone 15 Pro",
-      "description": "Apple iPhone 15 Pro with A17 Pro chip and 48MP camera.",
+      "title": "Samsung Galaxy A06 6.7, 4GB RAM / 64GB ROM Android 14 - Black",
+      "description": "The most powerful MacBook Pro ever is here. With the blazing-fast M1 Pro or M1 Max chip — the first Apple silicon designed for pros — you get groundbreaking performance and amazing battery life. Add to that a stunning Liquid Retina XDR display, the best camera and audio ever in a Mac notebook, and all the ports you need. The first notebook of its kind, this MacBook Pro is a beast. M1 Pro takes the exceptional performance of the M1 architecture to a whole new level for pro users.",
       "price": 9.99,
       "discount": 5,
       "category": { "id": 3, "name": "SmartPhones" },
-      "brand": "Apple",
+      "brand": "Samsung",
       "rating": 4.9,
       "reviews": [
         { "user": "JohnDoe", "comment": "Great phone!", "rating": 5 },
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/Image (11).png"],
+      "images": [
+        "/images/Image (11).png",
+        "/images/Image (11).png",
+        "/images/Image (11).png",
+        "/images/Image (11).png"
+      ],
       "variants": [
         {
           "color": "Black",
@@ -61,7 +66,7 @@
     },
     {
       "id": 2,
-      "name": "Lg Smart glasses 15 Pro",
+      "title": "Lg Smart glasses 15 Pro",
       "description": "Lg smart glasses 15 Pro with A17 Pro chip and 48MP camera.",
       "price": 29.99,
       "discount": 5,
@@ -73,7 +78,12 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/console.png"],
+      "images": [
+        "/images/console.png",
+        "/images/console.png",
+        "/images/console.png",
+        "/images/console.png"
+      ],
       "variants": [
         {
           "color": "Black",
@@ -108,7 +118,7 @@
     },
     {
       "id": 3,
-      "name": "Apple Watch 6 Pro",
+      "title": "Apple Watch 6 Pro",
       "description": "Apple Watch 6 Pro with A17 Pro chip and 48MP camera.",
       "price": 39.99,
       "discount": 5,
@@ -120,7 +130,12 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/Image (1).png"],
+      "images": [
+        "/images/Image (1).png",
+        "/images/Image (1).png",
+        "/images/Image (1).png",
+        "/images/Image (1).png"
+      ],
       "variants": [
         {
           "color": "Black",
@@ -155,7 +170,7 @@
     },
     {
       "id": 4,
-      "name": "Samsung Tv 15 Pro",
+      "title": "Samsung Tv 15 Pro",
       "description": "Samsung Tv 75inches with A17 Pro chip and 48MP camera.",
       "price": 1099.99,
       "discount": 5,
@@ -167,7 +182,12 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/Image (2).png"],
+      "images": [
+        "/images/Image (2).png",
+        "/images/Image (2).png",
+        "/images/Image (2).png",
+        "/images/Image (2).png"
+      ],
       "variants": [
         {
           "color": "Black",
@@ -203,7 +223,7 @@
     },
     {
       "id": 5,
-      "name": "Nikon 332DX Pro",
+      "title": "Nikon 332DX Pro",
       "description": "Nikon 332DX Pro with A17 Pro chip and 48MP camera.",
       "price": 199.99,
       "discount": 5,
@@ -215,7 +235,12 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/Image (3).png"],
+      "images": [
+        "/images/Image (3).png",
+        "/images/Image (3).png",
+        "/images/Image (3).png",
+        "/images/Image (3).png"
+      ],
       "variants": [
         {
           "color": "Black",
@@ -250,7 +275,7 @@
     },
     {
       "id": 6,
-      "name": "Sony PES 5",
+      "title": "Sony PES 5",
       "description": "Sony PES 5 Pro with A17 Pro chip and 48MP camera.",
       "price": 409.99,
       "discount": 5,
@@ -262,7 +287,12 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/Image (4).png"],
+      "images": [
+        "/images/Image (4).png",
+        "/images/Image (4).png",
+        "/images/Image (4).png",
+        "/images/Image (4).png"
+      ],
       "variants": [
         {
           "color": "Black",
@@ -297,7 +327,7 @@
     },
     {
       "id": 7,
-      "name": "Phone Screen guard",
+      "title": "Phone Screen guard",
       "description": "Screen guard Pro with A17 Pro chip and 48MP camera.",
       "price": 1999.99,
       "discount": 5,
@@ -309,7 +339,12 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/Image (5).png"],
+      "images": [
+        "/images/Image (5).png",
+        "/images/Image (5).png",
+        "/images/Image (5).png",
+        "/images/Image (5).png"
+      ],
       "variants": [
         {
           "color": "Black",
@@ -344,7 +379,7 @@
     },
     {
       "id": 8,
-      "name": "Oriamo bigbeat 4",
+      "title": "Oriamo bigbeat 4",
       "description": "Oriamo big beat 4 with A17 Pro chip and 48MP camera.",
       "price": 999.99,
       "discount": 5,
@@ -356,7 +391,12 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/Image (6).png"],
+      "images": [
+        "/images/Image (6).png",
+        "/images/Image (6).png",
+        "/images/Image (6).png",
+        "/images/Image (6).png"
+      ],
       "variants": [
         {
           "color": "Black",
@@ -391,7 +431,7 @@
     },
     {
       "id": 9,
-      "name": "Samsung Galaxy S24",
+      "title": "Samsung Galaxy S24",
       "description": "Samsung Galaxy S24 with A17 Pro chip and 48MP camera.",
       "price": 999.99,
       "discount": 5,
@@ -403,7 +443,12 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/Image (7).png"],
+      "images": [
+        "/images/Image (7).png",
+        "/images/Image (7).png",
+        "/images/Image (7).png",
+        "/images/Image (7).png"
+      ],
       "variants": [
         {
           "color": "Black",
@@ -438,7 +483,7 @@
     },
     {
       "id": 10,
-      "name": "RGX mouse",
+      "title": "RGX mouse",
       "description": "RGX Mouse Pro with A17 Pro chip and 48MP camera.",
       "price": 999.99,
       "discount": 5,
@@ -450,7 +495,12 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/Image (8).png"],
+      "images": [
+        "/images/Image (8).png",
+        "/images/Image (8).png",
+        "/images/Image (8).png",
+        "/images/Image (8).png"
+      ],
       "variants": [
         {
           "color": "Black",
@@ -485,7 +535,7 @@
     },
     {
       "id": 11,
-      "name": "Apple Mac 4 Pro",
+      "title": "Apple Mac 4 Pro",
       "description": "Apple Mac 4 Pro with A17 Pro chip and 48MP camera.",
       "price": 875.99,
       "discount": 5,
@@ -497,7 +547,12 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/Image (9).png"],
+      "images": [
+        "/images/Image (9).png",
+        "/images/Image (9).png",
+        "/images/Image (9).png",
+        "/images/Image (9).png"
+      ],
       "variants": [
         {
           "color": "Black",
@@ -532,7 +587,7 @@
     },
     {
       "id": 12,
-      "name": "Tecno Spark 5 pro",
+      "title": "Tecno Spark 5 pro",
       "description": "Tecno spark 5 Pro Max with A17 Pro chip and 48MP camera.",
       "price": 999.99,
       "discount": 5,
@@ -544,7 +599,12 @@
         { "user": "JaneDoe", "comment": "Very expensive.", "rating": 4 }
       ],
       "stock": 50,
-      "images": ["/images/Image (9).png"],
+      "images": [
+        "/images/Image (9).png",
+        "/images/Image (9).png",
+        "/images/Image (9).png",
+        "/images/Image (9).png"
+      ],
       "variants": [
         {
           "color": "Black",
