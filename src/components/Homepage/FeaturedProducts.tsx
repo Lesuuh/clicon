@@ -128,7 +128,9 @@ const FeaturedProducts = () => {
         <div className="flex flex-col sm:flex-row">
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  border border-gray-200 w-full">
             {featuredProductsState?.map((item: ProductTypes) => (
-              <ProductCard item={item} />
+              <Link to={`/products/${item.id}`} key={item.id}>
+                <ProductCard item={item} />
+              </Link>
             ))}
           </div>
         </div>
