@@ -49,7 +49,7 @@ const ShopPage = () => {
   useEffect(() => {
     if (query) {
       const searchProducts = (products || []).filter((item: ProductTypes) =>
-        item.name.toLowerCase().includes(query.toLowerCase())
+        item.title.toLowerCase().includes(query.toLowerCase())
       );
       setFilteredProducts(searchProducts);
     } else {

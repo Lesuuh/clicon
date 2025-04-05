@@ -10,7 +10,8 @@ import { auth } from "@/services/firebase";
 import ResetPassword from "@/pages/ResetPassword";
 import VerifyEmailPage from "@/pages/VerifyEmailPage";
 import ProductDetails from "@/pages/ProductDetails";
-import { Wishlist } from "@/pages/Wishlist";
+import { Wishlist } from "@/pages/dashboard/Wishlist";
+import Dashboard from "@/pages/dashboard/Dashboard";
 
 // Define or import the User type
 type User = {
@@ -49,6 +50,7 @@ const AppRoutes = () => {
           <Route path="verifyEmail" element={<VerifyEmailPage />} />
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="wishlist" element={<Wishlist />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="*" element={<NotFound message="Page not found" />} />
         </Route>
       </Routes>
