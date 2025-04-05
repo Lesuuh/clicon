@@ -4,14 +4,17 @@ import MainLayout from "../layouts/MainLayout";
 import ShopPage from "../pages/ShopPage";
 import NotFound from "@/pages/NotFound";
 import LoginPage from "@/pages/LoginPage";
-import ProfilePage from "@/pages/ProfilePage";
+// import ProfilePage from "@/pages/ProfilePage";
 import { useEffect, useState } from "react";
 import { auth } from "@/services/firebase";
 import ResetPassword from "@/pages/ResetPassword";
 import VerifyEmailPage from "@/pages/VerifyEmailPage";
 import ProductDetails from "@/pages/ProductDetails";
 import { Wishlist } from "@/pages/dashboard/Wishlist";
-import Dashboard from "@/pages/dashboard/Dashboard";
+// import Dashboard from "@/pages/dashboard/Dashboard";
+import OrderHistory from "@/pages/dashboard/OrderHistory";
+import DashboardLayout from "@/pages/dashboard/DashboardLayout";
+import Profile from "@/pages/dashboard/Profile";
 
 // Define or import the User type
 type User = {
@@ -23,7 +26,7 @@ type User = {
 const AppRoutes = () => {
   const [userState, setUserState] = useState<User | null>(null);
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUserState({
           uid: user.uid,
@@ -34,6 +37,7 @@ const AppRoutes = () => {
         setUserState(null);
       }
     });
+    return () => unsubscribe(); // Unsubscribe on cleanup
   }, []);
   return (
     <div>
@@ -45,12 +49,14 @@ const AppRoutes = () => {
             path="login"
             element={userState ? <Navigate to="/profile" /> : <LoginPage />}
           />
-          <Route path="profile" element={<ProfilePage />} />
           <Route path="resetPassword" element={<ResetPassword />} />
           <Route path="verifyEmail" element={<VerifyEmailPage />} />
           <Route path="products/:id" element={<ProductDetails />} />
-          <Route path="wishlist" element={<Wishlist />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard" element={<DashboardLayout />}>
+            <Route path="profile" element={<Profile />} />
+            <Route path="wishlist" element={<Wishlist />} />
+            <Route path="orders" element={<OrderHistory />} />
+          </Route>
           <Route path="*" element={<NotFound message="Page not found" />} />
         </Route>
       </Routes>
