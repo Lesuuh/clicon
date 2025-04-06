@@ -2,7 +2,7 @@ const OrderHistory = () => {
   return (
     <div className="w-full">
       <h2 className="w-full bg-gray-200 py-1 rounded-xs px-3 text-[.8rem]">
-        RECENT ORDERS
+        RECENT ORDERS (9)
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col w-full">

@@ -1,68 +1,64 @@
-import CartIcon from "@/components/icons/CartIcon";
-import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import ClipLoaderSpinner from "@/components/icons/ClipLoaderSpinner";
+import ProductCard from "@/components/products/ProductCard";
+import { ProductTypes } from "@/lib/types";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router";
 
-const productss = [
-  {
-    products:
-      "Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear Headphones for Workouts and Running, Triple Black",
-    price: "$2,300.00",
-    stockStatus: "IN STOCK",
-  },
-  {
-    products:
-      "Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear Headphones for Workouts and Running, Triple Black",
-    price: "$2,300.00",
-    stockStatus: "IN STOCK",
-  },
-  {
-    products:
-      "Bose Sport Earbuds - Wireless Earphones - Bluetooth In Ear Headphones for Workouts and Running, Triple Black",
-    price: "$2,300.00",
-    stockStatus: "IN STOCK",
-  },
+const wishlist = [
+  { id: 1, productId: 2 },
+  { id: 2, productId: 1 },
 ];
+const fetchProducts = async () => {
+  const response = await fetch("http://localhost:8000/products");
+  const data = await response.json();
+  return data;
+};
 
-export const Wishlist = () => {
-  return (
-    <section className="my-10 mx-auto w-full max-w-[1400px] px-5 md:px-20">
-      <div className="overflow-x-auto">
-        <Table className="text-[.7rem] border border-gray-200 w-full">
-          <TableHeader className="bg-gray-200 text-[.7rem] border-0">
-            <TableRow className="border-0">
-              <TableHead className="w-[100px] border-0">PRODUCTS</TableHead>
-              <TableHead className="border-0">PRICE</TableHead>
-              <TableHead className="border-0">STOCK STATUS</TableHead>
-              <TableHead className="text-right border-0">ACTIONS</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {productss.map((products) => (
-              <TableRow key={products.products} className="border-0">
-                <TableCell className="font-medium border-0">
-                  {products.products}
-                </TableCell>
-                <TableCell className="border-0">{products.price}</TableCell>
-                <TableCell className="border-0">
-                  {products.stockStatus}
-                </TableCell>
-                <TableCell className="text-right border-0">
-                  <Button className="text-[.7rem] rounded-xs text-white">
-                    ADD TO CART <CartIcon />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+const Wishlist = () => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="w-full justify-center items-center flex-h my-10">
+        <ClipLoaderSpinner />
       </div>
-    </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="w-full justify-center items-center flex-h my-10">
+        <p className="text-red-500">Error fetching products</p>
+      </div>
+    );
+  }
+
+  const wishlistIds = wishlist.map((item) => item.productId);
+
+  const wishlistProducts = data.filter((product: ProductTypes) =>
+    wishlistIds.includes(product.id)
+  );
+
+  console.log(data);
+
+  console.log(wishlistProducts);
+  return (
+    <div className="w-full">
+      <h2 className="w-full bg-gray-200 py-1 rounded-xs px-3 text-[.8rem]">
+        WISHLIST (8)
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {wishlistProducts.map((item: ProductTypes) => (
+            <Link key={item.id} to={`products/${item.id}`}>
+              <ProductCard item={item} />
+            </Link>
+          ))}
+        </div>
+      </h2>
+    </div>
   );
 };
+
+export default Wishlist;

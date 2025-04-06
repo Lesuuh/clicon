@@ -4,17 +4,15 @@ import MainLayout from "../layouts/MainLayout";
 import ShopPage from "../pages/ShopPage";
 import NotFound from "@/pages/NotFound";
 import LoginPage from "@/pages/LoginPage";
-// import ProfilePage from "@/pages/ProfilePage";
 import { useEffect, useState } from "react";
 import { auth } from "@/services/firebase";
 import ResetPassword from "@/pages/ResetPassword";
 import VerifyEmailPage from "@/pages/VerifyEmailPage";
 import ProductDetails from "@/pages/ProductDetails";
-import { Wishlist } from "@/pages/dashboard/Wishlist";
-// import Dashboard from "@/pages/dashboard/Dashboard";
 import OrderHistory from "@/pages/dashboard/OrderHistory";
 import DashboardLayout from "@/pages/dashboard/DashboardLayout";
 import Profile from "@/pages/dashboard/Profile";
+import Wishlist from "@/pages/dashboard/Wishlist";
 
 // Define or import the User type
 type User = {

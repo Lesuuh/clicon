@@ -6,7 +6,7 @@ import {
   Settings,
   ShoppingCart,
 } from "lucide-react";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 
 const dashboardMenu = [
   { title: "Dashboard", path: "/dashboard/profile", icon: <LayoutDashboard /> },
@@ -18,14 +18,23 @@ const dashboardMenu = [
 ];
 
 const DashboardMenu = () => {
+  const location = useLocation();
+  const currentPath = location.pathname.split("/").pop();
+
+  console.log(currentPath);
+
   return (
-    <div className="sm:w-[30%] rounded-xs ">
-      <ul className="flex flex-col gap-5 text-gray text-[.9rem] shadow-xl  rounded-xs p-4">
+    <div className="sm:w-[30%] rounded-xs bg-white">
+      <ul className="flex flex-col items-center sm:items-start gap-3 text-gray text-[.9rem] shadow-lg py-5  rounded-xs border border-gray-200 ">
         {dashboardMenu.map((menu, index) => (
-          <li key={index}>
+          <li key={index} className="w-full">
             <NavLink
               to={menu.path}
-              className="flex items-center gap-2 hover:text-primary cursor-pointer"
+              className={`${
+                currentPath === menu.path.split("/").pop()
+                  ? "bg-primary hover:text-white w-full text-white  "
+                  : ""
+              } flex items-center gap-2 hover:text-primary cursor-pointer py-2 px-4`}
             >
               <span> {menu.icon}</span>{" "}
               <span className="hidden sm:block">{menu.title}</span>
@@ -33,13 +42,13 @@ const DashboardMenu = () => {
           </li>
         ))}
 
-        <div className="flex gap-2 ">
+        <div className="flex gap-2 px-4">
           <img
             src="https://avatar.iran.liara.run/public/32"
             alt=""
             className="w-10"
           />
-          <div className="flex flex-col">
+          <div className="sm:flex flex-col hidden ">
             <p className="text-[.8rem] font-bold">Kelvin, Gilbert</p>
             <p className="text-[.7rem]">kelvin.gilbert@gmailcom</p>
           </div>
