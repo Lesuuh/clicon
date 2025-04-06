@@ -35,14 +35,6 @@ const Wishlist = () => {
 
   // console.log(wishlistProducts);
 
-  if (isLoading) {
-    return (
-      <div className="w-full justify-center items-center flex-h my-10">
-        <ClipLoaderSpinner />
-      </div>
-    );
-  }
-
   if (error) {
     return (
       <div className="w-full justify-center items-center flex-h my-10">
@@ -56,14 +48,20 @@ const Wishlist = () => {
       <h2 className="w-full bg-gray-200 py-1 rounded-xs px-3 text-[.8rem]">
         WISHLIST (8){" "}
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {data &&
-          data.map((item: ProductTypes) => (
-            <Link key={item.id} to={`products/${item.id}`}>
-              <ProductCard item={item} />
-            </Link>
-          ))}
-      </div>
+      {isLoading ? (
+        <div className="w-full justify-center items-center flex my-10">
+          <ClipLoaderSpinner />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {data &&
+            data.map((item: ProductTypes) => (
+              <Link key={item.id} to={`products/${item.id}`}>
+                <ProductCard item={item} />
+              </Link>
+            ))}
+        </div>
+      )}
     </div>
   );
 };
