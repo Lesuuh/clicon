@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     initAuth();
-  }, [initAuth]);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

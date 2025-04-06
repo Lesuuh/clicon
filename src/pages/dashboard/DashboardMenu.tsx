@@ -5,14 +5,14 @@ import {
   LayoutDashboard,
   LogOut,
   Settings,
-  ShoppingCart,
+  // ShoppingCart,
 } from "lucide-react";
 import { NavLink, useLocation } from "react-router";
 
 const dashboardMenu = [
   { title: "Dashboard", path: "/profile", icon: <LayoutDashboard /> },
   { title: "Order History", path: "/orders", icon: <BookA /> },
-  { title: "Shopping Cart", path: "/cart", icon: <ShoppingCart /> },
+  // { title: "Shopping Cart", path: "/cart", icon: <ShoppingCart /> },
   { title: "Wishlist", path: "/wishlist", icon: <Heart /> },
   { title: "Settings", path: "/settings", icon: <Settings /> },
   { title: "Logout", path: "/dashboard", icon: <LogOut />, action: true },
@@ -31,7 +31,7 @@ const DashboardMenu = () => {
           <li key={index} className="w-full">
             {menu.action ? (
               <button
-                onClick={logout}
+                onClick={() => logout()}
                 className="flex items-center gap-2 w-full text-left hover:text-primary cursor-pointer py-2 px-4"
               >
                 <span>{menu.icon}</span>

@@ -34,7 +34,7 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
+  user: JSON.parse(localStorage.getItem("user") || "null"), // Rehydrate user from localStorage
   userData: null,
   loading: false,
   error: null,
@@ -43,9 +43,11 @@ export const useAuthStore = create<AuthState>((set) => ({
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         set({ user: user, loading: false });
+        localStorage.setItem("user", JSON.stringify(user)); // Persist user to localStorage
         await useAuthStore.getState().fetchUserData(user.uid);
       } else {
         set({ user: null, loading: false, error: null });
+        localStorage.removeItem("user"); // Clear user from localStorage
       }
     });
   },
@@ -60,6 +62,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       );
       const user = userCredentials.user;
       set({ user: user, loading: false });
+      localStorage.setItem("user", JSON.stringify(user)); // Persist user to localStorage
       await useAuthStore.getState().fetchUserData(user.uid);
 
       toast.success("Login successful!");
@@ -84,6 +87,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       const userDocRef = doc(db, "Users", user.uid);
 
       await setDoc(userDocRef, { email, fullname });
+      localStorage.setItem("user", JSON.stringify(user)); // Persist user to localStorage
 
       toast.success("Registration successful!");
       navigate("/profile");
@@ -102,6 +106,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       const userCredentials = await signInWithPopup(auth, provider);
       const user = userCredentials.user;
       set({ user: user, loading: false });
+      localStorage.setItem("user", JSON.stringify(user)); // Persist user to localStorage
 
       const userDocRef = doc(db, "Users", user.uid);
       const docSnap = await getDoc(userDocRef);
@@ -129,6 +134,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       await signOut(auth);
       set({ user: null, loading: false, error: null });
+      localStorage.removeItem("user"); // Clear user from localStorage
       toast.success("Logged out successfully!");
       navigate("/login");
     } catch (error) {

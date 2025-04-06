@@ -8,6 +8,24 @@
       "cart": [],
       "wishlist": [],
       "orders": []
+    },
+    {
+      "id": 1,
+      "name": "UKL",
+      "email": "ukl@example.com",
+      "password": "hashed_password",
+      "cart": [],
+      "wishlist": [],
+      "orders": []
+    },
+    {
+      "id": 1,
+      "name": "Kabari",
+      "email": "kabari@example.com",
+      "password": "hashed_password",
+      "cart": [],
+      "wishlist": [],
+      "orders": []
     }
   ],
 

@@ -13,6 +13,7 @@ import DashboardLayout from "@/pages/dashboard/DashboardLayout";
 import Profile from "@/pages/dashboard/Profile";
 import Wishlist from "@/pages/dashboard/Wishlist";
 import ProtectedRoutes from "@/utils/ProtectedRoutes";
+import ShoppingCart from "@/pages/ShoppingCart";
 
 const AppRoutes = () => {
   return (
@@ -28,9 +29,10 @@ const AppRoutes = () => {
           <Route element={<ProtectedRoutes />}>
             <Route element={<DashboardLayout />}>
               <Route path="profile" element={<Profile />} />
-              <Route path="wishlist" element={<Wishlist />} />
               <Route path="orders" element={<OrderHistory />} />
+              <Route path="wishlist" element={<Wishlist />} />
             </Route>
+            <Route path="cart" element={<ShoppingCart />} />
           </Route>
           <Route path="*" element={<NotFound message="Page not found" />} />
         </Route>
