@@ -7,7 +7,7 @@ import {
   Settings,
   // ShoppingCart,
 } from "lucide-react";
-import { NavLink, useLocation } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 
 const dashboardMenu = [
   { title: "Dashboard", path: "/profile", icon: <LayoutDashboard /> },
@@ -19,10 +19,15 @@ const dashboardMenu = [
 ];
 
 const DashboardMenu = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname.split("/").pop();
 
   const logout = useAuthStore((state) => state.logOut);
+  const userData = useAuthStore((state) => state.userData);
+  const fullName = userData?.fullName || "Guest";
+  const name = fullName?.split(" ");
+  const email = userData?.email || "guest@example.com";
 
   return (
     <div className="sm:w-[30%] rounded-xs bg-white">
@@ -31,7 +36,7 @@ const DashboardMenu = () => {
           <li key={index} className="w-full">
             {menu.action ? (
               <button
-                onClick={() => logout("/login")}
+                onClick={() => logout(() => navigate("/login"))}
                 className="flex items-center gap-2 w-full text-left hover:text-primary cursor-pointer py-2 px-4"
               >
                 <span>{menu.icon}</span>
@@ -60,8 +65,8 @@ const DashboardMenu = () => {
             className="w-10"
           />
           <div className="sm:flex flex-col hidden ">
-            <p className="text-[.8rem] font-bold">Kelvin, Gilbert</p>
-            <p className="text-[.7rem]">kelvin.gilbert@gmailcom</p>
+            <p className="text-[.8rem] font-bold">{name[0]}</p>
+            <p className="text-[.7rem]">{email}</p>
           </div>
         </div>
       </ul>

@@ -34,7 +34,7 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
-  user: JSON.parse(localStorage.getItem("user") || "null"), // Rehydrate user from localStorage
+  user: JSON.parse(localStorage.getItem("user") || "null"),
   userData: null,
   loading: false,
   error: null,
@@ -43,11 +43,11 @@ export const useAuthStore = create<AuthState>((set) => ({
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         set({ user: user, loading: false });
-        localStorage.setItem("user", JSON.stringify(user)); // Persist user to localStorage
+        localStorage.setItem("user", JSON.stringify(user));
         await useAuthStore.getState().fetchUserData(user.uid);
       } else {
         set({ user: null, loading: false, error: null });
-        localStorage.removeItem("user"); // Clear user from localStorage
+        localStorage.removeItem("user");
       }
     });
   },
@@ -62,7 +62,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       );
       const user = userCredentials.user;
       set({ user: user, loading: false });
-      localStorage.setItem("user", JSON.stringify(user)); // Persist user to localStorage
+      localStorage.setItem("user", JSON.stringify(user));
       await useAuthStore.getState().fetchUserData(user.uid);
 
       toast.success("Login successful!");
@@ -71,11 +71,11 @@ export const useAuthStore = create<AuthState>((set) => ({
       set({ loading: false, error: error });
       const errorMessage =
         error instanceof Error ? error.message : "Login failed.";
-      toast.error(errorMessage);
+      toast.error(`Email or Password does not exist: ${errorMessage}`);
     }
   },
 
-  register: async (email, password, fullname, navigate) => {
+  register: async (email, password, fullName, navigate) => {
     set({ loading: true, error: null });
     try {
       const userCredentials = await createUserWithEmailAndPassword(
@@ -86,8 +86,8 @@ export const useAuthStore = create<AuthState>((set) => ({
       const user = userCredentials.user;
       const userDocRef = doc(db, "Users", user.uid);
 
-      await setDoc(userDocRef, { email, fullname });
-      localStorage.setItem("user", JSON.stringify(user)); // Persist user to localStorage
+      await setDoc(userDocRef, { email, fullName });
+      localStorage.setItem("user", JSON.stringify(user));
 
       toast.success("Registration successful!");
       navigate("/profile");
@@ -106,7 +106,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       const userCredentials = await signInWithPopup(auth, provider);
       const user = userCredentials.user;
       set({ user: user, loading: false });
-      localStorage.setItem("user", JSON.stringify(user)); // Persist user to localStorage
+      localStorage.setItem("user", JSON.stringify(user));
 
       const userDocRef = doc(db, "Users", user.uid);
       const docSnap = await getDoc(userDocRef);
@@ -134,7 +134,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       await signOut(auth);
       set({ user: null, loading: false, error: null });
-      localStorage.removeItem("user"); // Clear user from localStorage
+      localStorage.removeItem("user");
       toast.success("Logged out successfully!");
       navigate("/login");
     } catch (error) {

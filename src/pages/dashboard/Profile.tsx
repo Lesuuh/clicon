@@ -3,13 +3,23 @@ import Box from "@/components/icons/Box";
 import Paper from "@/components/icons/Paper";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useAuthStore } from "@/store/authStore";
 
 const Profile = () => {
+  const userData = useAuthStore((state) => state.userData);
+  console.log(userData);
+
+  const fullName = userData?.fullName;
+  const email = userData?.email || "guest@example.com";
+
+  const name = fullName?.split(" ");
+  console.log(name);
+
   return (
     <div className="w-full">
       <div>
         <h2 className="text-[1rem] font-semibold">
-          Hello, <span className="text-secondary-500">Kelvin</span>
+          Hello, <span className="text-secondary-500">{name[0]}</span>
         </h2>
         <p className="my-2 text-[.7rem] text-gray">
           From your account dashboard. you can easily check & view your
@@ -35,15 +45,15 @@ const Profile = () => {
                 className="w-10"
               />
               <div>
-                <p className="text-[.8rem] font-bold">Kelvin, Gilbert</p>
-                <p className="text-[.7rem] text-gray">Dhaka-1207, Bangladash</p>
+                <p className="text-[.8rem] font-bold">{fullName}</p>
+                <p className="text-[.7rem] text-gray">Portharcourt, Nigeria</p>
               </div>
             </div>
             <p className="text-[.7rem] mt-3">
-              Email: <span className="text-gray">kelvin.gilbert@gmailcom</span>
+              Email: <span className="text-gray">{email}</span>
             </p>
             <p className="text-[.7rem] mt-1">
-              Phone: <span className="text-gray">0906712453</span>
+              Phone: <span className="text-gray">09067252273</span>
             </p>
             <Button className="text-secondary-500 mt-3" variant={"outline"}>
               EDIT ACCOUNT
@@ -54,17 +64,16 @@ const Profile = () => {
           <h2 className="text-[.8rem]">BILLING ADDRESS</h2>
           <Separator className="w-full my-1 border-t border-gray-300" />
           <div>
-            <p className="text-[.8rem] font-bold">Kelvin, Gilbert</p>
+            <p className="text-[.8rem] font-bold">{fullName}</p>
             <p className="text-gray text-[.7rem]">
-              East Tejturi Bazar, Word No. 04, Road No. 13/x, House no. 1320/C,
-              Flat No. 5D, Dhaka - 1200, Bangladesh
+              No. 234 East West Road Portharcourt
             </p>
 
             <p className="text-[.7rem] mt-3">
-              Email: <span className="text-gray">kelvin.gilbert@gmailcom</span>
+              Email: <span className="text-gray">{email}</span>
             </p>
             <p className="text-[.7rem] mt-1">
-              Phone: <span className="text-gray">0906712453</span>
+              Phone: <span className="text-gray">09067252273</span>
             </p>
             <Button className="text-secondary-500 mt-3" variant={"outline"}>
               EDIT ACCOUNT

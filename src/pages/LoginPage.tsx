@@ -12,6 +12,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const { login, register, loginWithGoogle } = useAuthStore((state) => state);
+  const isLoading = useAuthStore((state) => state.loading);
+  console.log(isLoading);
 
   const [loginDetails, setLoginDetails] = useState({
     email: "",
@@ -121,7 +123,7 @@ const LoginPage = () => {
         {/* Heading */}
         <div className="heading flex justify-evenly items-center w-full">
           <h2
-            onClick={() => setIsSignUp(false)} 
+            onClick={() => setIsSignUp(false)}
             className={`cursor-pointer ${
               !isSignUp ? "font-bold" : "text-gray-500"
             }`}
@@ -157,6 +159,7 @@ const LoginPage = () => {
               <input
                 type="email"
                 name="email"
+                required
                 id="email"
                 value={loginDetails.email}
                 onChange={(e) => handleLoginChange(e)}
@@ -175,6 +178,7 @@ const LoginPage = () => {
                   type={loginPasswordPreview ? "text" : "password"}
                   name="password"
                   id="password"
+                  required
                   value={loginDetails.password}
                   onChange={(e) => handleLoginChange(e)}
                   className="border text-[.7rem] px-2 py-1 rounded-xs border-gray-300"
@@ -197,7 +201,8 @@ const LoginPage = () => {
               </div>
             </div>
             <Button className="w-full text-white text-[.7rem] rounded-xs">
-              SIGN IN <ArrowRight />
+              {isLoading ? <span>LOADING...</span> : <span>SIGN IN </span>}
+              <ArrowRight />
             </Button>
           </form>
         ) : (
@@ -209,6 +214,7 @@ const LoginPage = () => {
               <input
                 type="text"
                 name="fullName"
+                required
                 id="name"
                 value={createAccountDetails.fullName}
                 onChange={(e) => handleCreateAccountChange(e)}
@@ -222,6 +228,7 @@ const LoginPage = () => {
               <input
                 type="email"
                 name="email"
+                required
                 id="email"
                 value={createAccountDetails.email}
                 onChange={(e) => handleCreateAccountChange(e)}
@@ -236,6 +243,7 @@ const LoginPage = () => {
                 <input
                   type={signupPasswordPreview ? "text" : "password"}
                   name="password"
+                  required
                   id="password"
                   value={createAccountDetails.password}
                   onChange={(e) => handleCreateAccountChange(e)}
@@ -266,6 +274,7 @@ const LoginPage = () => {
                 <input
                   type={confirmPasswordPreview ? "text" : "password"}
                   name="confirmPassword"
+                  required
                   id="cpassword"
                   value={createAccountDetails.password}
                   onChange={(e) => handleCreateAccountChange(e)}
@@ -289,7 +298,12 @@ const LoginPage = () => {
               </div>
             </div>
             <Button className="w-full text-white text-[.7rem] rounded-xs cursor-pointer">
-              SIGN UP <ArrowRight />
+              {isLoading ? (
+                <span>LOADING...</span>
+              ) : (
+                <span>CREATE ACCOUNT </span>
+              )}{" "}
+              <ArrowRight />
             </Button>
           </form>
         )}
