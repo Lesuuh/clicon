@@ -31,7 +31,7 @@ const DashboardMenu = () => {
           <li key={index} className="w-full">
             {menu.action ? (
               <button
-                onClick={() => logout()}
+                onClick={() => logout("/login")}
                 className="flex items-center gap-2 w-full text-left hover:text-primary cursor-pointer py-2 px-4"
               >
                 <span>{menu.icon}</span>
