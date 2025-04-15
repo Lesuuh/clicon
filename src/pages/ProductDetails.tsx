@@ -43,6 +43,9 @@ const ProductDetails = () => {
   const quantityDecrease = useCartStore((state) => state.decreaseQuantity);
   const quantityIncrease = useCartStore((state) => state.increaseQuantity);
   console.log(cart);
+  const cartItem = cart.find((item) => item.product.id === product?.id);
+  const cartQuantity = cartItem?.quantity ?? 0;
+  console.log(cartQuantity);
 
   const handleAddtoCart = (product: ProductTypes) => {
     addToCart(product);
@@ -186,14 +189,14 @@ const ProductDetails = () => {
             <div className="flex items-center gap-4 bg-white border border-gray-200 rounded-xs">
               <button
                 onClick={() => handleQuantityDecrease(product.id)}
-                className="px-2 py-1.5 bg-transparent rounded"
+                className="px-2 py-1.5 bg-transparent rounded-xs cursor-pointer"
               >
                 -
               </button>
-              <span className="text-[.8rem]">0</span>
+              <span className="text-[.8rem]">{cartQuantity}</span>
               <button
                 onClick={() => handleQuantityIncrease(product.id)}
-                className="px-2 py-1.5 bg-transparent rounded"
+                className="px-2 py-1.5 bg-transparent rounded-xs cursor-pointer"
               >
                 +
               </button>

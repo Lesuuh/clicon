@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/store/cartStore";
 import { ArrowRight, Trash2 } from "lucide-react";
-import { Link, Navigate, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 // interface CartProps {
@@ -75,14 +75,16 @@ const ShoppingCart = () => {
                       <div className="flex items-center gap-4 bg-white border border-gray-200 rounded-xs">
                         <button
                           onClick={() => decreaseQuantity(cartItem.product.id)}
-                          className="px-2 py-1 bg-transparent rounded"
+                          className="px-2 py-1 bg-transparent rounded-xs cursor-pointer"
                         >
                           -
                         </button>
-                        <span>{cartItem.quantity}</span>
+                        <span className="text-[.7rem]">
+                          {cartItem.quantity}
+                        </span>
                         <button
                           onClick={() => increaseQuantity(cartItem.product.id)}
-                          className="px-2 py-1 bg-transparent rounded"
+                          className="px-2 py-1 bg-transparent rounded-xs cursor-pointer"
                         >
                           +
                         </button>
