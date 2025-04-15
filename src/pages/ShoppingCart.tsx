@@ -1,7 +1,9 @@
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/store/cartStore";
 import { ArrowRight, Trash2 } from "lucide-react";
-import { Link } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 // interface CartProps {
 //   title: string;
@@ -39,6 +41,7 @@ const ShoppingCart = () => {
   const handleDelete = (productId: number) => {
     deleteFromCart(productId);
   };
+  const navigate = useNavigate();
 
   return (
     <section className="my-10 mx-auto w-full h-auto max-w-[1400px] px-5 md:px-20 flex flex-col sm:flex-row flex-wrap items-start  gap-10">
@@ -90,8 +93,14 @@ const ShoppingCart = () => {
               </div>
             ))
           ) : (
-            <div className="flex w-full h-full items-center text-[.8rem] font-semibold justify-center">
+            <div className="flex w-full flex-col h-full items-center text-[.8rem] font-semibold justify-center">
               <p>No Products in Cart</p>
+              <Button
+                onClick={() => navigate("/products")}
+                className="uppercase  text-white rounded-xs mt-2 cursor-pointer text-[.7rem]"
+              >
+                Go Shopping
+              </Button>
             </div>
           )}
         </div>
@@ -121,12 +130,23 @@ const ShoppingCart = () => {
           <p>Total</p>
           <p>$3334</p>
         </div>
-        <Link
-          to={"/checkout"}
-          className="text-white bg-primary py-1 rounded-xs flex items-center w-full justify-center mt-3 gap-2 text-[.7rem]"
-        >
-          PROCEED TO CHECKOUT <ArrowRight />
-        </Link>
+        <div>
+          {cart.length === 0 ? (
+            <Button
+              onClick={() => toast.error("Please add an item to cart, biko")}
+              className="text-white bg-primary py-1 rounded-xs flex items-center w-full justify-center mt-3 gap-2 text-[.7rem]"
+            >
+              PROCEED TO CHECKOUT <ArrowRight />
+            </Button>
+          ) : (
+            <Link
+              to={"/checkout"}
+              className="text-white bg-primary py-1 rounded-xs flex items-center w-full justify-center mt-3 gap-2 text-[.7rem]"
+            >
+              PROCEED TO CHECKOUT <ArrowRight />
+            </Link>
+          )}
+        </div>
       </div>
     </section>
   );
