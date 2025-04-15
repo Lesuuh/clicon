@@ -4,6 +4,7 @@ import SearchBar from "../SearchBar";
 import { Link } from "react-router";
 import { useAuthStore } from "@/store/authStore";
 import { useCartStore } from "@/store/cartStore";
+import { useEffect } from "react";
 
 interface MiddleNavProps {
   navState: boolean;
@@ -17,8 +18,9 @@ const MiddleNav = ({ navState, setNavState }: MiddleNavProps) => {
   };
 
   const user = useAuthStore((state) => state.user);
-  const totalQuantity = useCartStore((state) => state.totalQuantity);
-  const cartQuantity: number = user ? totalQuantity() : 0;
+  const cart = useCartStore((state) => state.cart);
+  const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const cartQuantity = user ? totalQuantity : 0;
 
   const userData = useAuthStore((state) => state.userData);
   return (

@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCartStore } from "@/store/cartStore";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Trash2 } from "lucide-react";
 import { Link } from "react-router";
 
 // interface CartProps {
@@ -34,43 +33,67 @@ import { Link } from "react-router";
 
 const ShoppingCart = () => {
   const cart = useCartStore((state) => state.cart);
+  const increaseQuantity = useCartStore((state) => state.increaseQuantity);
+  const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
+  const deleteFromCart = useCartStore((state) => state.deleteFromCart);
+  const handleDelete = (productId: number) => {
+    deleteFromCart(productId);
+  };
+
   return (
-    <section className="my-10 mx-auto w-full h-auto max-w-[1400px] px-5 md:px-20 flex flex-wrap items-start  gap-10">
-      <div className="flex-2">
+    <section className="my-10 mx-auto w-full h-auto max-w-[1400px] px-5 md:px-20 flex flex-col sm:flex-row flex-wrap items-start  gap-10">
+      <div className="flex-2 w-full">
         <h2>Shopping Cart</h2>
-        <div className="grid grid-cols-1 mt-2">
-          {cart.map((cartItem, index: number) => (
-            <div key={index} className="flex flex-row w-full">
-              <div className="flex sm:flex-row w-full gap-2 p-4 border border-gray-200">
-                <img
-                  src={cartItem.product.images[0]}
-                  alt="Product"
-                  className="w-24 h-24 object-cover"
-                />
-                <div className="flex w-full flex-col justify-between items-start">
-                  <div>
-                    <p className="text-[.7rem] font-semibold">
-                      {cartItem.product.title}
-                    </p>
-                  </div>
-                  <div className="flex justify-between items-center w-full">
-                    <p className="text-black text-[.9rem] font-semibold">
-                      {cartItem.product.price}
-                    </p>
-                    <div className="flex items-center gap-4 bg-white border border-gray-200 rounded-xs">
-                      <button className="px-2 py-1 bg-transparent rounded">
-                        -
-                      </button>
-                      <span>0</span>
-                      <button className="px-2 py-1 bg-transparent rounded">
-                        +
-                      </button>
+        <div className="grid grid-cols-1 mt-2 w-full">
+          {cart.length > 0 ? (
+            cart.map((cartItem, index: number) => (
+              <div key={index} className="flex flex-row w-full ">
+                <div className="flex relative rounded-xs sm:flex-row w-full gap-2 p-4 border border-gray-200">
+                  <Trash2
+                    onClick={() => handleDelete(cartItem.product.id)}
+                    className="text-red-600 absolute top-2 right-2 cursor-pointer"
+                    size={16}
+                  />
+                  <img
+                    src={cartItem.product.images[0]}
+                    alt="Product"
+                    className="w-24 h-24 object-cover"
+                  />
+                  <div className="flex w-full flex-col justify-between items-start">
+                    <div>
+                      <p className="text-[.7rem] font-semibold mr-2">
+                        {cartItem.product.title}
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-center w-full">
+                      <p className="text-black text-[.9rem] font-semibold">
+                        {cartItem.product.price}
+                      </p>
+                      <div className="flex items-center gap-4 bg-white border border-gray-200 rounded-xs">
+                        <button
+                          onClick={() => decreaseQuantity(cartItem.product.id)}
+                          className="px-2 py-1 bg-transparent rounded"
+                        >
+                          -
+                        </button>
+                        <span>{cartItem.quantity}</span>
+                        <button
+                          onClick={() => increaseQuantity(cartItem.product.id)}
+                          className="px-2 py-1 bg-transparent rounded"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+            ))
+          ) : (
+            <div className="flex w-full h-full items-center text-[.8rem] font-semibold justify-center">
+              <p>No Products in Cart</p>
             </div>
-          ))}
+          )}
         </div>
       </div>
       <div className="w-full flex-1 border p-4 border-gray-300 rounded-xs">
@@ -100,7 +123,7 @@ const ShoppingCart = () => {
         </div>
         <Link
           to={"/checkout"}
-          className="text-white bg-primary py-1 rounded-xs flex items-center w-full justify-center mt-3 gap-2 text-[.8rem]"
+          className="text-white bg-primary py-1 rounded-xs flex items-center w-full justify-center mt-3 gap-2 text-[.7rem]"
         >
           PROCEED TO CHECKOUT <ArrowRight />
         </Link>

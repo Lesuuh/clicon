@@ -43,15 +43,6 @@ const ProductDetails = () => {
   const quantityDecrease = useCartStore((state) => state.decreaseQuantity);
   const quantityIncrease = useCartStore((state) => state.increaseQuantity);
   console.log(cart);
-  let productQuantity = 0;
-
-  const handleIncrease = () => {
-    productQuantity++;
-  };
-
-  const handleDecrease = () => {
-    productQuantity--;
-  };
 
   const handleAddtoCart = (product: ProductTypes) => {
     addToCart(product);
