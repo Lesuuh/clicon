@@ -17,7 +17,7 @@ import {
   Twitter,
 } from "lucide-react";
 import { FaPinterest, FaStar } from "react-icons/fa6";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 
 const fetchProducts = async (id: string) => {
@@ -36,12 +36,22 @@ const ProductDetails = () => {
     enabled: !!id,
   });
   const product: ProductTypes = data;
+  const navigate = useNavigate();
 
   const cart = useCartStore((state) => state.cart);
   const addToCart = useCartStore((state) => state.addToCart);
   const quantityDecrease = useCartStore((state) => state.decreaseQuantity);
   const quantityIncrease = useCartStore((state) => state.increaseQuantity);
-  const cartQuantity = cart.map((item) => item.quantity);
+  console.log(cart);
+  let productQuantity = 0;
+
+  const handleIncrease = () => {
+    productQuantity++;
+  };
+
+  const handleDecrease = () => {
+    productQuantity--;
+  };
 
   const handleAddtoCart = (product: ProductTypes) => {
     addToCart(product);
@@ -189,7 +199,7 @@ const ProductDetails = () => {
               >
                 -
               </button>
-              <span>{cartQuantity}</span>
+              <span className="text-[.8rem]">0</span>
               <button
                 onClick={() => handleQuantityIncrease(product.id)}
                 className="px-2 py-1.5 bg-transparent rounded"
@@ -204,8 +214,9 @@ const ProductDetails = () => {
               ADD TO CART <CartIcon />
             </Button>
             <Button
+              onClick={() => navigate("/cart")}
               variant={"outline"}
-              className="border-primary text-primary rounded-xs  text-[.7rem]"
+              className="border-primary cursor-pointer text-primary rounded-xs  text-[.7rem]"
             >
               BUY NOW
             </Button>

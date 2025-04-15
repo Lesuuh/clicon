@@ -16,6 +16,7 @@ import ProtectedRoutes from "@/utils/ProtectedRoutes";
 import ShoppingCart from "@/pages/ShoppingCart";
 import CheckoutPage from "@/pages/CheckoutPage";
 import CheckoutSuccessPage from "@/pages/CheckoutSuccessPage";
+import Test from "@/pages/Test";
 
 const AppRoutes = () => {
   return (
@@ -39,6 +40,7 @@ const AppRoutes = () => {
             <Route path="checkout-success" element={<CheckoutSuccessPage />} />
           </Route>
           <Route path="*" element={<NotFound message="Page not found" />} />
+          <Route path="test" element={<Test />} />
         </Route>
       </Routes>
     </div>

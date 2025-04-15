@@ -3,6 +3,7 @@ import Logo from "../Logo";
 import SearchBar from "../SearchBar";
 import { Link } from "react-router";
 import { useAuthStore } from "@/store/authStore";
+import { useCartStore } from "@/store/cartStore";
 
 interface MiddleNavProps {
   navState: boolean;
@@ -14,6 +15,10 @@ const MiddleNav = ({ navState, setNavState }: MiddleNavProps) => {
     if (navState === false) setNavState(true);
     console.log("red");
   };
+
+  const user = useAuthStore((state) => state.user);
+  const totalQuantity = useCartStore((state) => state.totalQuantity);
+  const cartQuantity: number = user ? totalQuantity() : 0;
 
   const userData = useAuthStore((state) => state.userData);
   return (
@@ -33,7 +38,7 @@ const MiddleNav = ({ navState, setNavState }: MiddleNavProps) => {
         <Link to={"/cart"} className="relative">
           <img src="icons/cartIcon.png" alt="cart-icon" className="lg:w-5" />
           <span className="font-normal text-xs bg-white px-1 rounded-full text-secondary absolute -top-5 -right-1 transform translate-y-1/2">
-            2
+            {cartQuantity}
           </span>
         </Link>
         <Link to={"/wishlist"}>

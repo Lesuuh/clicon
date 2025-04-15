@@ -1,5 +1,6 @@
 import { ProductTypes } from "@/lib/types";
 import { create } from "zustand";
+import { persist } from "zustand/middleware"; // ✅ this is needed!
 
 interface CartItem {
   product: ProductTypes;
@@ -13,62 +14,74 @@ interface CartProps {
   decreaseQuantity: (productId: number) => void;
   deleteFromCart: (productId: number) => void;
   clearCart: () => void;
+  totalQuantity: () => number;
 }
 
-export const useCartStore = create<CartProps>((set) => ({
-  cart: [],
+export const useCartStore = create<CartProps>()(
+  persist(
+    (set, get) => ({
+      cart: [],
 
-  // adding to cart
-  addToCart: (product) => {
-    set((state) => {
-      const existingItem = state.cart.find(
-        (item) => item.product.id === product.id
-      );
-      if (existingItem) {
-        return {
-          cart: state.cart.map((item) =>
-            item.product.id === product.id
+      addToCart: (product) => {
+        const { cart } = get();
+        set(() => {
+          const existingItem = cart.find(
+            (item) => item.product.id === product.id
+          );
+          if (existingItem) {
+            return {
+              cart: cart.map((item) =>
+                item.product.id === product.id
+                  ? { ...item, quantity: item.quantity + 1 }
+                  : item
+              ),
+            };
+          } else {
+            return { cart: [...cart, { product, quantity: 1 }] };
+          }
+        });
+      },
+
+      increaseQuantity: (productId) => {
+        const { cart } = get();
+        set(() => ({
+          cart: cart.map((item) =>
+            item.product.id === productId
               ? { ...item, quantity: item.quantity + 1 }
               : item
           ),
-        };
-      } else {
-        return { cart: [...state.cart, { product, quantity: 1 }] };
-      }
-    });
-  },
+        }));
+      },
 
-  // increase cart quanitity
-  increaseQuantity: (productId: number) => {
-    set((state) => ({
-      cart: state.cart.map((item) =>
-        item.product.id === productId
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      ),
-    }));
-  },
+      decreaseQuantity: (productId) => {
+        const { cart } = get();
+        set(() => ({
+          cart: cart.map((item) =>
+            item.product.id === productId
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          ),
+        }));
+      },
 
-  //   decrease cart quantity
-  decreaseQuantity: (productId: number) => {
-    set((state) => ({
-      cart: state.cart.map((item) =>
-        item.product.id === productId
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      ),
-    }));
-  },
+      deleteFromCart: (productId) => {
+        const { cart } = get();
+        set(() => ({
+          cart: cart.filter((item) => item.product.id !== productId),
+        }));
+      },
 
-  // deleting from cart
-  deleteFromCart: (productId: number) => {
-    set((state) => ({
-      cart: state.cart.filter((item) => item.product.id !== +productId),
-    }));
-  },
+      clearCart: () => {
+        set({ cart: [] });
+      },
 
-  // clear cart
-  clearCart: () => {
-    set({ cart: [] });
-  },
-}));
+      totalQuantity: () => {
+        const { cart } = get();
+        return cart.reduce((acc, item) => acc + item.quantity, 0);
+      },
+    }),
+    {
+      name: "cart",
+    }
+  )
+);

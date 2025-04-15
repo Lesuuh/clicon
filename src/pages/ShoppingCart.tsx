@@ -1,59 +1,61 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useCartStore } from "@/store/cartStore";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 
-interface CartProps {
-  title: string;
-  image: string;
-  orderNumber: string;
-  price: number;
-}
+// interface CartProps {
+//   title: string;
+//   image: string;
+//   orderNumber: string;
+//   price: number;
+// }
 
-const cart = [
-  {
-    title: " 2000mAh Dual Output Fast charging Portable Powerbank",
-    image: "/images/04.png",
-    orderNumber: "162887278",
-    price: 300,
-  },
-  {
-    title: " 2000mAh Dual Output Fast charging Portable Powerbank",
-    image: "/images/04.png",
-    orderNumber: "162887278",
-    price: 300,
-  },
-  {
-    title: " 2000mAh Dual Output Fast charging Portable Powerbank",
-    image: "/images/04.png",
-    orderNumber: "162887278",
-    price: 300,
-  },
-];
+// const cart = [
+//   {
+//     title: " 2000mAh Dual Output Fast charging Portable Powerbank",
+//     image: "/images/04.png",
+//     orderNumber: "162887278",
+//     price: 300,
+//   },
+//   {
+//     title: " 2000mAh Dual Output Fast charging Portable Powerbank",
+//     image: "/images/04.png",
+//     orderNumber: "162887278",
+//     price: 300,
+//   },
+//   {
+//     title: " 2000mAh Dual Output Fast charging Portable Powerbank",
+//     image: "/images/04.png",
+//     orderNumber: "162887278",
+//     price: 300,
+//   },
+// ];
 
 const ShoppingCart = () => {
+  const cart = useCartStore((state) => state.cart);
   return (
     <section className="my-10 mx-auto w-full h-auto max-w-[1400px] px-5 md:px-20 flex flex-wrap items-start  gap-10">
       <div className="flex-2">
         <h2>Shopping Cart</h2>
         <div className="grid grid-cols-1 mt-2">
-          {cart.map((cartItem: CartProps, index: number) => (
+          {cart.map((cartItem, index: number) => (
             <div key={index} className="flex flex-row w-full">
               <div className="flex sm:flex-row w-full gap-2 p-4 border border-gray-200">
                 <img
-                  src={cartItem.image}
+                  src={cartItem.product.images[0]}
                   alt="Product"
                   className="w-24 h-24 object-cover"
                 />
                 <div className="flex w-full flex-col justify-between items-start">
                   <div>
                     <p className="text-[.7rem] font-semibold">
-                      {cartItem.title}
+                      {cartItem.product.title}
                     </p>
                   </div>
                   <div className="flex justify-between items-center w-full">
                     <p className="text-black text-[.9rem] font-semibold">
-                      {cartItem.price}
+                      {cartItem.product.price}
                     </p>
                     <div className="flex items-center gap-4 bg-white border border-gray-200 rounded-xs">
                       <button className="px-2 py-1 bg-transparent rounded">
