@@ -57,7 +57,7 @@ export const useCartStore = create<CartProps>()(
         const { cart } = get();
         set(() => ({
           cart: cart.map((item) =>
-            item.product.id === productId
+            item.product.id === productId && item.quantity > 1
               ? { ...item, quantity: item.quantity - 1 }
               : item
           ),

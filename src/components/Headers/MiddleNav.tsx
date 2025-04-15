@@ -4,7 +4,6 @@ import SearchBar from "../SearchBar";
 import { Link } from "react-router";
 import { useAuthStore } from "@/store/authStore";
 import { useCartStore } from "@/store/cartStore";
-import { useEffect } from "react";
 
 interface MiddleNavProps {
   navState: boolean;
