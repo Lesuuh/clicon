@@ -7,8 +7,7 @@ interface CartProps {
   title: string;
   image: string;
   orderNumber: string;
-  // date: Date;
-  status: string;
+  price: number;
 }
 
 const cart = [
@@ -16,22 +15,19 @@ const cart = [
     title: " 2000mAh Dual Output Fast charging Portable Powerbank",
     image: "/images/04.png",
     orderNumber: "162887278",
-    // date: new Date(),
-    status: "delivered",
+    price: 300,
   },
   {
     title: " 2000mAh Dual Output Fast charging Portable Powerbank",
     image: "/images/04.png",
     orderNumber: "162887278",
-    // date: new Date(),
-    status: "delivered",
+    price: 300,
   },
   {
     title: " 2000mAh Dual Output Fast charging Portable Powerbank",
     image: "/images/04.png",
     orderNumber: "162887278",
-    // date: new Date(),
-    status: "delivered",
+    price: 300,
   },
 ];
 
@@ -57,7 +53,7 @@ const ShoppingCart = () => {
                   </div>
                   <div className="flex justify-between items-center w-full">
                     <p className="text-black text-[.9rem] font-semibold">
-                      $300
+                      {cartItem.price}
                     </p>
                     <div className="flex items-center gap-4 bg-white border border-gray-200 rounded-xs">
                       <button className="px-2 py-1 bg-transparent rounded">

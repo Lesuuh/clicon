@@ -7,9 +7,9 @@ import { useAuthStore } from "./store/authStore";
 const queryClient = new QueryClient();
 function App() {
   const initAuth = useAuthStore((state) => state.initAuth);
-  const user = useAuthStore((state) => state.user);
+  // const user = useAuthStore((state) => state.user);
 
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     initAuth();

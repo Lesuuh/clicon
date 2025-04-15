@@ -4,6 +4,7 @@ import { HeartIcon } from "@/components/icons/HeartIcon";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ProductTypes } from "@/lib/types";
+import { useCartStore } from "@/store/cartStore";
 import { useQuery } from "@tanstack/react-query";
 import {
   CopyIcon,
@@ -17,6 +18,7 @@ import {
 } from "lucide-react";
 import { FaPinterest, FaStar } from "react-icons/fa6";
 import { useParams } from "react-router";
+import { toast } from "react-toastify";
 
 const fetchProducts = async (id: string) => {
   const response = await fetch(`http://localhost:8000/products/${id}`);
@@ -28,13 +30,31 @@ const fetchProducts = async (id: string) => {
 
 const ProductDetails = () => {
   const { id } = useParams<{ id: string }>();
-  console.log(id);
   const { data, isLoading, error } = useQuery({
     queryKey: ["product", id],
     queryFn: () => fetchProducts(id as string),
     enabled: !!id,
   });
   const product: ProductTypes = data;
+
+  const cart = useCartStore((state) => state.cart);
+  const addToCart = useCartStore((state) => state.addToCart);
+  const quantityDecrease = useCartStore((state) => state.decreaseQuantity);
+  const quantityIncrease = useCartStore((state) => state.increaseQuantity);
+  const cartQuantity = cart.map((item) => item.quantity);
+
+  const handleAddtoCart = (product: ProductTypes) => {
+    addToCart(product);
+    toast.success(`${product.title} added to cart`);
+  };
+
+  const handleQuantityDecrease = (productId: number) => {
+    quantityDecrease(productId);
+  };
+
+  const handleQuantityIncrease = (productId: number) => {
+    quantityIncrease(productId);
+  };
 
   if (isLoading) {
     return (
@@ -163,11 +183,24 @@ const ProductDetails = () => {
           </div>
           <div className="flex flex-wrap items-center w-full justify-between my-5">
             <div className="flex items-center gap-4 bg-white border border-gray-200 rounded-xs">
-              <button className="px-2 py-1.5 bg-transparent rounded">-</button>
-              <span>0</span>
-              <button className="px-2 py-1.5 bg-transparent rounded">+</button>
+              <button
+                onClick={() => handleQuantityDecrease(product.id)}
+                className="px-2 py-1.5 bg-transparent rounded"
+              >
+                -
+              </button>
+              <span>{cartQuantity}</span>
+              <button
+                onClick={() => handleQuantityIncrease(product.id)}
+                className="px-2 py-1.5 bg-transparent rounded"
+              >
+                +
+              </button>
             </div>
-            <Button className="text-white rounded-xs text-[.7rem]">
+            <Button
+              onClick={() => handleAddtoCart(product)}
+              className="text-white rounded-xs text-[.7rem]"
+            >
               ADD TO CART <CartIcon />
             </Button>
             <Button
