@@ -15,6 +15,7 @@ import Wishlist from "@/pages/dashboard/Wishlist";
 import ProtectedRoutes from "@/utils/ProtectedRoutes";
 import ShoppingCart from "@/pages/ShoppingCart";
 import CheckoutPage from "@/pages/CheckoutPage";
+import CheckoutSuccessPage from "@/pages/CheckoutSuccessPage";
 
 const AppRoutes = () => {
   return (
@@ -35,6 +36,7 @@ const AppRoutes = () => {
             </Route>
             <Route path="cart" element={<ShoppingCart />} />
             <Route path="checkout" element={<CheckoutPage />} />
+            <Route path="checkout-success" element={<CheckoutSuccessPage />} />
           </Route>
           <Route path="*" element={<NotFound message="Page not found" />} />
         </Route>
