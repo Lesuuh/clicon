@@ -4,8 +4,12 @@ import CartIcon from "../icons/CartIcon";
 import { EyeIcon } from "../icons/EyeIcon";
 import { FaStar } from "react-icons/fa6";
 import { truncateText } from "@/lib/utils";
+import { useCartStore } from "@/store/cartStore";
+import { useWishlistStore } from "@/store/wishlistStore";
 
 const ProductCard = ({ item }: { item: ProductTypes }) => {
+  const addToCart = useCartStore((state) => state.addToCart);
+  const addToWishlist = useWishlistStore((state) => state.addToWishlist);
   return (
     <div
       key={item.id}
@@ -38,9 +42,15 @@ const ProductCard = ({ item }: { item: ProductTypes }) => {
         />
         <span className="group-hover:flex hidden w-full h-full absolute justify-center items-center gap-4 space-x-3 md:gap-1 top-0 z-20">
           <div className="absolute inset-0 bg-[#00000050] rounded-sm"></div>
-          <HeartIcon className="text-black hover:text-white bg-white hover:bg-primary z-30 opacity-100 rounded-full w-8 px-2 h-8 cursor-pointer" />
-          <CartIcon className="text-black hover:text-white bg-white hover:bg-primary z-30 opacity-100 rounded-full w-8 px-2 h-8 cursor-pointer" />
-          <EyeIcon className="text-black hover:text-white bg-white hover:bg-primary z-30 opacity-100 rounded-full w-8 px-2 h-8 cursor-pointer" />
+          <span onClick={() => addToWishlist(item)}>
+            <HeartIcon className="text-black hover:text-white bg-white hover:bg-primary z-30 opacity-100 rounded-full w-8 px-2 h-8 cursor-pointer" />
+          </span>
+          <span onClick={() => addToCart(item)}>
+            <CartIcon className="text-black hover:text-white bg-white hover:bg-primary z-30 opacity-100 rounded-full w-8 px-2 h-8 cursor-pointer" />
+          </span>
+          <span>
+            <EyeIcon className="text-black hover:text-white bg-white hover:bg-primary z-30 opacity-100 rounded-full w-8 px-2 h-8 cursor-pointer" />
+          </span>
         </span>
       </div>
 
