@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ProductTypes } from "@/lib/types";
 import { useCartStore } from "@/store/cartStore";
+import { useWishlistStore } from "@/store/wishlistStore";
 import { useQuery } from "@tanstack/react-query";
 import {
   CopyIcon,
@@ -42,10 +43,11 @@ const ProductDetails = () => {
   const addToCart = useCartStore((state) => state.addToCart);
   const quantityDecrease = useCartStore((state) => state.decreaseQuantity);
   const quantityIncrease = useCartStore((state) => state.increaseQuantity);
-  console.log(cart);
+  const wishlist = useWishlistStore((state) => state.wishlist);
+  const addToWishlist = useWishlistStore((state) => state.addToWishlist);
   const cartItem = cart.find((item) => item.product.id === product?.id);
   const cartQuantity = cartItem?.quantity ?? 0;
-  console.log(cartQuantity);
+  console.log(wishlist);
 
   const handleAddtoCart = (product: ProductTypes) => {
     addToCart(product);
@@ -59,6 +61,12 @@ const ProductDetails = () => {
   const handleQuantityIncrease = (productId: number) => {
     quantityIncrease(productId);
   };
+
+  const handleAddtoWishlist = (product: ProductTypes) => {
+    addToWishlist(product);
+  };
+  // const wishlist = useWishlistStore((state) => state.wishlist);
+  console.log(wishlist);
 
   if (isLoading) {
     return (
@@ -217,7 +225,10 @@ const ProductDetails = () => {
           </div>
           <div className="flex items-center text-[.7rem] justify-between text-gray">
             <div className="flex item-center">
-              <p className="flex items-center gap-1 hover:text-primary">
+              <p
+                onClick={() => handleAddtoWishlist(product)}
+                className="flex items-center gap-1 hover:text-primary"
+              >
                 <HeartIcon className="w-4" /> Add to Wishlist
               </p>
             </div>

@@ -1,67 +1,45 @@
-import ClipLoaderSpinner from "@/components/icons/ClipLoaderSpinner";
 import ProductCard from "@/components/products/ProductCard";
+import { Button } from "@/components/ui/button";
 import { ProductTypes } from "@/lib/types";
-import { useQuery } from "@tanstack/react-query";
-// import { useEffect, useState } from "react";
-import { Link } from "react-router";
-
-// const wishlist = [
-//   { id: 1, productId: 2 },
-//   { id: 2, productId: 1 },
-// ];
-const fetchProducts = async () => {
-  const response = await fetch("http://localhost:8000/products");
-  const data = await response.json();
-  return data;
-};
+import { useWishlistStore } from "@/store/wishlistStore";
+import { Link, useNavigate } from "react-router";
 
 const Wishlist = () => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["products"],
-    queryFn: fetchProducts,
-  });
+  const wishlist = useWishlistStore((state) => state.wishlist);
+  const navigate = useNavigate();
 
-  // const wishlistProducts: ProductTypes[] = [];
-  // // const wishlistIds = wishlist.map((id) => id.productId);
-
-  // wishlist.forEach((wishlistItem) => {
-  //   const matchingProduct = data?.find(
-  //     (product: ProductTypes) => product.id === wishlistItem.productId
+  // if (error) {
+  //   return (
+  //     <div className="w-full justify-center items-center flex-h my-10">
+  //       <p className="text-red-500">Error fetching products</p>
+  //     </div>
   //   );
-  //   if (matchingProduct) {
-  //     wishlistProducts.push(matchingProduct);
-  //   }
-  // });
-
-  // console.log(wishlistProducts);
-
-  if (error) {
-    return (
-      <div className="w-full justify-center items-center flex-h my-10">
-        <p className="text-red-500">Error fetching products</p>
-      </div>
-    );
-  }
+  // }
 
   return (
     <div className="w-full">
       <h2 className="w-full bg-gray-200 py-1 rounded-xs px-3 text-[.8rem]">
-        WISHLIST (8){" "}
+        WISHLIST ({wishlist.length})
       </h2>
-      {isLoading ? (
-        <div className="w-full justify-center items-center flex my-10">
-          <ClipLoaderSpinner />
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {data &&
-            data.map((item: ProductTypes) => (
-              <Link key={item.id} to={`products/${item.id}`}>
-                <ProductCard item={item} />
-              </Link>
-            ))}
-        </div>
-      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {wishlist.length !== 0 ? (
+          wishlist.map((item: ProductTypes) => (
+            <Link key={item.id} to={`products/${item.id}`}>
+              <ProductCard item={item} />
+            </Link>
+          ))
+        ) : (
+          <div className="flex w-full flex-col h-full items-center text-[.8rem] font-semibold justify-center">
+            <p>No Products in Wishlist, add your favourites</p>
+            <Button
+              onClick={() => navigate("/products")}
+              className="uppercase  text-white rounded-xs mt-2 cursor-pointer text-[.7rem]"
+            >
+              Go Shopping
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
