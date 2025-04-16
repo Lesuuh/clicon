@@ -10,6 +10,7 @@ import {
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { create } from "zustand";
 import { toast } from "react-toastify";
+import { persist } from "zustand/middleware";
 
 interface AuthState {
   user: any;
@@ -33,129 +34,128 @@ interface AuthState {
   fetchUserData: (uid: string) => Promise<void>;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: JSON.parse(localStorage.getItem("user") || "null"),
-  userData: null,
-  loading: false,
-  error: null,
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set, get) => ({
+      user: null,
+      userData: null,
+      loading: false,
+      error: null,
 
-  initAuth: () => {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        set({ user: user, loading: false });
-        localStorage.setItem("user", JSON.stringify(user));
-        await useAuthStore.getState().fetchUserData(user.uid);
-      } else {
-        set({ user: null, loading: false, error: null });
-        localStorage.removeItem("user");
-      }
-    });
-  },
-
-  login: async (email, password, navigate) => {
-    set({ loading: true, error: null });
-    try {
-      const userCredentials = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredentials.user;
-      set({ user: user, loading: false });
-      localStorage.setItem("user", JSON.stringify(user));
-      await useAuthStore.getState().fetchUserData(user.uid);
-
-      toast.success("Login successful!");
-      navigate("/profile");
-    } catch (error) {
-      set({ loading: false, error: error });
-      const errorMessage =
-        error instanceof Error ? error.message : "Login failed.";
-      toast.error(`Email or Password does not exist: ${errorMessage}`);
-    }
-  },
-
-  register: async (email, password, fullName, navigate) => {
-    set({ loading: true, error: null });
-    try {
-      const userCredentials = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredentials.user;
-      const userDocRef = doc(db, "Users", user.uid);
-
-      await setDoc(userDocRef, { email, fullName });
-      localStorage.setItem("user", JSON.stringify(user));
-
-      toast.success("Registration successful!");
-      navigate("/profile");
-    } catch (error) {
-      set({ loading: false, error: error });
-      const errorMessage =
-        error instanceof Error ? error.message : "Registration Failed";
-      toast.error(errorMessage);
-    }
-  },
-
-  loginWithGoogle: async (navigate) => {
-    set({ loading: true, error: null });
-    try {
-      const provider = googleProvider;
-      const userCredentials = await signInWithPopup(auth, provider);
-      const user = userCredentials.user;
-      set({ user: user, loading: false });
-      localStorage.setItem("user", JSON.stringify(user));
-
-      const userDocRef = doc(db, "Users", user.uid);
-      const docSnap = await getDoc(userDocRef);
-
-      if (!docSnap.exists()) {
-        await setDoc(userDocRef, {
-          email: user.email,
-          displayName: user.displayName,
-          photoUrl: user.photoURL,
+      initAuth: () => {
+        onAuthStateChanged(auth, async (user) => {
+          if (user) {
+            set({ user: user, loading: false });
+            await get().fetchUserData(user.uid);
+          } else {
+            set({ user: null, loading: false, error: null });
+          }
         });
-      }
+      },
 
-      toast.success("Google Login successful!");
-      navigate("/profile");
-    } catch (error) {
-      set({ loading: false, error: error });
-      const errorMessage =
-        error instanceof Error ? error.message : "Google Login Failed";
-      toast.error(errorMessage);
-    }
-  },
+      login: async (email, password, navigate) => {
+        set({ loading: true, error: null });
+        try {
+          const userCredentials = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          const user = userCredentials.user;
+          set({ user, loading: false });
+          await get().fetchUserData(user.uid);
 
-  logOut: async (navigate) => {
-    set({ loading: true, error: null });
-    try {
-      await signOut(auth);
-      set({ user: null, loading: false, error: null });
-      localStorage.removeItem("user");
-      toast.success("Logged out successfully!");
-      navigate("/login");
-    } catch (error) {
-      set({ loading: false, error: error });
-      const errorMessage =
-        error instanceof Error ? error.message : "Logout failed";
-      toast.error(errorMessage);
-    }
-  },
+          toast.success("Login successful!");
+          navigate("/profile");
+        } catch (error) {
+          set({ loading: false, error });
+          const errorMessage =
+            error instanceof Error ? error.message : "Login failed.";
+          toast.error(`Email or Password does not exist: ${errorMessage}`);
+        }
+      },
 
-  fetchUserData: async (uid) => {
-    try {
-      const docRef = doc(db, "Users", uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        set({ userData: docSnap.data() });
-      } else {
-        console.error("User does not exist");
-      }
-    } catch (error) {
-      console.error(error);
+      register: async (email, password, fullName, navigate) => {
+        set({ loading: true, error: null });
+        try {
+          const userCredentials = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          const user = userCredentials.user;
+          await setDoc(doc(db, "Users", user.uid), { email, fullName });
+
+          toast.success("Registration successful!");
+          navigate("/profile");
+        } catch (error) {
+          set({ loading: false, error });
+          const errorMessage =
+            error instanceof Error ? error.message : "Registration Failed";
+          toast.error(errorMessage);
+        }
+      },
+
+      loginWithGoogle: async (navigate) => {
+        set({ loading: true, error: null });
+        try {
+          const userCredentials = await signInWithPopup(auth, googleProvider);
+          const user = userCredentials.user;
+          set({ user, loading: false });
+
+          const userDocRef = doc(db, "Users", user.uid);
+          const docSnap = await getDoc(userDocRef);
+
+          if (!docSnap.exists()) {
+            await setDoc(userDocRef, {
+              email: user.email,
+              displayName: user.displayName,
+              photoUrl: user.photoURL,
+            });
+          }
+
+          toast.success("Google Login successful!");
+          navigate("/profile");
+        } catch (error) {
+          set({ loading: false, error });
+          const errorMessage =
+            error instanceof Error ? error.message : "Google Login Failed";
+          toast.error(errorMessage);
+        }
+      },
+
+      logOut: async (navigate) => {
+        set({ loading: true, error: null });
+        try {
+          await signOut(auth);
+          set({ user: null, userData: null, loading: false, error: null });
+          toast.success("Logged out successfully!");
+          navigate("/login");
+        } catch (error) {
+          set({ loading: false, error });
+          const errorMessage =
+            error instanceof Error ? error.message : "Logout failed";
+          toast.error(errorMessage);
+        }
+      },
+
+      fetchUserData: async (uid) => {
+        try {
+          const docRef = doc(db, "Users", uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            set({ userData: docSnap.data() });
+          } else {
+            console.error("User does not exist");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      },
+    }),
+    {
+      name: "auth-storage", // key in localStorage
+      partialize: (state) => ({ user: state.user, userData: state.userData }), // persist only necessary parts
     }
-  },
-}));
+  )
+);
