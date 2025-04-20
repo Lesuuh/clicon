@@ -1,6 +1,6 @@
 import { ProductTypes } from "@/lib/types";
 import { create } from "zustand";
-import { persist } from "zustand/middleware"; // ✅ this is needed!
+import { persist } from "zustand/middleware";
 
 interface CartItem {
   product: ProductTypes;
@@ -9,6 +9,7 @@ interface CartItem {
 
 interface CartProps {
   cart: CartItem[];
+  isMerged: boolean;
   addToCart: (product: ProductTypes) => void;
   increaseQuantity: (productId: number) => void;
   decreaseQuantity: (productId: number) => void;
@@ -21,6 +22,7 @@ export const useCartStore = create<CartProps>()(
   persist(
     (set, get) => ({
       cart: [],
+      isMerged: false,
 
       addToCart: (product) => {
         const { cart } = get();

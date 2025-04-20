@@ -64,7 +64,6 @@ export const useAuthStore = create<AuthState>()(
           const user = userCredentials.user;
           set({ user, loading: false });
           await get().fetchUserData(user.uid);
-
           toast.success("Login successful!");
           navigate("/profile");
         } catch (error) {
@@ -84,7 +83,7 @@ export const useAuthStore = create<AuthState>()(
             password
           );
           const user = userCredentials.user;
-          await setDoc(doc(db, "Users", user.uid), { email, fullName });
+          await setDoc(doc(db, "users", user.uid), { email, fullName });
 
           toast.success("Registration successful!");
           navigate("/profile");
@@ -103,7 +102,7 @@ export const useAuthStore = create<AuthState>()(
           const user = userCredentials.user;
           set({ user, loading: false });
 
-          const userDocRef = doc(db, "Users", user.uid);
+          const userDocRef = doc(db, "users", user.uid);
           const docSnap = await getDoc(userDocRef);
 
           if (!docSnap.exists()) {
@@ -141,7 +140,7 @@ export const useAuthStore = create<AuthState>()(
 
       fetchUserData: async (uid) => {
         try {
-          const docRef = doc(db, "Users", uid);
+          const docRef = doc(db, "users", uid);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             set({ userData: docSnap.data() });

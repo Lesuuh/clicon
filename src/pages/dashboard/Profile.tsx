@@ -5,11 +5,21 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useAuthStore } from "@/store/authStore";
 
+const recentOrders = [
+  {
+    id: "162887278",
+    product: "2000mAh Dual Output Fast charging Portable Powerbank",
+    date: "13-02-2024",
+    status: "Delivered",
+    image: "/images/04.png",
+  },
+];
 const Profile = () => {
   const userData = useAuthStore((state) => state.userData);
   console.log(userData);
 
-  const fullName = userData?.fullName;
+  const fullName = userData?.displayName || "Guest User";
+
   const email = userData?.email || "guest@example.com";
 
   const name = fullName?.split(" ");
@@ -19,7 +29,8 @@ const Profile = () => {
     <div className="w-full">
       <div>
         <h2 className="text-[1rem] font-semibold">
-          Hello, <span className="text-secondary-500">{name[0]}</span>
+          Hello,{" "}
+          <span className="text-secondary-500">{name?.[0] || "Guest"}</span>
         </h2>
         <p className="my-2 text-[.7rem] text-gray">
           From your account dashboard. you can easily check & view your
@@ -116,23 +127,26 @@ const Profile = () => {
           RECENT ORDERS
         </h2>
         <div className="flex flex-col w-full ">
-          <div className="flex w-full gap-10 p-4 border border-gray-200">
-            <img src="/images/04.png" alt="" />
-            <div className="flex flex-col justify-between items-start">
-              <div>
-                <p className="text-[.8rem]">
-                  2000mAh Dual Output Fast charging Portable Powerbank
-                </p>
-                <p className="text-[.7rem] text-gray">Order 162887278</p>
-              </div>
-              <div>
-                <span className="bg-green-500 rounded-xs text-white p-1 text-[.6rem]">
-                  Delivered
-                </span>
-                <p className="text-gray text-[.7rem]">On 13-02-2024</p>
+          {recentOrders.map((order, index) => (
+            <div
+              key={index}
+              className="flex w-full gap-10 p-4 border border-gray-200"
+            >
+              <img src={order.image} alt="" />
+              <div className="flex flex-col justify-between items-start">
+                <div>
+                  <p className="text-[.8rem]">{order.product}</p>
+                  <p className="text-[.7rem] text-gray">Order {order.id}</p>
+                </div>
+                <div>
+                  <span className="bg-green-500 rounded-xs text-white p-1 text-[.6rem]">
+                    {order.status}
+                  </span>
+                  <p className="text-gray text-[.7rem]">On {order.date}</p>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
         <div className="flex flex-col w-full ">
           <div className="flex w-full gap-10 p-4 border border-gray-200">
