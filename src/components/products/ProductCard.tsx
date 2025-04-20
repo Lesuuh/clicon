@@ -3,7 +3,7 @@ import { HeartIcon } from "../icons/HeartIcon";
 import CartIcon from "../icons/CartIcon";
 import { EyeIcon } from "../icons/EyeIcon";
 import { FaStar } from "react-icons/fa6";
-import { truncateText } from "@/lib/utils";
+// import { truncateText } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
 import { useWishlistStore } from "@/store/wishlistStore";
 
@@ -63,7 +63,7 @@ const ProductCard = ({ item }: { item: ProductTypes }) => {
           <FaStar className="text-yellow-300 w-3" />
           <p className="text-[.7rem] text-gray ml-1">(52,677)</p>
         </div>
-        <p className="text-xs">{truncateText(item.description, 40)}</p>
+        <p className="text-xs line-clamp-2">{item.description}</p>
         <p className="text-secondary-500 text-xs font-medium">${item.price}</p>
       </div>
     </div>
