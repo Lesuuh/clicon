@@ -11,6 +11,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { create } from "zustand";
 import { toast } from "react-toastify";
 import { persist } from "zustand/middleware";
+import { useCartStore } from "./cartStore";
 
 interface AuthState {
   user: any;
@@ -128,6 +129,7 @@ export const useAuthStore = create<AuthState>()(
         try {
           await signOut(auth);
           set({ user: null, userData: null, loading: false, error: null });
+          useCartStore.setState({ isMerged: false });
           toast.success("Logged out successfully!");
           navigate("/login");
         } catch (error) {

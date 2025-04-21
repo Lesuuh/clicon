@@ -3,24 +3,25 @@ import { useCartStore } from "@/store/cartStore";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export async function syncCart(userId: string) {
-  const isMerged = useCartStore.getState().isMerged;
-  if (!userId && isMerged) return; // No userId, no syncing
+  const isMerged = useCartStore.getState();
+  if (!userId && isMerged) return;
 
   try {
     const cartRef = doc(db, "users", userId, "cart", "userCart");
     const snapShot = await getDoc(cartRef);
 
-    // If cart doesn't exist in Firestore, start with an empty cart
-    const firebaseCart = snapShot.exists() ? snapShot.data().cart || [] : [];
-
     const localCart = useCartStore.getState().cart;
+    if (!snapShot.exists() && localCart.length > 0) {
+      await setDoc(cartRef, { cart: localCart });
+      useCartStore.setState({ isMerged: true });
+      return;
+    }
 
-    // Log for debugging, optional
-    console.log("Firebase Cart:", firebaseCart);
-    console.log("Local Cart:", localCart);
+    const firebaseCart = snapShot.exists() ? snapShot.data().cart || [] : [];
+    const currentLocalCart = useCartStore.getState().cart;
 
     // Merge local cart with Firestore cart
-    const mergedCart = mergeCarts(localCart, firebaseCart);
+    const mergedCart = mergeCarts(currentLocalCart, firebaseCart);
 
     // Save merged cart to Firestore
     await setDoc(cartRef, { cart: mergedCart });
@@ -48,7 +49,7 @@ function mergeCarts(local: any[], remote: any[]) {
       const old = map.get(item.product.id);
       map.set(item.product.id, {
         ...old,
-        quantity: old.quantity + item.quantity, // Increase quantity if item exists
+        quantity: item.quantity,
       });
     } else {
       map.set(item.product.id, item); // Add new item

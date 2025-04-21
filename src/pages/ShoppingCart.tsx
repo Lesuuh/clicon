@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { deleteFromDb } from "@/lib/deleteCartInDb";
+import { useAuthStore } from "@/store/authStore";
 import { useCartStore } from "@/store/cartStore";
 import { ArrowRight, Trash2 } from "lucide-react";
 import { Link, useNavigate } from "react-router";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 // interface CartProps {
 //   title: string;
@@ -34,12 +36,14 @@ import { toast } from "react-toastify";
 // ];
 
 const ShoppingCart = () => {
+  const user = useAuthStore((state) => state.user);
   const cart = useCartStore((state) => state.cart);
   const increaseQuantity = useCartStore((state) => state.increaseQuantity);
   const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
   const deleteFromCart = useCartStore((state) => state.deleteFromCart);
   const handleDelete = (productId: number) => {
     deleteFromCart(productId);
+    deleteFromDb(user.uid, productId);
   };
   const navigate = useNavigate();
 

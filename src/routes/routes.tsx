@@ -35,10 +35,10 @@ const AppRoutes = () => {
               <Route path="orders" element={<OrderHistory />} />
               <Route path="wishlist" element={<Wishlist />} />
             </Route>
-            <Route path="cart" element={<ShoppingCart />} />
             <Route path="checkout" element={<CheckoutPage />} />
             <Route path="checkout-success" element={<CheckoutSuccessPage />} />
           </Route>
+          <Route path="cart" element={<ShoppingCart />} />
           <Route path="*" element={<NotFound message="Page not found" />} />
           <Route path="test" element={<Test />} />
         </Route>

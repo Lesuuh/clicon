@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { FaPinterest, FaStar } from "react-icons/fa6";
 import { useNavigate, useParams } from "react-router";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 const fetchProducts = async (id: string) => {
   const response = await fetch(`http://localhost:8000/products/${id}`);
