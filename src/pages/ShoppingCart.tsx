@@ -7,34 +7,6 @@ import { ArrowRight, Trash2 } from "lucide-react";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 
-// interface CartProps {
-//   title: string;
-//   image: string;
-//   orderNumber: string;
-//   price: number;
-// }
-
-// const cart = [
-//   {
-//     title: " 2000mAh Dual Output Fast charging Portable Powerbank",
-//     image: "/images/04.png",
-//     orderNumber: "162887278",
-//     price: 300,
-//   },
-//   {
-//     title: " 2000mAh Dual Output Fast charging Portable Powerbank",
-//     image: "/images/04.png",
-//     orderNumber: "162887278",
-//     price: 300,
-//   },
-//   {
-//     title: " 2000mAh Dual Output Fast charging Portable Powerbank",
-//     image: "/images/04.png",
-//     orderNumber: "162887278",
-//     price: 300,
-//   },
-// ];
-
 const ShoppingCart = () => {
   const user = useAuthStore((state) => state.user);
   const cart = useCartStore((state) => state.cart);
@@ -46,6 +18,8 @@ const ShoppingCart = () => {
     deleteFromDb(user.uid, productId);
   };
   const navigate = useNavigate();
+
+  console.log(cart);
 
   return (
     <section className="my-10 mx-auto w-full h-auto max-w-[1400px] px-5 md:px-20 flex flex-col sm:flex-row flex-wrap items-start  gap-10">
