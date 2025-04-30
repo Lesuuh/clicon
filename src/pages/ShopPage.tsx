@@ -9,12 +9,20 @@ import ProductsMainContent from "@/components/products/ProductsMainContent";
 import MobileCategorySidebar from "@/components/products/MobileCategorySidebar";
 import SortingDrawer from "@/components/products/SortingDrawer";
 import FilteringButtons from "@/components/products/FilteringButtons";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/services/firebase";
 
 // FETCHING PRODUCTS DATA
 const fetchProducts = async () => {
-  const response = await fetch("http://localhost:8000/products");
-  const data = await response.json();
-  return data;
+  const productsCol = collection(db, "Products");
+  const productSnapshot = await getDocs(productsCol);
+
+  const productList = productSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  return productList;
 };
 
 interface FiltersProps {
@@ -32,6 +40,8 @@ const ShopPage = () => {
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
+
+  console.log(products);
 
   // STATE FOR SORTING and filtering
   const [openDrawer, setOpenDrawer] = useState(false);

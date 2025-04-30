@@ -1,5 +1,5 @@
 export interface ProductTypes {
-  id: number;
+  id: string;
   title: string;
   description: string;
   price: number;
@@ -10,14 +10,6 @@ export interface ProductTypes {
   reviews: { user: string; comment: string; rating: number }[];
   stock: number;
   images: string[];
-  variants: { color: string; storage: string; price: number }[];
-  specs: { size: string; memory: string; storage: string };
-  shipping: {
-    weight: string;
-    dimensions: { width: string; height: string; depth: string };
-    availableRegions: string[];
-  };
-  seller: { id: number; storeName: string; location: string };
   bestDeals: boolean;
   featured: boolean;
   hot: boolean;
