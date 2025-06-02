@@ -190,7 +190,7 @@ const CheckoutPage = () => {
         ) : (
           <button
             onClick={() =>
-              toast.error("Please fill in your billing information")
+              toast.error("Please fill in your billing informations")
             }
             className="text-white bg-primary py-1 rounded-xs flex items-center w-full justify-center mt-3 gap-2 text-[.7rem]"
           >
